@@ -1,0 +1,162 @@
+---
+slug: 'react-toast-notifications-step-by-step-guide';
+title: "Creating Toast Notifications in React.js: Step-by-Step Guide"
+meta_title: "Creating Toast Notifications in React.js: Step-by-Step Guide"
+description: "Learn how to create Toast notifications in React.js using the react-toastify library. Follow this step-by-step guide by Jigar Patel."
+date: "September 27, 2023"
+categories: ["React.js"]
+author: "Jigar Patel"
+tags: ["React.js, Toast notifications, react-toastify"]
+draft: false
+---
+
+# Overview
+
+<TOCInline toc={props.toc} exclude="Overview" toHeading={2} />
+
+# How to Create Toast Notifications in React.js: A Step-by-Step Guide
+
+## Introduction
+
+Toast notifications are a simple yet effective way to provide feedback to users in a non-intrusive manner in [React.js](https://react.dev/learn) applications. In this step-by-step guide, we'll walk you through the process of creating a basic Toast notification using the popular `react-toastify` library. Let's get started!
+
+## Step 1: Set Up Your React Project
+
+Assuming you have Node.js and npm installed, let's create a new React.js project using Create React App:
+
+```bash
+npx create-react-app react-toast-example
+cd react-toast-example
+npm start
+```
+
+## Step 2: Install a Toast Library
+
+There are various libraries available for creating Toast notifications in React. In this example, we'll use the react-toastify library. Install it with npm:
+
+```bash
+npm install react-toastify
+```
+
+## Step 3: Create a Toast Component
+
+Now, let's create a new component to display Toast notifications. Create a file named Toast.js in your React project:
+
+```javascript
+// Toast.js
+import React from 'react';
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
+
+const Toast = () => {
+  const showToast = () => {
+    toast('This is a Toast notification!', { autoClose: 2000 });
+  };
+
+  return (
+    <div>
+      <button onClick={showToast}>Show Toast</button>
+      <ToastContainer />
+    </div>
+  );
+};
+
+export default Toast;
+```
+
+In this component, we import the necessary elements from react-toastify and set up a simple button to trigger the Toast notification.
+
+## Step 4: Implement the Toast Component
+
+Now, let's integrate the Toast component into your App.js:
+
+```jsx
+// App.js
+import React from 'react';
+import './App.css';
+import Toast from './Toast';
+
+function App() {
+  return (
+    <div className="App">
+      <h1>React Toast Example</h1>
+      <Toast />
+    </div>
+  );
+}
+
+export default App;
+```
+
+## Step 5: Style Your Toasts
+
+You have the optionto customize the styling of your Toast notifications by editing the CSS or utilizing the provided classes. For more advanced styling, consider overriding the default styles.
+
+```jsx
+const showToast = () => {
+  toast('This is a Toast notification!', {
+    autoClose: 2000,
+    style: { background: 'gray', color: 'white' }, // // Customize the background and text color
+  });
+};
+```
+
+## Step 6: Run Your React App
+
+Start your React development server:
+
+```bash
+npm start
+```
+
+Visit http://localhost:3000 in your web browser to see your React application with the Toast notification in action.
+
+## Step 7: Conclusion
+
+In this step-by-step guide, we've explored the process of creating Toast notifications in React.js using the react-toastify library. These unobtrusive pop-up messages are a valuable addition to any React application, enhancing user experience by providing timely feedback and alerts.
+
+We began by setting up a new React project and installing the react-toastify library. Then, we created a Toast component that allows you to trigger notifications with a simple button click. Along the way, you learned how to customize the appearance and behavior of your Toasts to match your application's design.
+
+# Source Code
+
+The complete source code for this tutorial is available on GitHub. You can find it [Here](https://github.com/jbcodeapp/Blogs/tree/main/react-toast-example).
+
+# About the Author
+
+[Jigar Patel](laraveldeveloper.com) is a React.js enthusiast and a software developer at JBCodeapp Company. Visit our [JBCodeapp](https://jbcodeapp.com) to learn more about our work in the React.js ecosystem.
+
+Output:
+
+![Output-1](/static/blog/react-toast-notifications-step-by-step-guide/image-1.png)
+
+![Output-2](/static/blog/react-toast-notifications-step-by-step-guide/image-3.png)
+
+# We're Hiring!
+
+Are you passionate about React.js development? We're always on the lookout for talented developers to join our team. Check out our [careers page](https://jbcodeapp.com) for current job openings.
+
+# Related Blogs
+
+- [Building a Contact Us Form in Laravel](contact-form-send.mdx)
+- [Building a Contact Us Form in Laravel](Effortlessly-Incorporating-Fonts-into-Your-Next.js-Projects.mdx)
+- [A Guide to React Form Validation](Here's-a-simple-guide-to-validating-forms-in-React.mdx)
+- [Laravel Contact Form with Email Sending](Laravel-Contact-Form-with-Email-Sending.mdx)
+- [React Password Validation Made Easy: A Step-by-Step Guide](react-password-validation-step-by-step.mdx)
+- [Simplified React User Authentication: Username & Password Validation](simplified-react-user-authentication-username-&-password-validation.mdx)
+  React
+- [Getting Started with React: Setting Up a Project with Webpack and Babel](getting-started-react-setup-webpack-babel.mdx)
+- [Getting Started with Create React App](getting-started-with-create-react-app.mdx)
+- [A Guide to React Form Validation](Here's-a-simple-guide-to-validating-forms-in-React.mdx)
+- [How to Allow Only Numbers in React Textboxes](How-to-Allow-Only-Numbers-in-React-Textboxes.mdx)
+- [How to Easily Install Bootstrap in Your React App](how-to-install-bootstrap-in-react-app.mdx)
+- [How to Start a React Project in 2023](How-to-start-a-React-Project-in-2023.mdx)
+- [Key JavaScript Concepts Every React Developer Should Know](key-javascript-concepts-for-react-developers.mdx)
+- [Learn React.js Step by Step](Learn-React.js-Step-by-Step.mdx)
+- [Mastering React: Your Go-To Guide for 2023](mastering-react-2023-guide.mdx)
+- [React Bootstrap Modal Popup Example](react-bootstrap-modal-example.mdx)
+- [Mastering React Debugging: Tips and Techniques for Effective Debugging](react-debugging-tips-and-techniques.mdx)
+- [React Password Validation Made Easy: A Step-by-Step Guide](react-password-validation-step-by-step.mdx)
+- [React State Management Shootout: Redux vs. MobX](react-state-management-redux-vs-mobx.mdx)
+- [React Tutorial: An Overview and Walkthrough](React-Tutorial-An-Overview-and-Walkthrough.mdx)
+- [Creating a Secure Login Page in React: User Authentication Example](secure-login-react-user-authentication.mdx)
+- [Simplified Guide to useEffect in React](Simplified-Guide-to-useEffect-in-React.mdx)

@@ -1,0 +1,237 @@
+---
+slug: 'boost-your-react-forms-adding-email-validation';
+title: "Boost Your React Forms: Adding Email Validation"
+date: "September 6, 2023"
+tags: ["ReactJS", "Forms", "email", "Validation", "Typography"]
+draft: false
+author: "Jigar Patel"
+summary: "Learn how to implement email address validation in a React.js application with this step-by-step tutorial."
+---
+
+# Overview
+
+<TOCInline toc={props.toc} exclude="Overview" toHeading={2} />
+
+# Boost Your React Forms: Adding Email Validation
+
+In this tutorial, we'll guide you through the process of implementing email address validation in a React.js application step by step.
+
+## Step 1: Install React App.
+
+Begin by creating a new React.js app if you haven't already. You can do this with the following command:
+
+```bash
+npx create-react-app my-app
+```
+
+## Step 2: Create DemoForm Component
+
+Now, let's create a `DemoForm.js` component file where we'll handle form validation. Here's the code for the component:
+
+```javascript
+import React from 'react';
+
+class DemoForm extends React.Component {
+  constructor() {
+    super();
+    this.state = {
+      input: {},
+      errors: {},
+    };
+    this.handleChange = this.handleChange.bind(this);
+    this.handleSubmit = this.handleSubmit.bind(this);
+  }
+
+  handleChange(event) {
+    let input = this.state.input;
+    input[event.target.name] = event.target.value;
+    this.setState({
+      input,
+    });
+  }
+
+  handleSubmit(event) {
+    event.preventDefault();
+    if (this.validate()) {
+      console.log(this.state);
+      let input = {};
+      input['name'] = '';
+      input['email'] = '';
+      input['comment'] = '';
+      this.setState({ input });
+      alert('Demo Form is submitted');
+    }
+  }
+
+  validate() {
+    let input = this.state.input;
+    let errors = {};
+    let isValid = true;
+
+    if (!input['name']) {
+      isValid = false;
+      errors['name'] = 'Please enter your name.';
+    }
+
+    if (!input['email']) {
+      isValid = false;
+      errors['email'] = 'Please enter your email address.';
+    }
+
+    // Email validation regex pattern
+    var pattern = new RegExp(
+      /^(("[\w-\s]+")|([\w-]+(?:\.[\w-]+)*)|("[\w-\s]+")([\w-]+(?:\.[\w-]+)*))(@((?:[\w-]+\.)*\w[\w-]{0,66})\.([a-z]{2,6}(?:\.[a-z]{2})?)$)|(@\[?((25[0-5]\.|2[0-4][0-9]\.|1[0-9]{2}\.|[0-9]{1,2}\.))((25[0-5]|2[0-4][0-9]|1[0-9]{2}|[0-9]{1,2})\.){2}(25[0-5]|2[0-4][0-9]|1[0-9]{2}|[0-9]{1,2})\]?$)/i
+    );
+
+    if (!pattern.test(input['email'])) {
+      isValid = false;
+      errors['email'] = 'Please enter a valid email address.';
+    }
+
+    if (!input['comment']) {
+      isValid = false;
+      errors['comment'] = 'Please enter your comment.';
+    }
+
+    this.setState({
+      errors,
+    });
+
+    return isValid;
+  }
+
+  render() {
+    return (
+      <div>
+        <h1>Boost Your React Forms Adding Email Validation</h1>
+        <form onSubmit={this.handleSubmit}>
+          <div className="form-group">
+            <label htmlFor="name">Name:</label>
+            <input
+              type="text"
+              name="name"
+              value={this.state.input.name}
+              onChange={this.handleChange}
+              className="form-control"
+              placeholder="Enter name"
+              id="name"
+            />
+            <div className="text-danger">{this.state.errors.name}</div>
+          </div>
+          <div className="form-group">
+            <label htmlFor="email">Email Address:</label>
+            <input
+              type="text"
+              name="email"
+              value={this.state.input.email}
+              onChange={this.handleChange}
+              className="form-control"
+              placeholder="Enter email"
+              id="email"
+            />
+            <div className="text-danger">{this.state.errors.email}</div>
+          </div>
+          <div className="form-group">
+            <label htmlFor="comment">Comment:</label>
+            <textarea
+              name="comment"
+              value={this.state.input.comment}
+              onChange={this.handleChange}
+              placeholder="Enter comment"
+              className="form-control"
+            />
+            <div className="text-danger">{this.state.errors.comment}</div>
+          </div>
+          <input type="submit" value="Submit" className="btn btn-success" />
+        </form>
+      </div>
+    );
+  }
+}
+
+export default DemoForm;
+```
+
+## Step 3: Import Component
+
+Finally, import the DemoForm component into your `index.js` main file. If you wish to use Bootstrap, make sure to include it as well.
+
+```javascript
+import React from 'react';
+import ReactDOM from 'react-dom';
+import * as serviceWorker from './serviceWorker';
+import 'bootstrap/dist/css/bootstrap.min.css'; // Include Bootstrap CSS
+import DemoForm from './DemoForm';
+
+ReactDOM.render(
+  <React.StrictMode>
+    <div className="container">
+      <DemoForm />
+    </div>
+  </React.StrictMode>,
+  document.getElementById('root')
+);
+
+serviceWorker.unregister();
+```
+
+Now, you can run your React application using the following command:
+
+```bash
+npm start
+```
+
+Access your app at http://localhost:3000. You now have a simple React form with email validation in place.
+
+## Output
+
+![Output1](/static/blog/boost-your-react-forms-adding-email-validation/image.png)
+
+Error
+![Output2](/static/blog/boost-your-react-forms-adding-email-validation/image-1.png)
+
+Submit Data
+![Output3](/static/blog/boost-your-react-forms-adding-email-validation/image-2.png)
+
+# Source Code
+
+The complete source code for this tutorial is available on GitHub. You can find it [Here](https://github.com/jbcodeapp/Blogs/tree/main/Boost%20Your%20React%20Forms%20Adding%20Email%20Validation).
+
+# About the Author
+
+[Jigar Patel](laraveldeveloper.com) is a React.js enthusiast and a software developer at JBCodeapp Company. Visit our [JBCodeapp](https://jbcodeapp.com) to learn more about our work in the React.js ecosystem.
+
+# We're Hiring!
+
+Are you passionate about React.js development? We're always on the lookout for talented developers to join our team. Check out our [careers page](https://jbcodeapp.com) for current job openings.
+
+# Related Blogs
+
+- [Building a Contact Us Form in Laravel](contact-form-send.mdx)
+- [Building a Contact Us Form in Laravel](Effortlessly-Incorporating-Fonts-into-Your-Next.js-Projects.mdx)
+- [A Guide to React Form Validation](Here's-a-simple-guide-to-validating-forms-in-React.mdx)
+- [Laravel Contact Form with Email Sending](Laravel-Contact-Form-with-Email-Sending.mdx)
+- [React Password Validation Made Easy: A Step-by-Step Guide](react-password-validation-step-by-step.mdx)
+- [Simplified React User Authentication: Username & Password Validation](simplified-react-user-authentication-username-&-password-validation.mdx)
+  React
+- [Getting Started with React: Setting Up a Project with Webpack and Babel](getting-started-react-setup-webpack-babel.mdx)
+- [Getting Started with Create React App](getting-started-with-create-react-app.mdx)
+- [A Guide to React Form Validation](Here's-a-simple-guide-to-validating-forms-in-React.mdx)
+- [How to Allow Only Numbers in React Textboxes](How-to-Allow-Only-Numbers-in-React-Textboxes.mdx)
+- [How to Easily Install Bootstrap in Your React App](how-to-install-bootstrap-in-react-app.mdx)
+- [How to Start a React Project in 2023](How-to-start-a-React-Project-in-2023.mdx)
+- [Key JavaScript Concepts Every React Developer Should Know](key-javascript-concepts-for-react-developers.mdx)
+- [Learn React.js Step by Step](Learn-React.js-Step-by-Step.mdx)
+- [Mastering React: Your Go-To Guide for 2023](mastering-react-2023-guide.mdx)
+- [React Bootstrap Modal Popup Example](react-bootstrap-modal-example.mdx)
+- [Mastering React Debugging: Tips and Techniques for Effective Debugging](react-debugging-tips-and-techniques.mdx)
+- [React Password Validation Made Easy: A Step-by-Step Guide](react-password-validation-step-by-step.mdx)
+- [React State Management Shootout: Redux vs. MobX](react-state-management-redux-vs-mobx.mdx)
+- [React Tutorial: An Overview and Walkthrough](React-Tutorial-An-Overview-and-Walkthrough.mdx)
+- [Creating a Secure Login Page in React: User Authentication Example](secure-login-react-user-authentication.mdx)
+- [Simplified Guide to useEffect in React](Simplified-Guide-to-useEffect-in-React.mdx)
+- [Simplified React User Authentication: Username & Password Validation](simplified-react-user-authentication-username-&-password-validation.mdx)
+- [Getting Started with Programming](Step-by-Step-Guide-Building-a-CRUD-App-in-React-Using-Hooks.mdx)
+- [A Beginner's Guide to Testing React Components with Jest and React Testing Library](testing-react-components-jest-react-testing-library.mdx)
+- [Using Content Editable Elements in JavaScript (React)](Using-Content-Editable-Elements-in-JavaScript-React.mdx)
+- [Your Simplified React JS Developer Roadmap for 2023](Your-Simplified-React-JS-Developer-Roadmap-for-2023.mdx)

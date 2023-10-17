@@ -5,14 +5,14 @@ export const projects: Project[] = [
     title: 'HourlySpaces',
     src: 'HourlySpaces.webp',
     color: '#dbeafe',
-    url: 'https://www.hourlyspaces.com',
+    url: 'https://jbcodeapp.com',
     role: 'FullStack Developer',
   },
   {
     title: 'BookingNest',
     src: 'BookingNest.webp',
     color: '#ddd6fe',
-    url: 'https://bcodeapp.com',
+    url: 'https://jbcodeapp.com',
     role: 'FullStack Developer',
   },
   {

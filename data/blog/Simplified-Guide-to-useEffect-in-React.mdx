@@ -1,0 +1,174 @@
+---
+slug: 'Simplified-Guide-to-useEffect-in-React';
+title: "Simplified Guide to useEffect in React"
+date: "August 23, 2023"
+tags: ["React", "Hooks", "useEffect", "Web Development"]
+draft: false
+author: "Jigar Patel"
+summary: "Demystify the usage of useEffect in React. This guide provides a clear understanding of how to use useEffect for managing side effects in your React functional components with practical examples."
+---
+
+# Overview
+
+<TOCInline toc={props.toc} exclude="Overview" toHeading={2} />
+
+# Simplified Guide to `useEffect` in React
+
+**Effects** play a vital role in managing data flow in your app.
+
+![useeffect](/static/blog/Simplified-Guide-to-useEffect-in-React/useeffect.jpg)
+
+## Introduction
+
+If you've used [React Hooks](https://legacy.reactjs.org/docs/hooks-intro.html), you might have encountered situations where things didn't quite fit. Questions about replicating behaviors with `useEffect` or issues like infinite loops may arise. This guide aims to demystify these aspects and provide a clear understanding of `useEffect`.
+
+## Basic Syntax
+
+The basic syntax of the `useEffect` hook is as follows:
+
+```jsx
+import { useEffect } from 'react';
+
+function ExampleComponent() {
+  useEffect(
+    () => {
+      // Side effect code here
+      // This code will run after every render
+      return () => {
+        // Cleanup code here
+        // This function will run before the component unmounts
+      };
+    },
+    [
+      /* dependencies */
+    ]
+  );
+
+  // Component JSX and logic
+}
+```
+
+## Code Example: Fetching Data Using `useEffect`
+
+In this example, we'll explore how to use the `useEffect` hook to fetch data from an [API](https://legacy.reactjs.org/docs/react-api.html) when a component mounts. This is a common use case that demonstrates the power of `useEffect` in managing side effects.
+
+```jsx
+import React, { useState, useEffect } from 'react';
+
+function DataFetchingComponent() {
+  const [data, setData] = useState([]);
+
+  useEffect(() => {
+    // Fetch data from API
+    fetch('https://api.example.com/data')
+      .then((response) => response.json())
+      .then((data) => {
+        setData(data); // Update component state with fetched data
+      });
+
+    // Cleanup function (optional)
+    return () => {
+      // Cancel any ongoing requests or perform cleanup tasks
+    };
+  }, []); // Empty dependency array means the effect runs only on mount
+
+  return (
+    <div>
+      <h2>Fetched Data</h2>
+      <ul>
+        {data.map((item) => (
+          <li key={item.id}>{item.name}</li>
+        ))}
+      </ul>
+    </div>
+  );
+}
+
+export default DataFetchingComponent;
+```
+
+In this example, the [useEffect](https://legacy.reactjs.org/docs/hooks-effect.html) hook is used to fetch data from the [API](https://legacy.reactjs.org/docs/react-api.html). The effect runs only once, when the component mounts, because the dependency array [ ] is empty. This means that the effect will not re-run if [component](https://legacy.reactjs.org/docs/react-component.html) state or props change. The fetched data is then stored in the component's state using the [useState](https://legacy.reactjs.org/docs/hooks-state.html) hook.
+
+### Subscribing to WebSocket Events:
+
+```jsx
+import React, { useState, useEffect } from 'react';
+
+function WebSocketExample() {
+  const [message, setMessage] = useState('');
+
+  useEffect(() => {
+    const socket = new WebSocket('wss://api.example.com/socket');
+
+    socket.addEventListener('message', (event) => {
+      setMessage(event.data);
+    });
+
+    return () => {
+      socket.close();
+    };
+  }, []);
+
+  return (
+    <div>
+      <h1>WebSocket Example</h1>
+      <p>Received: {message}</p>
+    </div>
+  );
+}
+
+export default WebSocketExample;
+```
+
+This example demonstrates how to use the [useEffect](https://legacy.reactjs.org/docs/hooks-effect.html) hook to manage the WebSocket subscription and cleanup within a [React Component](https://legacy.reactjs.org/docs/react-component.html). The component establishes a [WebSocket](https://www.npmjs.com/package/react-use-websocket) connection when it mounts, listens for incoming messages, updates the UI with received data, and ensures the connection is closed when the component is unmounted.
+
+### Handling Document Title Changes:
+
+```jsx
+import React, { useEffect } from 'react';
+
+function DocumentTitleExample() {
+  useEffect(() => {
+    document.title = 'New Page Title';
+    return () => {
+      document.title = 'Default Title';
+    };
+  }, []);
+
+  return (
+    <div>
+      <h1>Document Title Example</h1>
+      <p>This component will change the document title.</p>
+    </div>
+  );
+}
+
+export default DocumentTitleExample;
+```
+
+The DocumentTitleExample component uses the [useEffect](https://legacy.reactjs.org/docs/hooks-effect.html) hook to dynamically modify the browser tab's title when the component is mounted and ensures that the title is reset when the component is unmounted or re-rendered. This behavior is especially useful when you want to provide meaningful titles for different sections of your application or website.
+
+Remember that the second argument of [useEffect](https://legacy.reactjs.org/docs/hooks-effect.html) (an array of dependencies) is crucial. If you pass an empty [array](https://react.dev/learn/updating-arrays-in-state) ([]), the effect will only run once after the initial render. If you pass a variable in the array, the effect will run whenever that variable changes. Omitting the array will cause the effect to run after every render.
+
+Please note that while these examples provide a solid foundation, you might need to modify them to suit your specific use case. Always consider error handling and edge cases when implementing [useEffect](https://legacy.reactjs.org/docs/hooks-effect.html) in your application.
+
+## Conclusion
+
+The [useEffect](https://legacy.reactjs.org/docs/hooks-effect.html) hook is a powerful tool for managing side effects in React functional components. Whether you're fetching data, interacting with APIs, or handling subscriptions, [useEffect](https://legacy.reactjs.org/docs/hooks-effect.html) provides a clean and declarative way to incorporate side effects into your components. By carefully managing the dependency array, you can control when the effect runs and ensure optimal performance. Embrace the flexibility of [useEffect](https://legacy.reactjs.org/docs/hooks-effect.html) to create dynamic and engaging React applications.
+
+# Source Code
+
+The complete source code for this tutorial is available on GitHub. You can find it [Here](https://github.com/jbcodeapp/Blogs/).
+
+# About the Author
+
+[Jigar Patel](https://expertlaravel.com) is a React.js enthusiast and a software developer at JBCodeapp Company. Visit our [JBCodeapp](https://jbcodeapp.com) to learn more about our work in the React.js ecosystem.
+
+# We're Hiring!
+
+Are you passionate about React.js development? We're always on the lookout for talented developers to join our team. Check out our [careers page](https://jbcodeapp.com) for current job openings.
+
+# Related Blogs
+
+- [Boost Your React Forms: Adding Email Validation](boost-your-react-forms-adding-email-validation.mdx)
+- [Key JavaScript Concepts Every React Developer Should Know](key-javascript-concepts-for-react-developers.mdx)

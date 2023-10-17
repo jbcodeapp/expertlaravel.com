@@ -1,0 +1,212 @@
+---
+slug: 'Send-Email-using-Queue-Example';
+title: "Laravel Send Email using Queue Example"
+date: "August 23, 2023"
+tags: ["Laravel", "Email", "Queue", "Background Task"]
+draft: false
+author: "Jigar Patel"
+summary: "Learn how to send emails using a queue in Laravel. Follow this step-by-step tutorial to improve the performance of background tasks like sending emails and enhance the overall user experience."
+---
+
+# Overview
+
+<TOCInline toc={props.toc} exclude="Overview" toHeading={2} />
+
+# Laravel Send Email using Queue Example
+
+---
+
+## Introduction
+
+This tutorial demonstrates how to send emails using a queue in Laravel. We will guide you through the step-by-step process of sending emails with a queue in Laravel. We will also provide an example of sending an email using a queue. By following this tutorial, you'll learn how to implement sending emails in the background, which can improve user experience and performance for tasks like email verification or sending invoices.
+
+## Step 1: Install Laravel
+
+If you don't already have a Laravel app, you can create one using the following command:
+
+```bash
+composer create-project laravel/laravel example-app
+```
+
+## Step 2: Create Mail Class with Configuration
+
+To begin, let's create an email for testing using the Laravel Mail facade. Run the following command:
+
+```bash
+php artisan make:mail SendEmailTest
+```
+
+This will generate a new folder named "Mail" in the app directory, containing the `SendEmailTest.php` file. Replace the contents of this file with the following code:
+
+```php
+<?php
+
+namespace App\Mail;
+
+use Illuminate\Bus\Queueable;
+use Illuminate\Contracts\Queue\ShouldQueue;
+use Illuminate\Mail\Mailable;
+use Illuminate\Queue\SerializesModels;
+
+class SendEmailTest extends Mailable
+{
+    use Queueable, SerializesModels;
+
+    public function __construct()
+    {
+    }
+
+    public function build()
+    {
+        return $this->view('emails.test');
+    }
+}
+
+```
+
+Next, create the email view using a Blade file. Create a file named `test.blade.php` in the `resources/views/emails/` directory with the following content:
+
+```html
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>Laravel Send Email using Queue Example</title>
+</head>
+
+<body>
+    <center>
+        <h2 ">
+            <a style="padding: 23px;background: #8f8a8aa1; href="https://jbcodeapp.com">Visit Our Website :
+            jbcodeapp.com</a>
+        </h2>
+        <br>
+        <h2><b>Hello, Learner</b> This is Test Message</h2>
+    </center>
+
+</body>
+
+</html>
+```
+
+After configuring the view file, set up the email configuration in the `.env` file:
+
+```dotenv
+MAIL_MAILER=smtp
+MAIL_HOST=sandbox.smtp.mailtrap.io
+MAIL_PORT=2525
+MAIL_USERNAME=your_username
+MAIL_PASSWORD=your_password
+MAIL_ENCRYPTION=null
+MAIL_FROM_ADDRESS="hello@example.com"
+MAIL_FROM_NAME="${APP_NAME}"
+```
+
+## Step 3: Queue Configuration
+
+Configure the queue driver by setting the `QUEUE_CONNECTION` in the `.env` file:
+
+```dotenv
+QUEUE_CONNECTION=database
+```
+
+Generate and migrate the queue database tables using the following commands:
+
+```bash
+php artisan queue:table
+php artisan migrate
+```
+
+## Step 4: Create Queue Job
+
+Create a queue job using the following command:
+
+```bash
+php artisan make:job SendEmailJob
+```
+
+This will generate the `SendEmailJob.php` file in the `Jobs` directory. Replace its contents with the following code:
+
+```php
+namespace App\Jobs;
+use Illuminate\Bus\Queueable;
+use Illuminate\Contracts\Queue\ShouldBeUnique;
+use Illuminate\Contracts\Queue\ShouldQueue;
+use Illuminate\Foundation\Bus\Dispatchable;
+use Illuminate\Queue\InteractsWithQueue;
+use Illuminate\Queue\SerializesModels;
+use App\Mail\SendEmailTest;
+use Mail;
+
+class SendEmailJob implements ShouldQueue
+{
+    use Dispatchable, InteractsWithQueue, Queueable, SerializesModels;
+
+    protected $details;
+
+    public function __construct($details)
+    {
+        $this->details = $details;
+    }
+
+    public function handle()
+    {
+        $email = new SendEmailTest();
+        Mail::to($this->details['email'])->send($email);
+    }
+}
+```
+
+## Step 5: Test Queue Job
+
+Create a route in the `routes/web.php` file to test the created queue:
+
+```php
+Route::get('email-test', function () {
+    $details['email'] = 'your_email@gmail.com';
+    dispatch(new App\Jobs\SendEmailJob($details));
+    dd('done');
+});
+```
+
+To see the queue process, run the following command:
+
+```bash
+php artisan queue:work
+```
+
+Output:
+
+![Output-1](/static/blog/Send-Email-using-Queue-Example/image.png)
+
+![Output-2](/static/blog/Send-Email-using-Queue-Example/image-2.png)
+
+Email:
+![Email](/static/blog/Send-Email-using-Queue-Example/image-8.png)
+
+## Conclusion
+
+By following the above steps, you have successfully set up a queue for sending emails in Laravel. This approach can help improve the performance of background tasks like sending emails and enhance the overall user experience.
+
+#### Please note that code indentation might be affected by the formatting limitations of this platform, but I've tried to maintain the structure and code blocks as accurately as possible.
+
+# Source Code
+
+The complete source code for this tutorial is available on GitHub. You can find it [Here](https://github.com/jbcodeapp/Blogs/tree/main/Laravel-6-Queue-for-Sending-Emails).
+
+# About the Author
+
+[Jigar Patel](https://expertlaravel.com) is a React.js enthusiast and a software developer at JBCodeapp Company. Visit our [JBCodeapp](https://jbcodeapp.com) to learn more about our work in the React.js ecosystem.
+
+# We're Hiring!
+
+Are you passionate about Laravel development? We're always on the lookout for talented developers to join our team. Check out our [careers page](https://jbcodeapp.com) for current job openings.
+
+# Related Blogs
+
+- [Building a Contact Us Form in Laravel](building-a-contact-us-form-in-laravel.mdx)
+- [Guide: Sending Email Notifications in Laravel](Guide-Sending-Email-Notifications-in-Laravel.mdx)
+- [Learn How to Send Emails Using Queue in Laravel 7/6](Laravel-6-Queue-for-Sending-Emails.mdx)
+- [3 Crucial Laravel Architecture Best Practices for 2023](Laravel-Architecture-2023.mdx)
+- [Laravel Contact Form with Email Sending](Laravel-Contact-Form-with-Email-Sending.mdx)
+- [Building a Contact Us Form in Laravel](Effortlessly-Incorporating-Fonts-into-Your-Next.js-Projects.mdx)

@@ -1,0 +1,124 @@
+---
+slug: 'Building-a-Node.js-Express-REST-API-for-Image-Upload';
+title: "Building a Node.js Express REST API for Image Upload"
+date: "September 6, 2023"
+tags: ["NodeJS", "Express", "Multer", "Image Upload,", "API"]
+draft: false
+author: "Jigar Patel"
+summary: "Learn how to create a RESTful API for image uploading using Node.js and Multer in this step-by-step tutorial."
+---
+
+# Overview
+
+<TOCInline toc={props.toc} exclude="Overview" toHeading={2} />
+
+# Building a Node.js Express REST API for Image Upload
+
+In this tutorial, we'll walk through creating a straightforward REST API for uploading images using [Node.js](https://nodejs.org/en) and [Multer](https://www.npmjs.com/package/multer). To accomplish this, we'll utilize popular npm packages like [Express](https://expressjs.com/), [Multer](https://www.npmjs.com/package/multer), and [Body-Parser](https://www.npmjs.com/package/body-parser).
+
+## Step 1: Setting Up Your [Node.js](https://nodejs.org/en) App
+
+Let's start by establishing the foundation for your [Node.js](https://nodejs.org/en) application:
+
+### 1.Begin by crafting a new directory for your project:
+
+```powershell
+mkdir my-app
+cd my-app
+```
+
+### 2.Initialize your Node.js app:
+
+```powershell
+npm init
+```
+
+## Step 2: Installing Dependencies
+
+We need to install the necessary npm packages: [Express](https://expressjs.com/), [Multer](https://www.npmjs.com/package/multer), and [Body-Parser](https://www.npmjs.com/package/body-parser).
+
+```powershell
+npm install --save express multer body-parser
+```
+
+## Step 3: Crafting the `app.js` File
+
+Create a file named `app.js` and populate it with the following code:
+
+```javascript
+const express = require('express');
+const bodyParser = require('body-parser');
+const app = express();
+const multer = require('multer');
+
+app.use(bodyParser.json());
+
+// Configure Multer for image upload
+var storage = multer.diskStorage({
+  destination: function (req, file, cb) {
+    cb(null, 'uploads');
+  },
+  filename: function (req, file, cb) {
+    cb(null, Date.now() + '-' + file.originalname);
+  },
+});
+var upload = multer({ storage: storage });
+
+// Handle image upload
+app.post('/api/image-upload', upload.single('image'), (req, res) => {
+  const image = req.image;
+  res.send(apiResponse({ message: 'File uploaded successfully.', image }));
+});
+
+// API Response utility
+function apiResponse(results) {
+  return JSON.stringify({ status: 200, error: null, response: results });
+}
+
+// Launch the server
+app.listen(3000, () => {
+  console.log('Server started on port 3000...');
+});
+```
+
+## Running the Node.js App
+
+### 1.Create an "uploads" folder at the root of your project.
+
+### 2.Launch the Node.js app:
+
+```powershell
+node app.js
+```
+
+### 3.Open your web browser and navigate to: `http://localhost:3000`
+
+# Image Upload API
+
+**Method**: GET
+**URL**: `http://localhost:3000/api/image-upload`
+
+Output :
+
+![Image](/static/blog/Building-a-Node.js-Express-REST-API-for-Image-Upload/image_upload.png))
+
+File uploaded successfully.
+
+![save Image](/static/blog/Building-a-Node.js-Express-REST-API-for-Image-Upload/uploaded_image.png)
+
+# Source Code
+
+The complete source code for this tutorial is available on GitHub. You can find it [Here](https://github.com/jbcodeapp/Blogs/tree/main/Image-upload-in-nodejs).
+
+# About the Author
+
+[Jigar Patel](https://expertlaravel.com) is a React.js enthusiast and a software developer at JBCodeapp Company. Visit our [JBCodeapp](https://jbcodeapp.com) to learn more about our work in the React.js ecosystem.
+
+# We're Hiring!
+
+Are you passionate about React.js development? We're always on the lookout for talented developers to join our team. Check out our [Careers Page](https://jbcodeapp.com) for current job openings.
+
+# Related Blogs
+
+- [Getting Started with Programming](Getting-Started-with-Programming.mdx)
+- [Utilizing ES6 Arrow Functions: Appropriate Usage and Considerations](Utilizing-ES6-Arrow-Functions-Appropriate-Usage-and-Considerations.mdx)

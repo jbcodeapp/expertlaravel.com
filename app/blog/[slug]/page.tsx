@@ -23,7 +23,7 @@ export async function generateMetadata({
   const siteURLWithBlog = `${baseSiteURL}blog/${post.slug}`;
 
   const ogImage = post.ogImage || {
-    url: `static/blog/${post.slug}.webp`,
+    url: `static/blog/${post.slug}.png`,
     width: 1200,
     height: 600,
     alt: post.title,
@@ -57,7 +57,7 @@ export async function generateMetadata({
       description: post.summary,
       images: [
         {
-          url: '/static/protecting-your-smart-home-2023-safeguarding-iot-devices-digital-age.webp',
+          url: `static/blog/${post.slug}.png`,
           width: 1200,
           height: 600,
         },

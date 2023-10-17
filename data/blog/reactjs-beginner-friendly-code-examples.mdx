@@ -1,0 +1,216 @@
+---
+slug: 'reactjs-beginner-friendly-code-examples';
+title: "React.js Short Code Examples: A Quick Guide for Beginners"
+date: "September 29, 2023"
+tags: ["React", "Front-end Development", "JavaScript"]
+draft: false
+author: "Jigar Patel"
+summary: "Explore React.js with concise code examples that simplify complex concepts for beginners."
+---
+
+# React.js Short Code Examples: A Quick Guide for Beginners
+
+[React.js](https://react.dev/learn) is a popular JavaScript library for building user interfaces, known for its simplicity and efficiency. In this blog post, we'll provide you with short and straightforward React.js code examples to help you get started on your journey to becoming a React developer.
+
+## 1. Hello World in React
+
+Let's start with the quintessential "Hello World" example in React. This code snippet demonstrates how to create a basic React component and render it to the DOM.
+
+```jsx
+import React from 'react';
+import ReactDOM from 'react-dom';
+
+const HelloWorld = () => {
+  return <h1>Hello, World!</h1>;
+};
+
+ReactDOM.render(<HelloWorld />, document.getElementById('root'));
+```
+
+In this code, we define a functional component called `HelloWorld` that returns a [JSX](https://legacy.reactjs.org/docs/introducing-jsx.html) element containing our greeting. We then use `ReactDOM.render` to render this component to an HTML element with the id of "root" in our HTML file.
+
+## 2. Using Props
+
+[Props](https://legacy.reactjs.org/docs/components-and-props.html) (short for properties) allow you to pass data from a parent component to a child component. Here's a simple example:
+
+```jsx
+import React from 'react';
+
+const Greeting = (props) => {
+  return <p>Hello, {props.name}!</p>;
+};
+
+const App = () => {
+  return <Greeting name="Alice" />;
+};
+
+export default App;
+```
+
+In this example, we define a `Greeting` component that accepts a `name` prop and displays a personalized `greeting`. We then render the Greeting component within an `App` component and pass the `name` prop as "Alice."
+
+## 3. Handling State
+
+React components can have [state](https://react.dev/learn/managing-state), which allows them to manage and react to changes. Here's a simple counter example using state:
+
+```jsx
+import React, { useState } from 'react';
+
+const Counter = () => {
+  const [count, setCount] = useState(0);
+
+  const increment = () => {
+    setCount(count + 1);
+  };
+
+  return (
+    <div>
+      <p>Count: {count}</p>
+      <button onClick={increment}>Increment</button>
+    </div>
+  );
+};
+
+export default Counter;
+```
+
+In this code, we use the `useState` hook to manage the `count` state variable and `setCount` function. When the "Increment" button is clicked, it calls the `increment` function, which updates the state and triggers a re-render.
+
+## 4. Handling Forms
+
+React makes it easy to handle form inputs and capture user input. Here's a simple form example:
+
+```jsx
+import React, { useState } from 'react';
+
+const FormExample = () => {
+  const [inputValue, setInputValue] = useState('');
+
+  const handleChange = (event) => {
+    setInputValue(event.target.value);
+  };
+
+  const handleSubmit = (event) => {
+    event.preventDefault();
+    alert(`You submitted: ${inputValue}`);
+  };
+
+  return (
+    <form onSubmit={handleSubmit}>
+      <input type="text" value={inputValue} onChange={handleChange} placeholder="Enter something" />
+      <button type="submit">Submit</button>
+    </form>
+  );
+};
+
+export default FormExample;
+```
+
+In this code, we create a form with an input field and a submit button. We use the [useState](https://legacy.reactjs.org/docs/hooks-state.html) hook to manage the input value, and the `handleChange` function updates it as the user types. When the form is submitted, it displays an alert with the input value.
+
+## 5. Conditional Rendering
+
+React allows you to conditionally render components or elements based on certain conditions. Here's an example of conditional rendering using the ternary operator:
+
+```jsx
+import React, { useState } from 'react';
+
+const ConditionalRendering = () => {
+  const [isLoggedIn, setIsLoggedIn] = useState(false);
+
+  return (
+    <div>
+      {isLoggedIn ? (
+        <p>Welcome, User!</p>
+      ) : (
+        <button onClick={() => setIsLoggedIn(true)}>Log In</button>
+      )}
+    </div>
+  );
+};
+
+export default ConditionalRendering;
+```
+
+In this code, we use the isLoggedIn state variable to conditionally render either a welcome message or a "Log In" button. When the button is clicked, it toggles the isLoggedIn state, triggering a re-render.
+
+## 6. Lists and Keys
+
+React is great for rendering lists of items efficiently. Here's an example of rendering a list of items with unique keys:
+
+```jsx
+import React from 'react';
+
+const ListExample = () => {
+  const fruits = ['Apple', 'Banana', 'Cherry', 'Date'];
+
+  return (
+    <ul>
+      {fruits.map((fruit, index) => (
+        <li key={index}>{fruit}</li>
+      ))}
+    </ul>
+  );
+};
+
+export default ListExample;
+```
+
+In this example, we use the `map` function to iterate through an array of fruits and render each item as a list element. It's essential to provide a unique `key` prop to each list item to help React efficiently update the list when items are added or removed.
+
+## 7. useEffect Hook
+
+The `useEffect` hook allows you to perform side effects in your components, such as fetching data from an API. Here's a simple example:
+
+```jsx
+import React, { useState, useEffect } from 'react';
+
+const DataFetching = () => {
+  const [data, setData] = useState([]);
+
+  useEffect(() => {
+    fetch('https://api.example.com/data')
+      .then((response) => response.json())
+      .then((result) => setData(result));
+  }, []);
+
+  return (
+    <div>
+      <h2>Fetched Data:</h2>
+      <ul>
+        {data.map((item, index) => (
+          <li key={index}>{item.name}</li>
+        ))}
+      </ul>
+    </div>
+  );
+};
+
+export default DataFetching;
+```
+
+In this code, the [useEffect hook](https://legacy.reactjs.org/docs/hooks-effect.html) is used to fetch data from an API when the component is mounted. The fetched data is stored in the data state variable, and it's rendered as a list.
+
+These short React.js code examples cover a range of fundamental concepts, from rendering components to handling state, forms, conditional rendering, working with lists, and making API calls. They provide a solid foundation for beginners looking to learn React.js and build interactive user interfaces.
+
+# About the Author
+
+[Jigar Patel](https://expertlaravel.com) is a React.js enthusiast and a software developer at JBCodeapp Company. Visit our [JBCodeapp](https://jbcodeapp.com) to learn more about our work in the React.js ecosystem.
+
+# We're Hiring!
+
+Are you passionate about React.js development? We're always on the lookout for talented developers to join our team. Check out our [careers page](https://jbcodeapp.com) for current job openings.
+
+# Related Blogs
+
+- [Boost Your React Forms: Adding Email Validation](boost-your-react-forms-adding-email-validation.mdx)
+- [Getting Started with React: Setting Up a Project with Webpack and Babel](getting-started-react-setup-webpack-babel.mdx)
+- [Getting Started with Create React App](getting-started-with-create-react-app.mdx)
+- [A Guide to React Form Validation](Here's-a-simple-guide-to-validating-forms-in-React.mdx)
+- [How to Allow Only Numbers in React Textboxes](How-to-Allow-Only-Numbers-in-React-Textboxes.mdx)
+- [How to Easily Install Bootstrap in Your React App](how-to-install-bootstrap-in-react-app.mdx)
+- [How to Start a React Project in 2023](How-to-start-a-React-Project-in-2023.mdx)
+- [Key JavaScript Concepts Every React Developer Should Know](key-javascript-concepts-for-react-developers.mdx)
+- [Learn React.js Step by Step](Learn-React.js-Step-by-Step.mdx)
+- [Mastering React: Your Go-To Guide for 2023](mastering-react-2023-guide.mdx)
+- [React Bootstrap Modal Popup Example](react-bootstrap-modal-example.mdx)
