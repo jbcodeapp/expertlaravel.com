@@ -32,7 +32,7 @@ export const metadata = {
 
     images: [
       {
-        url: '/static/projects.webp',
+        url: '/static/projects.png',
         width: '1903',
         height: '955',
       },

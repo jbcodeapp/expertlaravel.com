@@ -31,7 +31,7 @@ export const metadata = {
     siteName: 'Expert Laravel',
     images: [
       {
-        url: '/static/ExpertLaravel.webp',
+        url: '/static/ExpertLaravel.png',
         width: '1903',
         height: '955',
       },
