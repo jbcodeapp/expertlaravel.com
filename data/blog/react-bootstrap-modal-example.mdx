@@ -1,0 +1,129 @@
+---
+slug: 'react-bootstrap-modal-example';
+title: "React Bootstrap Modal Popup Example"
+date: "August 23, 2023"
+tags: ["React", "Bootstrap", "Modal", "Front-end Development", "JavaScript"]
+draft: false
+author: "Jigar Patel"
+summary: "Learn how to create a modal popup in a React application using Bootstrap. This step-by-step tutorial covers installation, importing Bootstrap CSS, and creating a modal popup in your React app."
+---
+
+# Overview
+
+<TOCInline toc={props.toc} exclude="Overview" toHeading={2} />
+
+# React Bootstrap Modal Popup Example
+
+Introduction: In this tutorial, we will learn how to create a modal popup in a React application using Bootstrap. We'll take you through the process step by step.
+
+If you haven't checked [how to create a React app]() yet, you can find a guide on this link: '[REACTJS]().' It's important to learn the basics before you start.
+
+Overview: In this tutorial, we'll implement a modal popup in a React application using Bootstrap. We'll guide you through the process of installing the necessary packages and creating the modal step by step.
+
+## Installation:
+
+To get started, you'll need to install Bootstrap using the following npm command:
+
+```bash
+npm install react-bootstrap bootstrap
+```
+
+## Importing Bootstrap CSS:
+
+After successfully installing Bootstrap, you should import the Bootstrap CSS in your `src/index.js` file like this:
+
+```bash
+import 'bootstrap/dist/css/bootstrap.css';
+```
+
+## Creating the Modal Popup:
+
+In your `src/App.js` file, we will write code to create a simple Bootstrap 4 modal popup using the `react-bootstrap` library. Here's the code:
+
+```javascript
+import React, { useState } from 'react';
+import { Button, Modal } from 'react-bootstrap';
+
+function App() {
+  const [show, setShow] = useState(false);
+  const handleClose = () => setShow(false);
+  const handleShow = () => setShow(true);
+
+  return (
+    <div className="container">
+      <h1>React Bootstrap Modal Example</h1>
+      <Button variant="primary" onClick={handleShow}>
+        Open Demo Model
+      </Button>
+      <Modal size="lg" show={show} onHide={handleClose}>
+        <Modal.Header closeButton>
+          <Modal.Title>React Bootstrap Modal Example</Modal.Title>
+        </Modal.Header>
+        <Modal.Body>
+          Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has
+          been the industry's standard dummy text ever since the 1500s, when an unknown printer took
+          a galley of type and scrambled it to make a type specimen book.
+        </Modal.Body>
+        <Modal.Footer>
+          <Button variant="secondary" onClick={handleClose}>
+            Close
+          </Button>
+          <Button variant="primary" onClick={handleClose}>
+            Save It!
+          </Button>
+        </Modal.Footer>
+      </Modal>
+    </div>
+  );
+}
+
+export default App;
+```
+
+Running the Example: To see the modal in action, you can run your React application using the following command:
+
+```bash
+npm start
+```
+
+## Output :
+
+Running any of these commands will create a folder called `my-app` in your current directory. It contains the initial project structure and installs necessary dependencies. No need for complex configurations – you'll have everything you need.
+
+## Output
+
+![Output](/static/blog/react-bootstrap-modal-example/image.png)
+
+![Modal](/static/blog/react-bootstrap-modal-example/image-1.png)
+
+That's it! You've now created a modal popup in your React application using Bootstrap.
+
+# Source Code
+
+The complete source code for this tutorial is available on GitHub. You can find it [Here](https://github.com/jbcodeapp/Blogs/tree/main/react-bootstrap-modal-example).
+
+# About the Author
+
+[Jigar Patel](https://expertlaravel.com) is a React.js enthusiast and a software developer at JBCodeapp Company. Visit our [JBCodeapp](https://jbcodeapp.com) to learn more about our work in the React.js ecosystem.
+
+# We're Hiring!
+
+Are you passionate about React.js development? We're always on the lookout for talented developers to join our team. Check out our [careers page](https://jbcodeapp.com) for current job openings.
+
+# Related Blogs
+
+- [Getting Started with React: Setting Up a Project with Webpack and Babel](getting-started-react-setup-webpack-babel.mdx)
+- [Getting Started with Create React App](getting-started-with-create-react-app.mdx)
+- [How to Easily Install Bootstrap in Your React App](how-to-install-bootstrap-in-react-app.mdx)
+- [How to Start a React Project in 2023](How-to-start-a-React-Project-in-2023.mdx)
+- [Key JavaScript Concepts Every React Developer Should Know](key-javascript-concepts-for-react-developers.mdx)
+- [Learn React.js Step by Step](Learn-React.js-Step-by-Step.mdx)
+- [Mastering React: Your Go-To Guide for 2023](mastering-react-2023-guide.mdx)
+- [Mastering React Debugging: Tips and Techniques for Effective Debugging](react-debugging-tips-and-techniques.mdx)
+- [React State Management Shootout: Redux vs. MobX](react-state-management-redux-vs-mobx.mdx)
+- [React Tutorial: An Overview and Walkthrough](React-Tutorial-An-Overview-and-Walkthrough.mdx)
+- [Simplified Guide to useEffect in React](Simplified-Guide-to-useEffect-in-React.mdx)
+- [Getting Started with Programming](Step-by-Step-Guide-Building-a-CRUD-App-in-React-Using-Hooks.mdx)
+- [A Beginner's Guide to Testing React Components with Jest and React Testing Library](testing-react-components-jest-react-testing-library.mdx)
+- [Using Content Editable Elements in JavaScript (React)](Using-Content-Editable-Elements-in-JavaScript-React.mdx)
+- [Your Simplified React JS Developer Roadmap for 2023](Your-Simplified-React-JS-Developer-Roadmap-for-2023.mdx)

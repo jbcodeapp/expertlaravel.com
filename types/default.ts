@@ -4,4 +4,4 @@ export enum EnvironmentType {
   Test = 'test',
 }
 
-export const POSTS_PER_PAGE = 5;
+export const POSTS_PER_PAGE = 10;

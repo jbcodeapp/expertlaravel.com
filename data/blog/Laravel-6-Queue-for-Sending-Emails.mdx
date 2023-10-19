@@ -1,0 +1,218 @@
+---
+slug: 'Laravel-6-Queue-for-Sending-Emails';
+title: "Learn How to Send Emails Using Queue in Laravel 7/6"
+date: "August 23, 2023"
+tags: ["Laravel", "Email", "Queue", "Laravel 7", "Laravel 6", "Web Development"]
+draft: false
+author: "Jigar Patel"
+summary: "In this tutorial, you'll discover how to optimize the process of sending emails in Laravel 7/6 by using queues. We'll guide you through setting up a Laravel project, creating email templates, configuring queues, defining queue jobs, and testing email queues. By the end, you'll have a solid understanding of how to send emails efficiently in Laravel using queues."
+---
+
+# Overview
+
+<TOCInline toc={props.toc} exclude="Overview" toHeading={2} />
+
+## Learn How to Send Emails Using Queue in Laravel 7/6
+
+### Hello Developers,
+
+Welcome to this tutorial where we'll delve into using queues in Laravel 7/6 to optimize the process of sending emails. We'll explore how to send emails asynchronously using Laravel's built-in queue system. By utilizing queues, you can improve user experience by minimizing loading times for tasks like sending emails or processing payments. In this tutorial, we'll start from scratch and create a basic example of sending emails using a queue in Laravel 7/6.
+
+[![alt](/static/blog/Laravel-6-Queue-for-Sending-Emails/first.jpeg)](https://jbcodeapp.com)
+
+In this tutorial, we'll create a basic example of sending emails using a queue in Laravel 7/6. We'll set up the Laravel project, create a mail template, configure the email settings, define a queue job, and finally test the queue by sending an email.
+
+## Step 1: Set Up Laravel 6
+
+To begin, let's set up a fresh Laravel 6 project using the following command:
+
+```bash
+composer create-project --prefer-dist laravel/laravel blog
+```
+
+## Step 2: Create a Mail Template
+
+We'll start by creating a simple email template that we'll later use in our queue job. Run the command to generate a new mail class:
+
+```bash
+php artisan make:mail SendEmailTest
+```
+
+This will create a new mail class `SendEmailTest` under the `app/Mail` directory. Replace the content of the generated `SendEmailTest.php` file with the following code:
+
+```php
+// app/Mail/SendEmailTest.php
+<?php
+
+namespace App\Mail;
+
+use Illuminate\Bus\Queueable;
+use Illuminate\Contracts\Queue\ShouldQueue;
+use Illuminate\Mail\Mailable;
+use Illuminate\Queue\SerializesModels;
+
+class SendEmailTest extends Mailable
+{
+    use Queueable, SerializesModels;
+
+    public function __construct()
+    {
+        //
+    }
+
+    public function build()
+    {
+        return $this->view('emails.test');
+    }
+}
+```
+
+Next, create the email view file `test.blade.php` under the `resources/views/emails` directory and use the following code:
+
+```html
+<!-- resources/views/emails/test.blade.php -->
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>How to Send Mail Using Queue in Laravel 6?</title>
+  </head>
+  <body>
+    <center>
+      <h2 style="padding: 23px;background: #b3deb8a1;border-bottom: 6px green solid;">
+        <a href="https://jbcodeapp.com">Visit Our Website : jbcodeapp.com</a>
+      </h2>
+    </center>
+
+    <p>Hi, Sir</p>
+    <p>
+      Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut
+      labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco
+      laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in
+      voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat
+      non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
+    </p>
+
+    <strong>Thank you Sir. :)</strong>
+  </body>
+</html>
+```
+
+## Step 3: Configure the Queue
+
+Open the `.env` file and set the queue driver to "database":
+
+```dotenv
+QUEUE_CONNECTION=database
+```
+
+Generate the migration for the queue tables:
+
+```bash
+php artisan queue:table
+```
+
+Run the migration to create the queue tables:
+
+```bash
+php artisan migrate
+```
+
+## Step 4: Create a Queue Job
+
+Generate a new queue job using the command:
+
+```bash
+php artisan make:job SendEmailJob
+```
+
+Open the generated `SendEmailJob.php` file located in the `app/Jobs` directory and replace its content with the following code:
+
+```php
+// app/Jobs/SendEmailJob.php
+<?php
+
+namespace App\Jobs;
+
+use Illuminate\Bus\Queueable;
+use Illuminate\Contracts\Queue\ShouldQueue;
+use Illuminate\Foundation\Bus\Dispatchable;
+use Illuminate\Queue\InteractsWithQueue;
+use Illuminate\Queue\SerializesModels;
+use App\Mail\SendEmailTest;
+use Mail;
+
+class SendEmailJob implements ShouldQueue
+{
+    use Dispatchable, InteractsWithQueue, Queueable, SerializesModels;
+
+    protected $details;
+
+    public function __construct($details)
+    {
+        $this->details = $details;
+    }
+
+    public function handle()
+    {
+        $email = new SendEmailTest();
+        Mail::to($this->details['email'])->send($email);
+    }
+}
+
+```
+
+## Step 5: Test the Queue Job
+
+Let's create a route to test the email queue. In your `routes/web.php` file, add the following code:
+
+```php
+// routes/web.php
+Route::get('email-test', function () {
+
+    $details['email'] = 'your_email@gmail.com';
+
+    dispatch(new App\Jobs\SendEmailJob($details));
+
+    dd('done');
+});
+```
+
+Start the queue worker to process the queued jobs:
+
+```bash
+php artisan queue:work
+```
+
+You can now run your Laravel project:
+
+```bash
+php artisan serve
+```
+
+Access the following link in your browser to initiate the email queue test:
+
+http://localhost:8000/email-test
+
+![alt](/static/blog/Laravel-6-Queue-for-Sending-Emails/output.png)
+
+I trust that this tutorial has been beneficial in demonstrating how to use queues to send emails efficiently. If you have any questions or need further assistance, feel free to ask.
+
+# Source Code
+
+The complete source code for this tutorial is available on GitHub. You can find it [Here](https://github.com/jbcodeapp/Blogs/tree/main/Laravel-6-Queue-for-Sending-Emails).
+
+# About the Author
+
+[Jigar Patel](https://expertlaravel.com) is a React.js enthusiast and a software developer at JBCodeapp Company. Visit our [JBCodeapp](https://jbcodeapp.com) to learn more about our work in the React.js ecosystem.
+
+# We're Hiring!
+
+Are you passionate about React.js development? We're always on the lookout for talented developers to join our team. Check out our [careers page](https://jbcodeapp.com) for current job openings.
+
+# Related Blogs
+
+- [Building a Contact Us Form in Laravel](building-a-contact-us-form-in-laravel.mdx)
+- [Guide: Sending Email Notifications in Laravel](Guide-Sending-Email-Notifications-in-Laravel.mdx)
+- [Learn How to Send Emails Using Queue in Laravel 7/6](Laravel-6-Queue-for-Sending-Emails.mdx)
+- [3 Crucial Laravel Architecture Best Practices for 2023](Laravel-Architecture-2023.mdx)
+- [Laravel Contact Form with Email Sending](Laravel-Contact-Form-with-Email-Sending.mdx)

@@ -1,0 +1,117 @@
+---
+slug: 'redirecting-another-page-5-seconds-jquery-in-react';
+title: "Redirecting to Another Page in 5 Seconds with jQuery in React"
+meta_title: "Redirecting to Another Page in 5 Seconds with jQuery in React"
+description: "In this tutorial, you'll learn how to create a simple React web application that automatically redirects users to another page after a 5-second delay."
+date: "September 27, 2023"
+categories: ["React.js"]
+author: "Jigar Patel"
+tags: ["React.js", "Redirect", "jquery"]
+draft: false
+summary: "This tutorial guides you through the process of creating a simple web application using React to redirect users to another page after a 5-second delay. This functionality can be useful for scenarios where you want to direct users to a different section of your website or to an external link."
+---
+
+# Overview
+
+<TOCInline toc={props.toc} exclude="Overview" toHeading={2} />
+
+In this tutorial, we'll walk you through the process of creating a simple web application using React that redirects users to another page after a 5-second delay. This can be handy for scenarios where you want to guide users to a different part of your website or to an external link.
+
+# Prerequisites
+
+Before we start, make sure you have Node.js and npm (Node Package Manager) installed on your computer.
+
+## Step 1: Set Up Your React App
+
+If you haven't already created a React app, you can do so by running the following command in your terminal:
+
+```bash
+npx create-react-app page-redirect-demo
+```
+
+This will create a new React app with the name "page-redirect-demo."
+
+## Step 2: Create the App Component
+
+Next, open the `src/App.js` file and replace its contents with the following code:
+
+```jsx
+import React, { useState } from 'react';
+
+function App() {
+  const [redirecting, setRedirecting] = useState(false);
+
+  const handleClick = () => {
+    setRedirecting(true);
+    setTimeout(() => {
+      window.location.href = 'https://jbcodeapp.com';
+    }, 5000);
+  };
+
+  return (
+    <div>
+      <h1>Redirecting to Another Page in 5 Seconds with jQuery</h1>
+      {redirecting ? (
+        <p>Redirecting soon....</p>
+      ) : (
+        <button onClick={handleClick}>Click to redirect</button>
+      )}
+    </div>
+  );
+}
+
+export default App;
+```
+
+In this code, we define a React functional component named App. It contains a state variable redirecting, which we'll use to control the display of a button and a message. When the button is clicked, the handleClick function sets redirecting to true and then uses setTimeout to redirect the user to `https://jbcodeapp.com` after a 5-second delay.
+
+## Step 3: Run Your React App
+
+Now, go back to your terminal and navigate to your project folder (page-redirect-demo). Start your React app by running:
+
+```bash
+npm start
+```
+
+Your app will be accessible at http://localhost:3000. Open a web browser and go to this URL.
+
+## Step 4: Test the Redirect
+
+You should see the message "Redirecting to Another Page in 5 Seconds with React" and a button that says "Click to redirect." Click the button, and after a 5-second delay, you will be redirected to https://jbcodeapp.com.
+
+## Output:
+
+![Output-1](/static/blog/redirecting-another-page-5-seconds-jquery-in-react/image.png)
+
+![Output-2](/static/blog/redirecting-another-page-5-seconds-jquery-in-react/image-1.png)
+
+# Source Code
+
+The complete source code for this tutorial is available on GitHub. You can find it [Here](https://github.com/jbcodeapp/Blogs/tree/main/redirecting-another-page-5-seconds-jquery).
+
+# About the Author
+
+[Jigar Patel](laraveldeveloper.com) is a React.js enthusiast and a software developer at JBCodeapp Company. Visit our [JBCodeapp](https://jbcodeapp.com) to learn more about our work in the React.js ecosystem.
+
+# We're Hiring!
+
+Are you passionate about React.js development? We're always on the lookout for talented developers to join our team. Check out our [careers page](https://jbcodeapp.com) for current job openings.
+
+# Related Blogs
+
+- [Getting Started with React: Setting Up a Project with Webpack and Babel](getting-started-react-setup-webpack-babel.mdx)
+- [Getting Started with Create React App](getting-started-with-create-react-app.mdx)
+- [A Guide to React Form Validation](Here's-a-simple-guide-to-validating-forms-in-React.mdx)
+- [How to Allow Only Numbers in React Textboxes](How-to-Allow-Only-Numbers-in-React-Textboxes.mdx)
+- [How to Easily Install Bootstrap in Your React App](how-to-install-bootstrap-in-react-app.mdx)
+- [How to Start a React Project in 2023](How-to-start-a-React-Project-in-2023.mdx)
+- [Key JavaScript Concepts Every React Developer Should Know](key-javascript-concepts-for-react-developers.mdx)
+- [Learn React.js Step by Step](Learn-React.js-Step-by-Step.mdx)
+- [Mastering React: Your Go-To Guide for 2023](mastering-react-2023-guide.mdx)
+- [React Bootstrap Modal Popup Example](react-bootstrap-modal-example.mdx)
+- [Mastering React Debugging: Tips and Techniques for Effective Debugging](react-debugging-tips-and-techniques.mdx)
+- [React Password Validation Made Easy: A Step-by-Step Guide](react-password-validation-step-by-step.mdx)
+- [React State Management Shootout: Redux vs. MobX](react-state-management-redux-vs-mobx.mdx)
+- [React Tutorial: An Overview and Walkthrough](React-Tutorial-An-Overview-and-Walkthrough.mdx)
+- [Creating a Secure Login Page in React: User Authentication Example](secure-login-react-user-authentication.mdx)
+- [Simplified Guide to useEffect in React](Simplified-Guide-to-useEffect-in-React.mdx)

@@ -1,0 +1,122 @@
+---
+slug: 'livewire3-create-SPA';
+title: "Create a SPA in Seconds Using wire:navigate in Livewire v3"
+date: "August 23, 2023"
+tags: ["Laravel", "Livewire", "SPA", "Web Development", "Front-end Development"]
+draft: false
+author: "Jigar Patel"
+summary: "Enhance your Laravel application's speed and responsiveness using Livewire v3 and the new wire:navigate attribute. This guide demonstrates how to achieve SPA-like performance without building a full Single Page Application."
+---
+
+# Overview
+
+<TOCInline toc={props.toc} exclude="Overview" toHeading={2} />
+
+# Create a SPA in Seconds Using wire:navigate in Livewire v3
+
+## Introduction
+
+Have you ever wondered how to make your web application lightning-fast without the complexity of building a Single Page Application (SPA)? In this tutorial, we'll explore how you can achieve the speediness of SPAs in your Laravel apps using Livewire v3 and the new `wire:navigate` attribute, all without the need to write an API.
+
+Traditional Laravel applications involve multiple pages and require a full page reload whenever a user clicks a link. Single Page Applications (SPAs), on the other hand, take a different approach. Instead of reloading the entire page, only specific parts are refreshed, eliminating the overhead of re-downloading JavaScript and CSS assets with every request. This leads to a significantly enhanced browsing experience.
+
+Let's dive into how the `wire:navigate` attribute can give your Laravel app the speediness of SPAs.
+
+## How to Use `wire:navigate`
+
+Using `wire:navigate` is incredibly straightforward. Simply add it as an attribute to your links, like so:
+
+```html
+<nav>
+  <a href="/" wire:navigate>Dashboard</a>
+  <a href="/posts" wire:navigate>Posts</a>
+  <a href="/users" wire:navigate>Users</a>
+</nav>
+```
+
+When a user clicks on one of these links, instead of the browser visiting the new page, Livewire steps in. Livewire employs its own efficient method to retrieve and render the page, giving your app a noticeable speed boost.
+
+## Using `wire:navigate` for Redirects
+
+Need to smoothly redirect users within your app? With `wire:navigate`, you can make these transitions seamless. Here's how you can do it in your Livewire component:
+
+```php
+return $this->redirect('/posts', navigate: true);
+```
+
+This instructs Livewire to use its `wire:navigate` function to swiftly take users to the new page.
+
+## Prefetching Links with `wire:navigate`
+
+The key to the speediness of `wire:navigate` lies in prefetching. As soon as a user hovers their mouse over a link, Livewire springs into action. By the time they click, the new page is already prepared and waiting. For even faster transitions, you can use the `.hover` modifier, like this:
+
+```html
+<a href="/posts" wire:navigate.hover>Posts</a>
+```
+
+## Persisting Elements Across Page Visits with `wire:navigate`
+
+Do you want to keep certain parts of your UI consistent between page loads? Let Livewire assist with the `@persist` directive. This is particularly useful for elements like audio or video players:
+
+```html
+@persist('player')
+<audio src="{{ $episode->file }}" controls></audio>
+@endpersist
+```
+
+With this, your players will continue playing uninterrupted, regardless of how many pages your users browse.
+
+## Updating the Page Before Navigating Away
+
+With `wire:navigate`, there's no need to risk losing your user's progress. You can use the `livewire:navigating` event to run JavaScript before the page change and perform any necessary actions:
+
+```javascript
+document.addEventListener('livewire:navigating', () => {
+  // Modify your HTML here
+});
+```
+
+## Script Evaluation in `wire:navigate`
+
+Since content is replaced with every page view, you might want to use the `livewire:navigated` event, which is triggered every time the DOM has been fully replaced. This is preferable to `DOMContentLoaded`, which is only called after the first page load:
+
+```javascript
+document.addEventListener('livewire:navigated', () => {
+  // Initialize 3rd-party libraries here...
+});
+```
+
+## Reloading Pages When Assets Change Using `wire:navigate`
+
+To ensure your JavaScript stays up-to-date after deployment, you can add `data-navigate-track` to your `<script>` tags:
+
+```html
+<head>
+  <script src="/app.js?id=123" data-navigate-track></script>
+</head>
+```
+
+Updating the version hash in this way will force a full page reload, ensuring that everyone gets the latest script.
+
+## Conclusion
+
+By now, you've become proficient in enhancing your Laravel application's speed using Livewire's `wire:navigate` attribute. Remember, it's not about turning your application into a full SPA; it's about reaping the benefits of speed and responsiveness.
+
+Fast, seamless browsing is no longer limited to JavaScript-heavy applications. With Livewire and `wire:navigate`, you have all the power you need to create a smooth and efficient user experience.
+
+# About the Author
+
+[Jigar Patel](https://expertlaravel.com) is a React.js enthusiast and a software developer at JBCodeapp Company. Visit our [JBCodeapp](https://jbcodeapp.com) to learn more about our work in the React.js ecosystem.
+
+# We're Hiring!
+
+Are you passionate about React.js development? We're always on the lookout for talented developers to join our team. Check out our [careers page](https://jbcodeapp.com) for current job openings.
+
+# Related Blogs
+
+- [Building a Contact Us Form in Laravel](building-a-contact-us-form-in-laravel.mdx)
+- [Guide: Sending Email Notifications in Laravel](Guide-Sending-Email-Notifications-in-Laravel.mdx)
+- [Learn How to Send Emails Using Queue in Laravel 7/6](Laravel-6-Queue-for-Sending-Emails.mdx)
+- [3 Crucial Laravel Architecture Best Practices for 2023](Laravel-Architecture-2023.mdx)
+- [Laravel Contact Form with Email Sending](Laravel-Contact-Form-with-Email-Sending.mdx)
+- [Laravel Send Email using Queue Example](Send-Email-using-Queue-Example.mdx)

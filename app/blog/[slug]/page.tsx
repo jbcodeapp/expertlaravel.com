@@ -22,6 +22,14 @@ export async function generateMetadata({
   const baseSiteURL = process.env.NEXT_PUBLIC_SITE_URL;
   const siteURLWithBlog = `${baseSiteURL}blog/${post.slug}`;
 
+  const ogImage = post.ogImage || {
+    url: `static/blog/${post.slug}.png`,
+    width: 1200,
+    height: 600,
+    alt: post.title,
+    type: 'image/png',
+  };
+
   return {
     title: post.title,
     description: post.summary,
@@ -29,29 +37,31 @@ export async function generateMetadata({
     alternates: {
       canonical: siteURLWithBlog,
     },
-
     keywords: post.tags,
-
-    // category: post.category,
-    authors: [{ name: post.author, url: 'https://expertlaravel.com' }],
-
     openGraph: {
+      locale: 'en_US',
       title: post.title,
       type: 'article',
       description: post.summary,
-      images: post.images,
       publishedTime: post.date,
       siteName: 'Expert Laravel',
       url: siteURLWithBlog,
-
-      locale: 'en_US',
+      // images: post.images,
+      images: [ogImage],
     },
+    authors: [{ name: post.author, url: 'https://expertlaravel.com' }],
     twitter: {
       card: 'summary_large_image',
       title: post.title,
       site: '@jbcodeapp',
       description: post.summary,
-      // images: post.images,
+      images: [
+        {
+          url: `static/blog/${post.slug}.png`,
+          width: 1200,
+          height: 600,
+        },
+      ],
     },
     robots: {
       index: true,
@@ -69,6 +79,7 @@ export async function generateMetadata({
   };
 }
 
+// Define the BlogPost component
 export default function BlogPost({ params }: { params: { slug: string } }) {
   const slug = params.slug;
   const sortedPosts = sortedBlogPost(allBlogs);

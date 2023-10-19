@@ -1,0 +1,175 @@
+---
+slug: 'react-ckeditor-blog-editor';
+Title: "Building a Blog Post Editor with React and CKEditor"
+date: "September 14, 2023"
+Tags: ["React", "CKEditor", "Blog", "Editor", "WYSIWYG"]
+draft: false
+author: "Jigar Patel"
+Summary: Learn how to create a simple blog post editor in React using CKEditor in this step-by-step guide.
+---
+
+## Introduction
+
+Creating a blog post editor with a What You See Is What You Get (WYSIWYG) text editor like [CKEditor](https://ckeditor.com/) is a common requirement for many web applications. In this tutorial, we'll walk through the process of building a basic blog post editor using React and CKEditor. By the end of this guide, you'll have a functional blog post editor that you can further customize and extend to meet your specific project needs.
+
+## Step 1: Set Up Your React Application
+
+To get started, make sure you have Node.js and npm installed on your machine. If you don't have them already, you can download and install them from the official website.
+
+Next, create a new React application using [Create React App](https://create-react-app.dev/) by running the following commands in your terminal:
+
+```bash
+npx create-react-app blog-editor
+```
+
+```bash
+cd blog-editor
+```
+
+## Step 2: Install CKEditor 5
+
+In your React project directory, you'll need to install CKEditor 5 as a dependency. Use npm to install the `required packages`:
+
+```bash
+npm install --save @ckeditor/ckeditor5-react @ckeditor/ckeditor5-build-classic
+```
+
+This command installs CKEditor 5 and the React wrapper for CKEditor.
+
+Step 3: Create the CKEditor Component
+
+Now, let's create a new [React component](https://legacy.reactjs.org/docs/react-component.html) that will serve as our blog post editor. In the src folder of your project, create a new file called `Editor.js` and add the following code:
+
+`src/Editor.js`
+
+```javascript
+import React, { Component } from 'react';
+import { CKEditor } from '@ckeditor/ckeditor5-react';
+import ClassicEditor from '@ckeditor/ckeditor5-build-classic';
+import '../App.css';
+
+class Editor extends Component {
+  render() {
+    return (
+      <div className="App">
+        <h2>Using CKEditor&nbsp;5 build in React</h2>
+        <div className="editor">
+          <CKEditor
+            editor={ClassicEditor}
+            data="<p>Hello from CKEditor&nbsp;5!</p>"
+            onReady={(editor) => {
+              // You can store the "editor" and use when it is needed.
+              console.log('Editor is ready to use!', editor);
+            }}
+            onChange={(event, editor) => {
+              const data = editor.getData();
+              console.log({ event, editor, data });
+            }}
+            onBlur={(event, editor) => {
+              console.log('Blur.', editor);
+            }}
+            onFocus={(event, editor) => {
+              console.log('Focus.', editor);
+            }}
+          />
+        </div>
+      </div>
+    );
+  }
+}
+
+export default Editor;
+```
+
+This component creates a simple CKEditor instance with an initial content and provides [hooks](https://legacy.reactjs.org/docs/hooks-intro.html) to access and handle changes to the editor's content.
+
+## Step 4: Add the CKEditor Component to Your App
+
+Now, let's integrate the Editor component into your main application. Open the `src/App.js` file and import and use the Editor component:
+
+```javascript
+import Editor from './components/Editor';
+
+function App() {
+  return (
+    <div className="App">
+      <header className="App-header">
+        <Editor />
+      </header>
+    </div>
+  );
+}
+
+export default App;
+```
+
+## Step 5: Styling (Optional)
+
+You can apply some basic CSS styles to make your editor look more appealing. Create a CSS file named `App.css` in the src folder and add the following styles:
+
+`src/App.css`
+
+```css
+.App {
+  text-align: center;
+}
+
+.editor {
+  max-width: 600px;
+  margin: 0 auto;
+  padding: 20px;
+  border: 1px solid #ddd;
+  border-radius: 5px;
+  background-color: #fff;
+  box-shadow: 0 0 5px rgba(0, 0, 0, 0.2);
+}
+
+h2 {
+  margin-top: 100px;
+}
+```
+
+These styles will give your blog post editor a clean and centered appearance.
+
+## Step 6: Run Your React Application
+
+You're now ready to see your blog post editor in action. Start your React application by running the following command:
+
+```bash
+npm start
+```
+
+Your application should open in your default web browser at `http://localhost:3000`, and you'll be able to use your CKEditor-powered blog post editor.
+
+Output:
+![Output](/static/blog/react-ckeditor-blog-editor/image.png)
+
+## Conclusion:
+
+Congratulations! You've successfully created a basic blog post editor using React and CKEditor. This is just the beginning, and you can build upon this foundation by adding more features like saving, loading, and formatting blog posts, integrating with a backend for data storage, and applying additional styles and customizations to CKEditor to meet the specific requirements of your project. Enjoy developing your blog platform!
+
+# Source Code
+
+The complete source code for this tutorial is available on GitHub. You can find it [Here](https://github.com/jbcodeapp/Blogs/tree/main/Building%20a%20Blog%20Post%20Editor%20with%20React%20and%20CKEditor).
+
+# About the Author
+
+[Jigar Patel](laraveldeveloper.com) is a React.js enthusiast and a software developer at JBCodeapp Company. Visit our [JBCodeapp](https://jbcodeapp.com) to learn more about our work in the React.js ecosystem.
+
+# We're Hiring!
+
+Are you passionate about React.js development? We're always on the lookout for talented developers to join our team. Check out our [careers page](https://jbcodeapp.com) for current job openings.
+
+# Related Blogs
+
+- [Boost Your React Forms: Adding Email Validation](boost-your-react-forms-adding-email-validation.mdx)
+- [Getting Started with React: Setting Up a Project with Webpack and Babel](getting-started-react-setup-webpack-babel.mdx)
+- [Getting Started with Create React App](getting-started-with-create-react-app.mdx)
+- [How to Easily Install Bootstrap in Your React App](how-to-install-bootstrap-in-react-app.mdx)
+- [Key JavaScript Concepts Every React Developer Should Know](key-javascript-concepts-for-react-developers.mdx)
+- [Mastering React: Your Go-To Guide for 2023](mastering-react-2023-guide.mdx)
+- [React Bootstrap Modal Popup Example](react-bootstrap-modal-example.mdx)
+- [Mastering React Debugging: Tips and Techniques for Effective Debugging](react-debugging-tips-and-techniques.mdx)
+- [React State Management Shootout: Redux vs. MobX](react-state-management-redux-vs-mobx.mdx)
+- [React Tutorial: An Overview and Walkthrough](React-Tutorial-An-Overview-and-Walkthrough.mdx)
+- [Simplified Guide to useEffect in React](Simplified-Guide-to-useEffect-in-React.mdx)

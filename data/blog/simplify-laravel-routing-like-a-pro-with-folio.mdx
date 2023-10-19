@@ -1,0 +1,130 @@
+---
+slug: 'simplify-laravel-routing-like-a-pro-with-folio';
+title: "Simplify Laravel Routing Like a Pro with Folio"
+date: "September 22, 2023"
+tags: ["Laravel", "Routing", "Folio"]
+draft: false
+author: "Jigar Patel"
+summary: "Learn how to streamline Laravel routing with Folio for a more efficient web application development experience."
+---
+
+# Overview
+
+<TOCInline toc={props.toc} exclude="Overview" toHeading={2} />
+
+# Getting Started with Folio in Laravel
+
+## Introduction
+
+Are you ready for an exciting update in the Laravel universe? Say hello to `Folio,` a revolutionary page-based routing system that's about to transform how you manage routes in your Laravel applications. In this blog post, we'll dive deep into what Folio is, how it simplifies routing, and what it means for Laravel developers.
+
+Laravel, known for its elegant syntax and robust features, is a popular PHP framework for web application development. In this blog post, we will introduce you to Folio, a revolutionary page-based routing system that simplifies how you manage routes in your [Laravel](https://laravel.com/) applications.
+
+### Folio Unveiled
+
+Folio is not your run-of-the-mill routing solution. It's a powerful and intuitive page-based router designed to streamline the routing process within your Laravel applications. With Folio, generating routes is as effortless as creating a Blade template in the `resources/views/pages` directory.
+
+For example, if you wish to create a page accessible at a specific URL, simply craft a `greeting.blade.php` file within the `resources/views/pages` directory. It's that straightforward!
+
+```blade
+<div>
+    Hello World
+</div>
+```
+
+### Feature-Rich and Familiar
+
+What sets Folio apart is its ability to retain all the features you've grown to love within Laravel's routing system. This includes middleware support, nested routes, route parameters, route model binding, and more. Folio doesn't just simplify; it also empowers you to maintain your Laravel project's routing in a way that feels familiar and comfortable.
+
+### The Livewire Connection
+
+While Folio excels at handling simple static pages, it may not cover the demands of highly interactive modern web applications. That's where Laravel Livewire comes into play. The exciting news is that Laravel Volt, launching tomorrow, will seamlessly integrate with Folio, allowing you to create single-file Livewire components within your Folio pages. The best of both worlds!
+
+## Installation
+
+To get started with Folio, you need to install it in your Laravel project using [Composer](https://getcomposer.org/), the PHP package manager. Open your terminal, navigate to your Laravel project's root directory, and execute the following command:
+
+```bash
+composer require laravel/folio
+```
+
+This command fetches the Folio package and its dependencies, making them available for use within your Laravel application.
+
+## Creating Your First Folio Page
+
+Folio's primary concept revolves around using Blade templates for defining your application's pages. Here's how to create a new Folio page:
+
+### Step 1: Navigate to the pages Directory
+
+If your project doesn't already have a `pages` directory inside `resources/views,` create it.
+
+### Step 2: Craft a Blade Template
+
+Inside the `pages` directory, create a new Blade template for your page. Let's illustrate this with an example by creating a `contact.blade.php` page:
+
+```php
+<!-- resources/views/pages/contact.blade.php -->
+
+@extends('layouts.app')
+
+@section('content')
+
+<div>This is the contact page.</div>
+@endsection
+```
+
+In this example, we extend a layout (e.g., 'layouts.app') and define
+the content specific to the contact page.
+
+### Automatic Routing with Folio
+
+One of Folio's remarkable features is its ability to handle routing automatically based on your Blade templates' [File Structure](https://laravel.com/docs/10.x/structure). In other words, you don't need to define routes explicitly in your `routes/web.php` file. With Folio, your routes are mapped to your Blade templates' file names.
+
+For instance, if you've created the `contact.blade.php` file, you can access it through the `/contact` URL in your browser no additional routing setup required.
+
+### Customizing Your Routes (Optional)
+
+While Folio simplifies routing through convention, it also allows for route customization. To do this, create a `folio.php` file in your `routes` directory (create one if it doesn't exist), and define your custom routes there. Here's an example:
+
+```php
+// routes/folio.php
+
+Folio::route('/about', 'about');
+Folio::route('/services', 'services');
+```
+
+In this example, custom routes are created for the `/about` and `/services` URLs, which are mapped to the `about` and `services Blade templates, respectively.
+
+### Leveraging Laravel's Features
+
+Folio doesn't stop you from enjoying the full suite of features offered by Laravel's routing system. You can incorporate middleware, utilize nested routes, work with route parameters, and employ route model binding just as you would with traditional Laravel routes.
+
+For instance, to apply middleware to a Folio route, you can use the following syntax:
+
+```php
+Folio::middleware(['auth'])->route('/dashboard', 'dashboard');
+```
+
+This line adds the `auth` middleware to the `/dashboard` route.
+
+### Conclusion
+
+With Folio, you can unlock the power of simplified routing in your Laravel application. It's particularly advantageous for managing static pages and effortlessly integrates with Laravel Livewire, enabling you to add interactivity to your web application.
+
+Folio represents a significant addition to the Laravel ecosystem, offering a flexible and intuitive approach to routing. Whether you're building a small website or a complex web application, Folio simplifies the routing process, allowing you to focus on what truly matters—building remarkable web experiences.
+
+# About the Author
+
+[Jigar Patel](https://expertlaravel.com) is a React.js enthusiast and a software developer at JBCodeapp Company. Visit our [JBCodeapp](https://jbcodeapp.com) to learn more about our work in the React.js ecosystem.
+
+# We're Hiring!
+
+Are you passionate about Laravel development? We're always on the lookout for talented developers to join our team. Check out our [careers page](https://jbcodeapp.com) for current job openings.
+
+# Related Blogs
+
+- [Building a Contact Us Form in Laravel](building-a-contact-us-form-in-laravel.mdx)
+- [Laravel Contact Form with Email Sending](Laravel-Contact-Form-with-Email-Sending.mdx)
+- [Laravel Send Email using Queue Example](Send-Email-using-Queue-Example.mdx)
+- [Guide: Sending Email Notifications in Laravel](Guide-Sending-Email-Notifications-in-Laravel.mdx)
+- [Learn How to Send Emails Using Queue in Laravel 7/6](Laravel-6-Queue-for-Sending-Emails.mdx)
