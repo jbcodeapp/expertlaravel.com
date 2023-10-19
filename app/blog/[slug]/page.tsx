@@ -22,7 +22,7 @@ export async function generateMetadata({
   const baseSiteURL = process.env.NEXT_PUBLIC_SITE_URL;
   const siteURLWithBlog = `${baseSiteURL}blog/${post.slug}`;
 
-  const ogImage = post.ogImage || {
+  const ogImage = {
     url: `static/blog/${post.slug}.png`,
     width: 1200,
     height: 600,
