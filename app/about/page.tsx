@@ -7,8 +7,9 @@ const baseSiteURL = process.env.NEXT_PUBLIC_SITE_URL;
 const siteURLWithBlog = `${baseSiteURL}about`;
 
 export const metadata = {
-  title: 'Expert Laravel',
-  description: 'Expert Laravel Portfolio Website',
+  title: 'About Expert Laravel - Meet Our Team and Mission',
+  description:
+    'Learn about Expert Laravel and our mission to provide you with expert Laravel development advice and resources. Meet our team of professionals.',
   metadataBase: new URL(siteURLWithBlog),
   alternates: {
     canonical: siteURLWithBlog,
@@ -16,9 +17,11 @@ export const metadata = {
   keywords: 'About Expert Laravel, Laravel Team, Mission, Expert Laravel',
   images: [
     {
-      url: `${baseSiteURL}/static/about.png`,
+      url: `${baseSiteURL}static/about.png`,
       width: '1903',
       height: '955',
+      alt: 'Expert Laravel',
+      type: 'image/png',
     },
   ],
   authors: 'Jigar Patel',
@@ -32,7 +35,7 @@ export const metadata = {
     siteName: 'Expert Laravel',
     images: [
       {
-        url: '/static/about.png',
+        url: `${baseSiteURL}static/about.png`,
         width: '1903',
         height: '955',
       },
@@ -40,9 +43,10 @@ export const metadata = {
   },
   twitter: {
     card: 'summary_large_image',
-    title: 'Expert Laravel',
+    title: 'About Expert Laravel - Meet Our Team and Mission',
+    description:
+      'Learn about Expert Laravel and our mission to provide you with expert Laravel development advice and resources. Meet our team of professionals.',
     site: '@jbcodeapp',
-    description: 'Expert Laravel Portfolio Website',
   },
 };
 

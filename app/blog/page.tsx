@@ -10,14 +10,15 @@ const baseSiteURL = process.env.NEXT_PUBLIC_SITE_URL;
 const siteURLWithBlog = `${baseSiteURL}blog`;
 
 export const metadata = {
-  title: 'Expert Laravel',
-  description: 'Expert Laravel Portfolio Website',
+  title: 'Expert Laravel Blog - Latest Insights and Tutorials',
+  description:
+    'Stay updated with the latest Laravel insights, tutorials, and news from Expert Laravels blog. Enhance your web development skills with our expert articles.',
   metadataBase: new URL(siteURLWithBlog),
   alternates: {
     canonical: siteURLWithBlog,
   },
   keywords: 'Laravel Blog, Web Development, Laravel Insights, Tutorials, Expert Laravel',
-  images: ['static/blog.png'],
+  images: `${baseSiteURL}static/blog.png`,
   openGraph: {
     locale: 'en_US',
     type: 'website',
@@ -28,17 +29,20 @@ export const metadata = {
     siteName: 'Expert Laravel',
     images: [
       {
-        url: '/static/blog.png',
+        url: `${baseSiteURL}static/blog.png`,
         width: '1903',
         height: '955',
+        alt: 'Expert Laravel Blog - Latest Insights and Tutorials',
+        type: 'image/png',
       },
     ],
   },
   twitter: {
     card: 'summary_large_image',
-    title: 'Expert Laravel',
+    title: 'Expert Laravel Blog - Latest Insights and Tutorials',
+    description:
+      'Stay updated with the latest Laravel insights, tutorials, and news from Expert Laravels blog. Enhance your web development skills with our expert articles.',
     site: '@jbcodeapp',
-    description: 'Expert Laravel Portfolio Website',
   },
 };
 

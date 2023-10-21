@@ -15,29 +15,31 @@ export const metadata = {
   alternates: {
     canonical: siteURLWithBlog,
   },
-  keywords: 'Blog, Expert, laravel',
-  images: ['static/ExpertLaravel.webp'],
+  keywords: 'Laravel Blog, Web Development, Laravel Insights, Tutorials, Expert Laravel',
+  images: [`${baseSiteURL}static/ExpertLaravel.png`],
   // authors: 'Jigar Patel',
   openGraph: {
     locale: 'en_US',
     type: 'website',
     url: siteURLWithBlog,
-    title: 'Expert Laravel',
-    description: 'Expert Laravel Portfolio Website',
+    title: 'Blog - Expert laravel',
+    description: 'My Blogs - Expert laravel new',
     siteName: 'Expert Laravel',
     images: [
       {
-        url: 'static/ExpertLaravel.webp',
+        url: `${baseSiteURL}static/ExpertLaravel.png`,
         width: '1903',
         height: '955',
+        alt: 'Blog - Expert laravel',
+        type: 'image/png',
       },
     ],
   },
   twitter: {
     card: 'summary_large_image',
-    title: 'Expert Laravel',
+    title: 'Blog - Expert laravel',
+    description: 'My Blogs - Expert laravel new',
     site: '@jbcodeapp',
-    description: 'Expert Laravel Portfolio Website',
   },
 };
 
