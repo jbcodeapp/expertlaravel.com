@@ -23,7 +23,7 @@ export async function generateMetadata({
   const siteURLWithBlog = `${baseSiteURL}blog/${post.slug}`;
 
   const ogImage = {
-    url: `static/blog/${post.slug}.png`,
+    url: `${baseSiteURL}static/blog/${post.slug}.png`,
     width: 1200,
     height: 600,
     alt: post.title,
@@ -57,9 +57,11 @@ export async function generateMetadata({
       description: post.summary,
       images: [
         {
-          url: `static/blog/${post.slug}.png`,
+          url: `${baseSiteURL}static/blog/${post.slug}.png`,
           width: 1200,
           height: 600,
+          alt: post.title,
+          type: 'image/png',
         },
       ],
     },

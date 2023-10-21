@@ -10,8 +10,9 @@ const baseSiteURL = process.env.NEXT_PUBLIC_SITE_URL;
 const siteURLWithBlog = `${baseSiteURL}blog`;
 
 export const metadata = {
-  title: 'Expert Laravel',
-  description: 'Expert Laravel Portfolio Website',
+  title: 'Expert Laravel Blog - Latest Insights and Tutorials',
+  description:
+    'Stay updated with the latest Laravel insights, tutorials, and news from Expert Laravels blog. Enhance your web development skills with our expert articles.',
   metadataBase: new URL(siteURLWithBlog),
   alternates: {
     canonical: siteURLWithBlog,
@@ -36,9 +37,10 @@ export const metadata = {
   },
   twitter: {
     card: 'summary_large_image',
-    title: 'Expert Laravel',
+    title: 'Expert Laravel Blog - Latest Insights and Tutorials',
+    description:
+      'Stay updated with the latest Laravel insights, tutorials, and news from Expert Laravels blog. Enhance your web development skills with our expert articles.',
     site: '@jbcodeapp',
-    description: 'Expert Laravel Portfolio Website',
   },
 };
 

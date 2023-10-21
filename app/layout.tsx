@@ -14,8 +14,9 @@ const baseSiteURL = process.env.NEXT_PUBLIC_SITE_URL;
 const siteURLWithBlog = `${baseSiteURL}`;
 
 export const metadata = {
-  title: 'Expert Laravel',
-  description: 'Coding the Future: Empowering Innovation as a Full Stack Developer',
+  title: 'Expert Laravel - Your Source for Laravel Development',
+  description:
+    'Expert Laravel is your one-stop destination for all things Laravel development. Find expert advice, tutorials, and projects.',
   metadataBase: new URL(siteURLWithBlog),
   alternates: {
     canonical: siteURLWithBlog,
@@ -31,17 +32,20 @@ export const metadata = {
     siteName: 'Expert Laravel',
     images: [
       {
-        url: '/static/ExpertLaravel.png',
+        url: `${baseSiteURL}static/ExpertLaravel.png`,
         width: '1903',
         height: '955',
+        alt: 'Expert Laravel - Your Source for Laravel Development',
+        type: 'image/png',
       },
     ],
   },
   twitter: {
     card: 'summary_large_image',
-    title: 'Expert Laravel',
+    title: 'Expert Laravel - Your Source for Laravel Development',
+    description:
+      'Expert Laravel is your one-stop destination for all things Laravel development. Find expert advice, tutorials, and projects.',
     site: '@jbcodeapp',
-    description: 'Coding the Future: Empowering Innovation as a Full Stack Developer',
   },
 };
 
