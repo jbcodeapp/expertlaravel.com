@@ -18,7 +18,7 @@ export const metadata = {
     canonical: siteURLWithBlog,
   },
   keywords: 'Laravel Blog, Web Development, Laravel Insights, Tutorials, Expert Laravel',
-  images: ['static/blog.png'],
+  images: `${baseSiteURL}static/blog.png`,
   openGraph: {
     locale: 'en_US',
     type: 'website',
@@ -29,9 +29,11 @@ export const metadata = {
     siteName: 'Expert Laravel',
     images: [
       {
-        url: '/static/blog.png',
+        url: `${baseSiteURL}static/blog.png`,
         width: '1903',
         height: '955',
+        alt: 'Expert Laravel Blog - Latest Insights and Tutorials',
+        type: 'image/png',
       },
     ],
   },

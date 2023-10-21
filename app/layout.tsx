@@ -22,6 +22,15 @@ export const metadata = {
     canonical: siteURLWithBlog,
   },
   authors: 'Jigar Patel',
+  images: [
+    {
+      url: `${baseSiteURL}static/projects.png`,
+      width: '1903',
+      height: '955',
+      alt: 'Expert Laravel Projects - Explore Our Showcase',
+      type: 'image/png',
+    },
+  ],
   openGraph: {
     locale: 'en_US',
     type: 'website',

@@ -17,7 +17,7 @@ export const metadata = {
   keywords: 'About Expert Laravel, Laravel Team, Mission, Expert Laravel',
   images: [
     {
-      url: `${baseSiteURL}/static/about.png`,
+      url: `${baseSiteURL}static/about.png`,
       width: '1903',
       height: '955',
       alt: 'Expert Laravel',
@@ -35,7 +35,8 @@ export const metadata = {
     siteName: 'Expert Laravel',
     images: [
       {
-        url: `${baseSiteURL}/static/about.png`,
+        url: `${baseSiteURL}static/about.png`,
+
         width: '1903',
         height: '955',
       },
