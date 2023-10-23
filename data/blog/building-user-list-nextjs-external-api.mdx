@@ -1,0 +1,150 @@
+---
+slug: 'building-user-list-nextjs-external-api'
+title: 'Building a User List with Next.js and an External API'
+date: 'October 20, 2023'
+tags: ['Next.js', 'API Integration']
+draft: false
+author: 'Jigar Patel'
+summary: "Learn how to fetch and display data from an external API in a Next.js application. This tutorial guides you through the process of creating a simple web app that retrieves and presents a list of random users using the 'Random User Generator' API."
+---
+
+# Overview
+
+<TOCInline toc={props.toc} exclude="Overview" toHeading={2} />
+
+# Building a User List with Next.js and an External API
+
+If you're new to Next.js and want to learn how to fetch and display data from an external API, you've come to the right place. In this tutorial, we'll create a simple web application that fetches and displays a list of random users using the "Random User Generator" API. By the end of this guide, you'll have a basic understanding of building dynamic applications with Next.js.
+
+## Prerequisites
+
+Before we begin, ensure that you have the following set up on your machine:
+
+1. **Node.js and npm**: Make sure you have Node.js and npm (Node Package Manager) installed. If not, download and install them from the [official website](https://nodejs.org/).
+
+2. **Next.js**: You should have Next.js installed on your machine. If not, you can create a new Next.js project by following the steps below:
+
+```bash
+npx create-next-app my-next-app
+cd my-next-app
+```
+
+1. Code Editor: Use a code editor of your choice. Popular options include Visual Studio Code, Sublime Text, and Atom.
+
+## Step 1: Install Dependencies
+
+We'll start by installing a package called isomorphic-unfetch, which is a minimalistic fetch library that allows us to fetch data from APIs on both the client and server sides.
+
+```bash
+npm install isomorphic-unfetch
+```
+
+## Step 2: Create a Component for Data Fetching
+
+In this step, we'll create a new component to handle the data fetching. Let's call it UserList.js. Inside this component, we'll use React hooks to manage state and the useEffect hook to fetch data from the API.
+
+```jsx
+// components/UserList.js
+
+import React, { useState, useEffect } from 'react';
+import fetch from 'isomorphic-unfetch';
+
+const UserList = () => {
+  const [users, setUsers] = useState([]);
+
+  useEffect(() => {
+    async function fetchUsers() {
+      try {
+        const response = await fetch('https://randomuser.me/api/?results=5');
+        const data = await response.json();
+        setUsers(data.results);
+      } catch (error) {
+        console.error('Error fetching data:', error);
+      }
+    }
+
+    fetchUsers();
+  }, []);
+
+  return (
+    <div>
+      <h2>Random User List</h2>
+      <ul>
+        {users.map((user, index) => (
+          <li key={index}>
+            <img src={user.picture.thumbnail} alt="User Thumbnail" />
+            {user.name.first} {user.name.last}
+          </li>
+        ))}
+      </ul>
+    </div>
+  );
+};
+
+export default UserList;
+```
+
+This component fetches user data from the "Random User Generator" API and displays it in a list.
+
+## Step 3: Create a Next.js Page
+
+Now, let's create a Next.js page to include the UserList component. We'll call this page index.js.
+
+```jsx
+// pages/index.js
+
+import UserList from '../components/UserList';
+
+const Home = () => {
+  return (
+    <div>
+      <h1>Fetching API Data in Next.js</h1>
+      <UserList />
+    </div>
+  );
+};
+
+export default Home;
+```
+
+## Step 4: Start the Development Server
+
+You're almost there! To see your application in action, start the Next.js development server:
+
+```bash
+npm run dev
+```
+
+Now, open your web browser and navigate to http://localhost:3000. You should see the "Fetching API Data in Next.js" heading and a list of five random users fetched from the API.
+
+## Output:
+
+![Output](image.png)
+
+## Conclusion
+
+Congratulations! You've successfully created a Next.js application that fetches and displays data from an external API. This is just the beginning of what you can achieve with Next.js. You can explore more complex data fetching, integrate additional APIs, and style your application to make it more visually appealing.
+
+## Source Code
+
+The complete source code for this tutorial is available on GitHub. You can find it [Here](https://github.com/jbcodeapp/Blogs/tree/main/building-user-list-nextjs-external-api).
+
+## About the Author
+
+[Jigar Patel](https://expertlaravel.com) is a React.js enthusiast and a software developer at JBCodeapp Company. Visit our [JBCodeapp](https://jbcodeapp.com) to learn more about our work in the React.js ecosystem.
+
+## We're Hiring
+
+Are you passionate about React.js development? We're always on the lookout for talented developers to join our team. Check out our [Careers Page](https://jbcodeapp.com/career) for current job openings.
+
+## Related Blogs
+
+- [Add Fonts to Next.js Projects - Font Integration Guide](add-fonts-in-to-nextjs-projects)
+
+- [A Beginner's Guide to Learning Next.js: Step by Step](beginners-guide-learning-nextjs-step-by-step)
+
+- [2023's Best Web App Development Frameworks: A Guide for Beginners](2023-best-web-app-development-framework)s
+
+- [Maximizing the Synergy of Tailwind CSS and Next.js for Effortless Web Development](maximizing-synergy-tailwind-css-next-js-web-development)
+
+- [A Novice's Handbook for Crafting an SEO-Enhanced Website via Next.js](a-novices-guide-to-seo-enhanced-websites-with-nextjs)
