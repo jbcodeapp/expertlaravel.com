@@ -1,6 +1,11 @@
 ---
+<<<<<<< HEAD:data/blog/building-a-nodejs-crud-with-mysql.mdx
+slug: 'building-a-nodejs-crud-with-mysql'
+title: 'Building a Nodejs CRUD Application with MySQL 01'
+=======
 slug: 'Building-a-Node.js-CRUD-Application-with-MySQL'
 title: 'Building a Node.js CRUD Application with MySQL'
+>>>>>>> main:data/blog/Building-a-Node.js-CRUD-Application-with-MySQL.mdx
 date: 'September 6, 2023'
 tags: ['NodeJS', 'CRUD', 'MySQL', 'Express', 'API']
 draft: false
@@ -26,25 +31,25 @@ In this tutorial, we'll construct a straightforward CRUD API using [Node.js](htt
 
 - **GET** `/api/items`: Get all items
 
-  ![read_all_data](read_all_data.png)
+  ![read_all_data](/static/blog/Building-a-Node.js-CRUD-Application-with-MySQL/read_all_data.png)
 
 - **GET** `/api/items/{id}`: Get a single item
-- ![alt](read_one_data.png)
+- ![Get a single item-1](/static/blog/Building-a-Node.js-CRUD-Application-with-MySQL/read_one_data.png)
 
 - **POST** `/api/items`: Create a new item
 
-  ![alt](item_created.png)
-  ![alt](created_table.png)
+  ![Create a new item-1](/static/blog/Building-a-Node.js-CRUD-Application-with-MySQL/item_created.png)
+  ![Create a new item-2](/static/blog/Building-a-Node.js-CRUD-Application-with-MySQL/created_table.png)
 
 - **PUT** `/api/items/{id}`: Update an item
 
-  ![alt](item_updated.png)
-  ![alt](updated_table.png)
+  ![Update an item-1](/static/blog/Building-a-Node.js-CRUD-Application-with-MySQL/item_updated.png)
+  ![Update an item-2](/static/blog/Building-a-Node.js-CRUD-Application-with-MySQL/updated_table.png)
 
 - **DELETE** `/api/items/{id}`: Delete an item
 
-  ![alt](item_deleted.png)
-  ![alt](deleted_table.png)
+  ![Delete an item-1](/static/blog/Building-a-Node.js-CRUD-Application-with-MySQL/item_deleted.png)
+  ![Delete an item-2](/static/blog/Building-a-Node.js-CRUD-Application-with-MySQL/deleted_table.png)
 
 We'll guide you through the process of setting up the database, creating the Node.js application, installing the necessary packages, defining the routes, and handling CRUD operations.
 
@@ -142,32 +147,44 @@ app.listen(3000, () => {
 
 With your Node.js app running, you can now test the CRUD APIs using tools like Postman. Here are the endpoints you can test:
 
-**GET http://localhost:3000/api/items:** Retrieve all items.
+**`GET http://localhost:3000/api/items:`** Retrieve all items.
 
-**GET http://localhost:3000/api/items/{id}:** Get details of a specific item.
+**`GET http://localhost:3000/api/items/{id}:`** Get details of a specific item.
 
-**POST http://localhost:3000/api/items:** Create a new item.
+**`POST http://localhost:3000/api/items:`** Create a new item.
 
-**PUT http://localhost:3000/api/items/{id}:** Update an existing item.
+**`PUT http://localhost:3000/api/items/{id}:`** Update an existing item.
 
-**DELETE http://localhost:3000/api/items/{id}:** Delete an item.
+**`DELETE http://localhost:3000/api/items/{id}:`** Delete an item.
 
 By following these steps, you've successfully built a Node.js CRUD API using Express and MySQL. This tutorial provides a solid foundation for more advanced applications and customization.
 
 If you have any questions or need further assistance, feel free to ask.
 
-# Source Code
+## Source Code
 
 The complete source code for this tutorial is available on GitHub. You can find it [Here](https://github.com/jbcodeapp/Blogs/tree/main/Building%20a%20Node.js%20CRUD%20Application%20with%20MySQL).
 
-# About the Author
+## About the Author
 
-[Jigar Patel](laraveldeveloper.com) is a React.js enthusiast and a software developer at JBCodeapp Company. Visit our [JBCodeapp](https://jbcodeapp.com) to learn more about our work in the React.js ecosystem.
+[Jigar Patel](https://expertlaravel.com) is a React.js enthusiast and a software developer at JBCodeapp Company. Visit our [JBCodeapp](https://jbcodeapp.com) to learn more about our work in the React.js ecosystem.
 
-# We're Hiring!
+## We're Hiring
 
 Are you passionate about React.js development? We're always on the lookout for talented developers to join our team. Check out our [careers page](https://jbcodeapp.com) for current job openings.
 
-# Related Blogs
+## Related Blogs
 
-- [Building a Node.js Express REST API for Image Upload](Building-a-Node.js-Express-REST-API-for-Image-Upload.mdx)
+- [Building a Nodejs CRUD Application with MySQL](building-a-nodejs-crud-with-mysql)
+
+- [Building a Node.js Express REST API for Image Upload](building-a-nodejs-express-rest-api-for-image-upload)
+
+- [Node.js Folder Creation: Step-by-Step Guide for Beginners](nodejs-folder-creation-beginners-guide)
+
+- [Unveiling the Potential of Node.js: How JBCodeApp Masters Web App Development](unveiling-potential-nodejs-jbcodeapp-masters-web-app-development)
+
+- [Utilizing ES6 Arrow Functions: Appropriate Usage and Considerations](utilizing-es6-arrow-functions-appropriate-usage-and-considerations)
+
+- [Understanding the Costs of Building a Web App](web-app-development-costs)
+
+- [Understanding Web Applications: An In-Depth Look](web-applications-in-depth)
