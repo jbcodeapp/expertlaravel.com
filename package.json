@@ -24,7 +24,7 @@
     "classnames": "2.3.2",
     "cmdk": "0.1.20",
     "contentlayer": "0.3.2",
-    "esbuild": "0.16.12",
+    "esbuild": "0.14.12",
     "framer-motion": "10.12.16",
     "github-slugger": "1.4.0",
     "gsap": "3.12.1",
