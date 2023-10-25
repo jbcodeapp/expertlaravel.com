@@ -36,6 +36,7 @@ export const metadata = {
     images: [
       {
         url: `${baseSiteURL}static/about.png`,
+
         width: '1903',
         height: '955',
       },
