@@ -1,0 +1,115 @@
+---
+slug: 'grasping-the-mvc-framework-in-laravel'
+title: 'Grasping the MVC Framework in Laravel'
+date: 'October 28, 2023'
+tags: ['Laravel', 'MVC Framework', 'PHP', 'Web Development']
+draft: false
+author: 'Jigar Patel'
+summary: ' This blog breaks down the crucial elements of MVC, highlighting the roles of Models, Views, and Controllers in the context of Laravel.'
+---
+
+# Overview
+
+<TOCInline toc={props.toc} exclude="Overview" toHeading={2} />
+
+## Introduction
+
+![alt](/static/2.png)
+
+[Laravel](https://laravel.com/), a popular [PHP](https://www.php.net/) web application framework, champions the Model-View-Controller (MVC) architectural pattern, providing an elegant solution for web development. In this blog, we'll dive into the fundamental concepts of the MVC framework in Laravel and gain a clear understanding of how it operates.
+
+### Understanding the MVC Framework
+
+MVC, or Model-View-Controller, is a design pattern extensively used in web development. In Laravel, this pattern is employed to create structured and maintainable web applications. Let's break down the core components:
+
+## Model
+
+The [Model](https://laravel.com/docs/10.x/eloquent) represents an application's data and business logic. It interacts with the database and encapsulates data-related operations. In Laravel, Models are typically located in the `app/Models` directory.
+
+For beginners, think of the Model as the part of your application that manages the data. It defines how data is structured and how it should be stored and retrieved from the database.
+
+```php
+namespace App\Models;
+
+use Illuminate\Database\Eloquent Model;
+
+class User extends Model
+{
+// Model logic here
+}
+```
+
+## View
+
+The [View](https://laravel.com/docs/10.x/view) is responsible for presenting data to the user. It's where the HTML, CSS, and user interface elements are defined. Views in Laravel are like the visual representation of your application. They dictate how data from the Model should be displayed to the user. Views are usually placed in the `resources/views` directory.
+
+Example View:
+
+```html
+<!DOCTYPE html>
+
+<html>
+  <head>
+    <title>Welcome to My Website</title>
+  </head>
+  <body>
+    <h1>Welcome, {{ $user->name }}!</h1>
+  </body>
+</html>
+```
+
+## Controller
+
+The [Controller](https://laravel.com/docs/10.x/controllers) acts as an intermediary between the Model and View. It receives user requests, processes them, and interacts with the Model to retrieve or manipulate data. Controllers in Laravel are typically located in the `app/Http/Controllers` directory. Controllers can be thought of as the traffic managers of your application, determining what should happen when a user interacts with your website.
+
+Example Controller:
+
+```php
+namespace App\Http\Controllers;
+
+use App Models User;
+use Illuminate\Http Request;
+
+class UserController extends Controller
+{
+public function show($id)
+    {
+        $user = User find($id);
+return view('user.show', ['user' => $user]);
+}
+}
+```
+
+## How MVC Works Together
+
+In a typical Laravel application, a user makes a request to a specific URL. The route defined in the application routes the request to the appropriate controller method. The controller method interacts with the Model to fetch data and then passes it to the View. The View generates the HTML to be displayed, which is sent back to the user's browser as a response.
+
+The route might call the show method in the UserController, which retrieves user data using the User Model and passes it to a view template. The View then renders the HTML, incorporating the data, and sends it to the user's browser.
+
+## Conclusion
+
+Understanding the MVC framework in Laravel is essential for building scalable and maintainable web applications. Laravel's elegant implementation of this pattern streamlines the development process and separates concerns, making code easier to manage and debug.
+
+By exploring the official documentation and examples provided, beginners can delve deeper into the world of Laravel's MVC architecture. This separation of concerns, with Models, Views, and Controllers, makes it easier for developers to work on different aspects
+
+## About the Author
+
+[Jigar Patel](https://expertlaravel.com) is a Laravel enthusiast and a software developer at JBCodeapp Company. Visit our [JBCodeapp](https://jbcodeapp.com) to learn more about our work in the Laravel ecosystem.
+
+## We're Hiring
+
+Are you passionate about Laravel development? We're always on the lookout for talented developers to join our team. Check out our [Careers Page](https://jbcodeapp.com) for current job openings.
+
+## Related Blogs
+
+- [3 Crucial Laravel Architecture Best Practices for 2023](laravel-architecture-2023)
+
+- [Laravel Contact Form with Email Sending](laravel-contact-form-with-email-sending)
+
+- [Laravel Post View Counter: Monitor Your Content's Popularity](laravel-post-view-counter-monitor-your-contents-popularity)
+
+- [Laravel vs. CodeIgniter Your Complete Handbook to Selecting the Perfect PHP Framework](laravel-vs-codeigniter-complete-php-framework-guide)
+
+- [Choosing Laravel for Web and PHP Development](laravel-web-php-development)
+
+- [Leading Laravel Development Services Provider](leading-laravel-development-services-provider)
