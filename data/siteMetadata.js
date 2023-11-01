@@ -5,7 +5,7 @@ const siteMetadata = {
   description: 'Expert Laravel developer 4',
   language: 'en-us',
   theme: 'dark', // system, dark or light
-  siteUrl: 'https://expertlaravel.com',
+  siteUrl: 'https://www.expertlaravel.com',
   siteRepo: 'https://github.com/tpjigar',
   siteLogo: '/static/images/logo.png',
   image: '/static/images/avatar.webp',
