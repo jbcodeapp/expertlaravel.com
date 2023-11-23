@@ -13,4 +13,7 @@ module.exports = withContentlayer({
     appDir: true,
   },
   swcMinify: true,
+  images: {
+    domains: ['www.expertlaravel.com'],
+  },
 });

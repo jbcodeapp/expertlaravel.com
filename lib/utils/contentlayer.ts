@@ -80,7 +80,7 @@ export function formatBlogLink(
   if (blog) {
     return {
       title: blog?.title,
-      slug: blog?.slug,
+      slug: blog.slug || '',
     };
   }
   return undefined;

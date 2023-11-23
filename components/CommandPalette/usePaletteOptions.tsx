@@ -50,7 +50,7 @@ export default function usePaletteOptions() {
   ];
 
   const blogOptions: PaletteOption[] = sortedPosts.map((post) => ({
-    id: post.slug,
+    id: post.slug || '',
     name: post.title,
     onSelect: (v) => router.push(`/blog/${v}`),
   }));
