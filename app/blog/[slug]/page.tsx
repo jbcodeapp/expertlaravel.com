@@ -81,21 +81,6 @@ export async function generateMetadata({
   };
 }
 
-// export default function BlogImage({ post }: { post: any }) {
-//   const baseSiteURL = process.env.NEXT_PUBLIC_SITE_URL;
-
-//   return (
-//     <div>
-//       <Image
-//         src={post ? `${baseSiteURL}static/blog/${post.slug}.png` : `${baseSiteURL}static/blog.png`}
-//         alt={post.title}
-//         width={1200}
-//         height={600}
-//       />
-//     </div>
-//   );
-// }
-
 // Define the BlogPost component
 export default function BlogPost({ params }: { params: { slug: string } }) {
   const slug = params.slug;
