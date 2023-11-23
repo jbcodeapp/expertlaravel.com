@@ -1,0 +1,104 @@
+---
+slug: 'installing-laravel-for-beginners'
+title: "A Beginner's Guide to Installing Laravel: Step-by-Step"
+date: 'October 28, 2023'
+tags: ['Laravel', 'Installation', 'PHP', 'Web Development']
+draft: false
+author: 'Jigar Patel'
+summary: 'This step by step guide will walk you through the process of installing Laravel, a widely used PHP web application framework. '
+---
+
+# Overview
+
+<TOCInline
+  toc={props.toc}
+  exclude="Overview"
+  toHeading={2}
+  defaultimage="installing-laravel-for-beginners"
+/>
+
+# A Beginner's Guide to Installing Laravel: Step-by-Step
+
+Are you excited to venture into web development and craft powerful web applications? Laravel, one of the most sought-after PHP frameworks, is a fantastic starting point for your journey. In this beginner-friendly guide, we'll accompany you through the step-by-step procedure of installing Laravel, enabling you to embark on the creation of remarkable web applications.
+
+## Prerequisites
+
+Before we initiate the installation process, ensure that you have the following prerequisites in place:
+
+1. [PHP](https://www.php.net/) : [Laravel](https://laravel.com/) necessitates `PHP 7.4` or a higher version. You can verify your PHP version by executing `php -v` in your command line.
+
+2. [Composer](https://getcomposer.org/): Composer is a valuable dependency management tool for PHP. You can easily download and install it from getcomposer.org.
+
+3. A Web Server: A web server, such as [Apache](https://httpd.apache.org/) or [Nginx](https://www.nginx.com/), is essential. If you're just starting out, you can utilize Laravel's built-in development server for testing.
+
+## Step 1: Install Composer
+
+If you haven't already installed Composer, head over to https://getcomposer.org. Choose the installer that matches your operating system and follow the installation instructions for your specific OS.
+
+To confirm that Composer is correctly installed, open your command line and run:
+
+```sh
+composer --version
+```
+
+You should see Composer's version information displayed if the installation was successful.
+
+## Step 2: Install Laravel Installer
+
+Laravel offers a handy tool known as the Laravel Installer, which simplifies the process of creating Laravel applications. To install it, execute the following command:
+
+```sh
+composer global require laravel/installer
+```
+
+## Step 3: Create a New Laravel Project
+
+Now that you have the Laravel Installer, you can initiate a new Laravel project with a single command. Navigate to the directory where you want to create your project and run:
+
+```sh
+laravel new project-name
+```
+
+Replace project-name with your preferred project name.
+
+## Step 4: Serve Your Application
+
+Laravel comes equipped with a built-in development server, making the initial setup a [breeze](https://laravel.com/docs/10.x/starter-kits#laravel-breeze). Navigate to your project's directory:
+
+```sh
+cd project-name
+```
+
+Then, run the following command to launch the development server:
+
+```sh
+php artisan serve
+```
+
+Your Laravel application is now accessible at http://localhost:8000. You can access it through your web browser.
+
+## Conclusion
+
+Congratulations! You've successfully installed Laravel and initiated your first Laravel project. With Laravel's elegant and intuitive syntax, you're well on your way to crafting dynamic web applications. Take your time to explore Laravel's comprehensive documentation, and don't hesitate to experiment and learn.
+
+## About the Author
+
+[Jigar Patel](https://expertlaravel.com) is a Laravel enthusiast and a software developer at JBCodeapp Company. Visit our [JBCodeapp](https://jbcodeapp.com) to learn more about our work in the Laravel ecosystem.
+
+## We're Hiring
+
+Are you passionate about Laravel development? We're always on the lookout for talented developers to join our team. Check out our [Careers Page](https://jbcodeapp.com) for current job openings.
+
+## Related Blogs
+
+- [3 Crucial Laravel Architecture Best Practices for 2023](laravel-architecture-2023)
+
+- [Laravel Contact Form with Email Sending](laravel-contact-form-with-email-sending)
+
+- [Laravel Post View Counter: Monitor Your Content's Popularity](laravel-post-view-counter-monitor-your-contents-popularity)
+
+- [Laravel vs. CodeIgniter Your Complete Handbook to Selecting the Perfect PHP Framework](laravel-vs-codeigniter-complete-php-framework-guide)
+
+- [Choosing Laravel for Web and PHP Development](laravel-web-php-development)
+
+- [Leading Laravel Development Services Provider](leading-laravel-development-services-provider)

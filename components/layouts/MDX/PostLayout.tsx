@@ -24,10 +24,10 @@ export default function PostLayout({ content, children, next, prev }: Props) {
   return (
     <article>
       <header
-        className=" flex items-center justify-center rounded-lg bg-gradient-to-r from-pink-500 to-blue-500 p-5 text-center shadow-lg"
-        style={{ borderRadius: '10px', height: '350px' }}
+        className=" flex items-center justify-center rounded-lg bg-gradient-to-r from-pink-500 to-blue-500 p-4 text-center shadow-lg"
+        style={{ borderRadius: '10px', height: '250px' }}
       >
-        <div className="py-5 px-5 text-center" style={{ borderRadius: '10px' }}>
+        <div className="py-4 px-4 text-center" style={{ borderRadius: '10px' }}>
           <PageTitle>{title}</PageTitle>
           <dl className="flex-end bt-0 text-bottom items-bottom mt-5 flex flex-col ">
             <dt className="sr-only">Published on</dt>
