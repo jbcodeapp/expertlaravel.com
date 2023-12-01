@@ -20,7 +20,7 @@ In this example, we'll create a "media" table in our database with a "name" colu
 
 Let's dive into the steps to achieve this:
 
-### Step 1: Install Laravel
+## Step 1: Install Laravel
 
 To begin, let's create a fresh Laravel application using the following command in your terminal or command prompt:
 
@@ -28,7 +28,7 @@ To begin, let's create a fresh Laravel application using the following command i
 composer create-project laravel/laravel crop-image
 ```
 
-### Step 2: Create Migration and Model
+## Step 2: Create Migration and Model
 
 In this step, we'll create a database migration for the "media" table and generate a corresponding model.
 
@@ -78,7 +78,7 @@ Next, generate a model for the "media" table:
 php artisan make:model Media
 ```
 
-### Step 3: Create Controller
+## Step 3: Create Controller
 
 In this step, we'll create a new controller named "CropImageController" to handle image uploads and cropping. This controller will have two methods: "index" to display the form and "store" to process image uploads and cropping.
 
@@ -134,7 +134,7 @@ class CropImageController extends Controller
 }
 ```
 
-### Step 4: Define Routes
+## Step 4: Define Routes
 
 Open the "routes/web.php" file and add routes for both displaying the form and handling image uploads:
 
@@ -382,7 +382,7 @@ cropping before uploading in Laravel 10. This feature is incredibly useful for
 user-friendly image uploads and customization. Feel free to integrate it into
 your Laravel projects for enhanced image management.
 
-## Conclusion:
+## Quick summary:
 
 Congratulations! You've learned how to seamlessly crop images before uploading them in your Laravel application using the powerful Cropper.js library. This skill can significantly enhance your web application's image handling capabilities and improve user experience.
 
