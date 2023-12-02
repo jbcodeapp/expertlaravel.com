@@ -14,7 +14,7 @@ summary: 'Learn how to install Tailwind CSS in Laravel 10 for building modern an
 
 # How to Install Tailwind CSS in Laravel
 
-### Introduction:
+## Introduction:
 
 In the ever-evolving world of web development, staying ahead of the curve is essential. One of the most popular and efficient ways to create modern and responsive user interfaces is by using the Tailwind CSS framework. In this comprehensive guide, we will walk you through three different methods to install Tailwind CSS in your Laravel 10 application. Whether you're a seasoned Laravel developer or just getting started, by the end of this tutorial, you'll have a solid understanding of how to integrate Tailwind CSS into your Laravel projects, allowing you to craft sleek and stylish web applications effortlessly.
 
@@ -30,7 +30,7 @@ So, let's follow the step-by-step guide to install Tailwind CSS in a Laravel app
 
 In this step, I will provide you with a list of steps using npm commands. Let's follow it.
 
-**Step 1: Install Laravel**
+## **Step 1: Install Laravel**
 
 If you haven't already set up a Laravel application, you can run the following command to get a fresh Laravel app:
 
@@ -38,7 +38,7 @@ If you haven't already set up a Laravel application, you can run the following c
 composer create-project laravel/laravel example-app
 ```
 
-**Step 2: Install Tailwind CSS**
+## **Step 2: Install Tailwind CSS**
 
 Let's install Tailwind CSS along with its dependencies and create a tailwind.config.js file. Run the following command:
 
@@ -46,7 +46,7 @@ Let's install Tailwind CSS along with its dependencies and create a tailwind.con
 npm install -D tailwindcss postcss autoprefixer npx tailwindcss init
 ```
 
-**Step 3: Configure Template Path**
+## **Step 3: Configure Template Path**
 
 Open the tailwind.config.js file and add file paths as shown below:
 
@@ -64,7 +64,7 @@ plugins: [],
 }
 ```
 
-**Step 4: Add Tailwind with Laravel Mix**
+## **Step 4: Add Tailwind with Laravel Mix**
 
 Open the webpack.mix.js file and add the following lines:
 
@@ -73,7 +73,8 @@ const mix = require('laravel-mix');
 
 mix.js("resources/js/app.js", "public/js")
 .postCss("resources/css/app.css", "public/css", [require("tailwindcss")]);
-Step 5: Add Tailwind CSS in app.css file
+
+## **Step 5: Add Tailwind CSS in app.css file**
 
 Open the resources/css/app.css file and add the following lines:
 
@@ -82,7 +83,7 @@ Open the resources/css/app.css file and add the following lines:
 @tailwind utilities;
 ```
 
-**Step 6: Install npm and Build**
+## **Step 6: Install npm and Build**
 
 Run the following commands to install npm dependencies and build the assets:
 
@@ -94,7 +95,7 @@ npm install
 npm run watch
 ```
 
-**Step 7: Use Tailwind CSS in App**
+## **Step 7: Use Tailwind CSS in App**
 
 Now, you can use Tailwind CSS classes in your Blade files as shown below:
 
@@ -126,14 +127,15 @@ Now, you can use Tailwind CSS classes in your Blade files as shown below:
 
 In this step, I will provide you with a list of steps using npm commands. Let's follow it.
 
-**Step 1: Install Laravel**
+## **Step 1: Install Laravel**
+
 If you haven't already set up a Laravel application, you can run the following command to get a fresh Laravel app:
 
 ```bash
 composer create-project laravel/laravel example-app
 ```
 
-**Step 2: Install Breeze**
+## **Step 2: Install Breeze**
 
 Run the following command to install the Laravel Breeze package:
 
@@ -159,7 +161,7 @@ That's it. You will have a setup based on Tailwind CSS.
 
 In this step, I will provide you with a list of steps using npm commands. Let's follow it.
 
-**Step 1: Install Laravel**
+## **Step 1: Install Laravel**
 
 If you haven't already set up a Laravel application, you can run the following command to get a fresh Laravel app:
 
@@ -167,7 +169,7 @@ If you haven't already set up a Laravel application, you can run the following c
 composer create-project laravel/laravel example-app
 ```
 
-**Step 2: Install Jetstream**
+## **Step 2: Install Jetstream**
 
 Now, use the composer command to install Jetstream:
 
@@ -175,7 +177,7 @@ Now, use the composer command to install Jetstream:
 composer require laravel/jetstream
 ```
 
-**Step 3:Create Auth with Livewire:**
+## **Step 3:Create Auth with Livewire:**
 
 To create authentication, run one of the following commands based on your requirements:
 
@@ -203,9 +205,9 @@ npm run dev
 
 That's it. You will have a setup based on Tailwind CSS.
 
-## Conclusion:
+## Quick summary:
 
-In conclusion, Tailwind CSS offers a unique approach to web development, empowering developers to create visually stunning user interfaces with minimal effort. Throughout this tutorial, we explored three distinct approaches to integrating Tailwind CSS into your Laravel 10 application: using npm, Laravel Breeze, and Laravel Jetstream. Each method has its merits and is suitable for different scenarios, ensuring flexibility in your development workflow.
+Quick summary, Tailwind CSS offers a unique approach to web development, empowering developers to create visually stunning user interfaces with minimal effort. Throughout this tutorial, we explored three distinct approaches to integrating Tailwind CSS into your Laravel 10 application: using npm, Laravel Breeze, and Laravel Jetstream. Each method has its merits and is suitable for different scenarios, ensuring flexibility in your development workflow.
 
 As you embark on your journey to harness the power of Tailwind CSS within Laravel, remember that practice makes perfect. Experiment with the framework, tweak your designs, and watch your applications transform into sleek, responsive, and highly customizable user interfaces.
 

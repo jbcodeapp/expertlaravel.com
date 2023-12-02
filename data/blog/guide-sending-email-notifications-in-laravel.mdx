@@ -12,8 +12,6 @@ summary: "Learn how to implement email notifications in Laravel, utilizing Larav
 
 <TOCInline toc={props.toc} exclude="Overview" toHeading={2} defaultimage="" />
 
-# Guide: Sending Email Notifications in Laravel
-
 ## Learn How to Implement Email Notifications in Laravel
 
 **Discover the Art of Sending Email Notifications in Laravel**
@@ -24,7 +22,7 @@ Laravel's notification system is an influential feature within the Laravel PHP f
 
 The Laravel framework offers an array of built-in channels for diverse notification mediums, including email notifications, database storage, and even broadcasting notifications through web sockets. Additionally, custom channels can be crafted to extend this functionality to various communication platforms.
 
-### Step 1: Laravel Installation
+## Step 1: Laravel Installation
 
 Begin by installing Laravel if you haven't already. Execute the following command to set up a new Laravel app:
 
@@ -32,7 +30,7 @@ Begin by installing Laravel if you haven't already. Execute the following comman
 composer create-project laravel/laravel example-app
 ```
 
-### Step 2: Database Migration
+## Step 2: Database Migration
 
 Create a new migration to add a 'birthdate' column to the users table using the command:
 
@@ -69,7 +67,7 @@ Apply the migration using:
 php artisan migrate
 ```
 
-### Step 3: Model Update
+## Step 3: Model Update
 
 Update the User model located at `app/Models/User.php`. Include the 'birthdate' column in the `$fillable` array. Ensure you include the `Notifiable` trait from `Illuminate\Notifications\Notifiable`:
 
@@ -97,7 +95,7 @@ class User extends Authenticatable
 }
 ```
 
-### Step 4: Creating Notifications
+## Step 4: Creating Notifications
 
 Generate the BirthdayWish notification class using the command:
 
@@ -148,7 +146,7 @@ class BirthdayWish extends Notification
 }
 ```
 
-### Step 5: Email Configuration
+## Step 5: Email Configuration
 
 Configure the email settings including mail driver, host, port, username, password, and other essential details in the `.env` file:
 
@@ -163,7 +161,7 @@ MAIL_FROM_ADDRESS=mygoogle@gmail.com
 MAIL_FROM_NAME="${APP_NAME}"
 ```
 
-### Step 6: Defining Routes
+## Step 6: Defining Routes
 
 Define a route for sending notifications to users. Open the `routes/web.php` file and add the following route:
 
@@ -174,7 +172,7 @@ use App\Http\Controllers\UserController;
 Route::get('user-notify', [UserController::class, 'index']);
 ```
 
-### Step 7: Controller Logic
+## Step 7: Controller Logic
 
 Create a UserController with an index method responsible for triggering the notification. The following code illustrates the logic within `app/Http/Controllers/UserController.php`:
 

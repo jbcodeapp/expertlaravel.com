@@ -10,9 +10,14 @@ summary: "Master Node.js Folder Creation with our Beginner's Guide: Create, Cust
 
 # Overview
 
-<TOCInline toc={props.toc} exclude="Overview" toHeading={2} defaultimage="" />
+<TOCInline
+  toc={props.toc}
+  exclude="Overview"
+  toHeading={2}
+  defaultimage="nodejs-folder-creation-beginners-guide"
+/>
 
-# **Node.js Folder Creation: Step-by-Step Guide for Beginners**
+## Introduction
 
 Node.js is a versatile and powerful runtime environment for server-side applications, and it's also handy for performing various file system operations, such as creating multiple folders. In this step-by-step guide, we will walk you through the process of creating multiple folders using Node.js.
 
@@ -20,7 +25,7 @@ Node.js is a versatile and powerful runtime environment for server-side applicat
 
 Before you get started, make sure you have Node.js installed on your computer. You can download it from the [official Node.js website](https://nodejs.org/).
 
-### **Step 1: Set Up a New Node.js Project**
+## **Step 1: Set Up a New Node.js Project**
 
 If you don't already have a Node.js project, you can create one by following these steps:
 
@@ -40,11 +45,11 @@ If you don't already have a Node.js project, you can create one by following the
 
    This command will guide you through the setup process and create a `package.json` file for your project.
 
-### **Step 2: Utilize the Built-In `fs` Module**
+## **Step 2: Utilize the Built-In `fs` Module**
 
 Node.js comes with a built-in `fs` (File System) module, so there's no need to install any additional packages for this task.
 
-### **Step 3: Write the JavaScript Code**
+## **Step 3: Write the JavaScript Code**
 
 Create a JavaScript file (e.g., `createFolders.js`) in your project directory to write the code for creating multiple folders. Here's an example script to create three folders: `folder1`, `folder2`, and `folder3`.
 
@@ -66,7 +71,7 @@ foldersToCreate.forEach((folder) => {
 
 This script imports the `fs` module, defines an array of folder names to create, and uses a `forEach` loop to create each folder.If there is any error during folder creation, it will be logged to the console.
 
-### **Step 4: Run the Node.js Script**
+## **Step 4: Run the Node.js Script**
 
 To execute your Node.js script, open your terminal, navigate to your project directory, and run the following command:
 
@@ -76,27 +81,27 @@ node createFolders.js
 
 This will execute the script, and you should see output indicating whether each folder was created successfully or if there was an error.
 
-### **Step 5: Verify the Created Folders**
+## **Step 5: Verify the Created Folders**
 
 Check your project directory, and you should find the three folders (`folder1`, `folder2`, and `folder3`) created and ready for use.
 
 Congratulations! You've successfully created multiple folders using Node.js. You can customize the script to create different folders or a different number of folders based on your specific needs.
 
-### Conclusion
+## Quick summary
 
 Node.js provides a flexible environment for working with files and directories, making it a valuable tool for various tasks, including folder creation. Enjoy exploring the possibilities that Node.js offers!
 
-# Source Code
-
-The complete source code for this tutorial is available on GitHub. You can find it [Here](https://github.com/jbcodeapp/Blogs/tree/main/nodejs-folder-creation-beginners-guide).
-
-Output:
+### Output :
 
 ![Output](/static/blog/nodejs-folder-creation-beginners-guide/image.png)
 
 ![Successfully Image](/static/blog/nodejs-folder-creation-beginners-guide/image-1.png)
 
 ![Folders](/static/blog/nodejs-folder-creation-beginners-guide/image-2.png)
+
+## Source Code
+
+The complete source code for this tutorial is available on GitHub. You can find it [Here](https://github.com/jbcodeapp/Blogs/tree/main/nodejs-folder-creation-beginners-guide).
 
 ## About the Author
 

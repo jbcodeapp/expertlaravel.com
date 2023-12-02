@@ -89,7 +89,7 @@ export default DataFetchingComponent;
 
 In this example, the [useEffect](https://legacy.reactjs.org/docs/hooks-effect.html) hook is used to fetch data from the [API](https://legacy.reactjs.org/docs/react-api.html). The effect runs only once, when the component mounts, because the dependency array [ ] is empty. This means that the effect will not re-run if [component](https://legacy.reactjs.org/docs/react-component.html) state or props change. The fetched data is then stored in the component's state using the [useState](https://legacy.reactjs.org/docs/hooks-state.html) hook.
 
-### Subscribing to WebSocket Events:
+## Subscribing to WebSocket Events:
 
 ```jsx
 import React, { useState, useEffect } from 'react';
@@ -122,7 +122,7 @@ export default WebSocketExample;
 
 This example demonstrates how to use the [useEffect](https://legacy.reactjs.org/docs/hooks-effect.html) hook to manage the WebSocket subscription and cleanup within a [React Component](https://legacy.reactjs.org/docs/react-component.html). The component establishes a [WebSocket](https://www.npmjs.com/package/react-use-websocket) connection when it mounts, listens for incoming messages, updates the UI with received data, and ensures the connection is closed when the component is unmounted.
 
-### Handling Document Title Changes:
+## Handling Document Title Changes:
 
 ```jsx
 import React, { useEffect } from 'react';
@@ -152,7 +152,7 @@ Remember that the second argument of [useEffect](https://legacy.reactjs.org/docs
 
 Please note that while these examples provide a solid foundation, you might need to modify them to suit your specific use case. Always consider error handling and edge cases when implementing [useEffect](https://legacy.reactjs.org/docs/hooks-effect.html) in your application.
 
-## Conclusion
+## Quick summary
 
 The [useEffect](https://legacy.reactjs.org/docs/hooks-effect.html) hook is a powerful tool for managing side effects in React functional components. Whether you're fetching data, interacting with APIs, or handling subscriptions, [useEffect](https://legacy.reactjs.org/docs/hooks-effect.html) provides a clean and declarative way to incorporate side effects into your components. By carefully managing the dependency array, you can control when the effect runs and ensure optimal performance. Embrace the flexibility of [useEffect](https://legacy.reactjs.org/docs/hooks-effect.html) to create dynamic and engaging React applications.
 

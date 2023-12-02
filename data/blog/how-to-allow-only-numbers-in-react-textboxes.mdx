@@ -14,7 +14,7 @@ summary: "Learn how to restrict input to numeric values in React textboxes. This
 
 # How to Allow Only Numbers in React Textboxes
 
-## Introduction:
+## Introduction
 
 In this tutorial, I'll demonstrate how to restrict input to numeric values in [React](https://react.dev/) textboxes. We'll cover a simple example of allowing only numbers in input fields, specifically focusing on [React](https://react.dev/). This tutorial aims to provide a straightforward solution for allowing only numeric input in textboxes.
 
@@ -80,49 +80,61 @@ http://localhost:3000
 
 In this React tutorial by [JBcodeapp](https://jbcodeapp.com), the focus is on allowing only numeric input in a text field. The provided code example demonstrates how to achieve this functionality in a React application. By utilizing regular expressions and handling the input change event, users are restricted to entering only numbers. The tutorial offers a clear and practical solution for data input validation in React.
 
-1. **Importance of Form Validation:**
-   Form validation ensures that the data submitted by users is accurate and meets specific criteria, enhancing data integrity and usability.
+## 1. **Importance of Form Validation:**
 
-2. **React and Controlled Components:**
-   React encourages the use of controlled components for form elements, where the component's state stores the input values. This approach makes it easier to implement form validation.
+Form validation ensures that the data submitted by users is accurate and meets specific criteria, enhancing data integrity and usability.
 
-3. **Handling Input Changes:**
-   React provides the `onChange` event handler, which allows you to monitor and respond to changes in form inputs in real-time. This is useful for live input validation, as shown in the blog.
+## 2. **React and Controlled Components:**
 
-4. **Regular Expressions (Regex):**
-   Regular expressions are a powerful tool for validating input patterns. In the provided example, a regular expression (`const re = /^[0-9\b]+$/;`) is used to ensure that only numeric values are allowed.
+React encourages the use of controlled components for form elements, where the component's state stores the input values. This approach makes it easier to implement form validation.
 
-5. **Preventing Invalid Input:**
-   The blog's example code uses the `event.preventDefault()` method to prevent the form from being submitted if the input doesn't meet the validation criteria. This prevents invalid data from being processed.
+## 3. **Handling Input Changes:**
 
-6. **Feedback to Users:**
-   Effective form validation provides clear feedback to users about what went wrong. In a real application, you can display error messages near the input fields or use tooltips to explain validation requirements.
+React provides the `onChange` event handler, which allows you to monitor and respond to changes in form inputs in real-time. This is useful for live input validation, as shown in the blog.
 
-7. **Server-Side Validation:**
-   While client-side validation is essential for improving user experience, server-side validation should also be implemented to ensure data integrity and security. Client-side validation can be bypassed by users with malicious intent.
+## 4. **Regular Expressions (Regex):**
 
-8. **Form Submission:**
-   The provided code logs the validated input to the console when the form is submitted. In a production application, you would typically send this data to a server or perform other actions, such as updating a database.
+Regular expressions are a powerful tool for validating input patterns. In the provided example, a regular expression (`const re = /^[0-9\b]+$/;`) is used to ensure that only numeric values are allowed.
 
-9. **Testing Form Validation:**
-   Testing is a crucial part of form validation. Unit tests and integration tests should be written to validate that the form behaves as expected under various conditions, including valid and invalid input.
+## 5. **Preventing Invalid Input:**
 
-10. **React Ecosystem:**
+The blog's example code uses the `event.preventDefault()` method to prevent the form from being submitted if the input doesn't meet the validation criteria. This prevents invalid data from being processed.
+
+## 6. **Feedback to Users:**
+
+Effective form validation provides clear feedback to users about what went wrong. In a real application, you can display error messages near the input fields or use tooltips to explain validation requirements.
+
+## 7. **Server-Side Validation:**
+
+While client-side validation is essential for improving user experience, server-side validation should also be implemented to ensure data integrity and security. Client-side validation can be bypassed by users with malicious intent.
+
+## 8. **Form Submission:**
+
+The provided code logs the validated input to the console when the form is submitted. In a production application, you would typically send this data to a server or perform other actions, such as updating a database.
+
+## 9. **Testing Form Validation:**
+
+Testing is a crucial part of form validation. Unit tests and integration tests should be written to validate that the form behaves as expected under various conditions, including valid and invalid input.
+
+## 10. **React Ecosystem:**
+
     React offers a vast ecosystem of libraries and packages that can simplify form validation. Popular choices include Formik and Yup, which provide tools and schemas for handling forms and validation.
 
-11. **Accessibility Considerations:**
+## 11. **Accessibility Considerations:**
+
     When implementing form validation, consider accessibility. Ensure that error messages are announced to screen readers and that form elements are navigable using keyboard controls.
 
-12. **Continuous Learning:**
+## 12. **Continuous Learning:**
+
     Web development, including [form validation in React](/), is an evolving field. Developers should stay updated with the latest best practices and tools for improving form validation and user experience.
 
 In summary, form validation is a critical aspect of web development in React. It ensures data accuracy, enhances user experience, and contributes to the overall usability and reliability of web applications. Developers should approach form validation systematically, implement both client-side and server-side checks, and consider accessibility and testing throughout the development process.
 
-### Conclusion:
+## Quick summary
 
 This tutorial provides a clear example of how to allow only numeric input in React textboxes. By using regular expressions and handling the input change event, we ensure that users can only enter numbers in the textbox. This simple yet effective solution can be applied in various React applications to improve data input validation.
 
-# Output:
+# Output
 
 ![Output-1](/static/blog/How-to-Allow-Only-Numbers-in-React-Textboxes/image.png)
 
