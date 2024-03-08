@@ -1,4 +1,6 @@
 User-agent: *
 Allow: /
+Allow: /blog
+
 
 Sitemap: https://www.expertlaravel.com/sitemap.xml

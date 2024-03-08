@@ -1,0 +1,193 @@
+---
+slug: 'laravel-11-upgrade-model-casts-methods'
+title: 'Laravel 11 Upgrades Model Casts to Methods'
+date: 'March 4, 2024'
+tags: ['Laravel', 'Web Development']
+draft: false
+author: 'Jigar Patel'
+summary: 'Laravel 11 is transitions Model Casts from property to method, enabling static methods for casters. Backward-compatible with Laravel 10. New static methods introduced for built-in casters.'
+---
+
+# Overview
+
+<TOCInline
+  toc={props.toc}
+  exclude="Overview"
+  toHeading={2}
+  defaultimage="laravel-11-upgrade-model-casts-methods"
+/>
+
+## Introduction
+
+## Dynamic Model Casting
+
+Model Casts have transitioned from being defined as a property to being declared within a method named [casts()](https://laravel.com/docs/10.x/eloquent-mutators#attribute-casting). This change allows the utilization of static methods for built-in casters and the definition of static methods for custom casters. Here's an example:
+
+```php
+<?php
+
+use App\Enums\UserOption;
+use Illuminate\Database\Eloquent\Casts\AsEnumCollection;
+use Illuminate\Database\Eloquent\Casts\AsCollection;
+use Illuminate\Database\Eloquent\Casts\AsEncryptedCollection;
+use Illuminate\Database\Eloquent\Casts\AsEnumArrayObject;
+use Illuminate\Database\Eloquent\Model;
+
+class YourModel extends Model
+{
+    // Other model properties and methods...
+
+    /**
+     * Get the attributes that should be cast.
+     *
+     * @return array<string, string>
+     */
+    protected function casts(): array
+    {
+        return [
+            'email_verified_at' => 'datetime',
+            'password' => 'hashed',
+            'options' => AsEnumCollection::of(UserOption::class),
+        ];
+    }
+
+    // Example of using static methods for built-in casters
+    public static function setCustomCasts()
+    {
+        AsCollection::using(OptionCollection::class);
+        AsEncryptedCollection::using(OptionCollection::class);
+        AsEnumArrayObject::using(OptionEnum::class);
+        AsEnumCollection::using(OptionEnum::class);
+    }
+}
+
+?>
+
+```
+
+## Laravel 10 In Dynamic Model Casting
+
+In [Laravel 10](https://laravel.com/docs/10.x/releases), the equivalent cast definition without the ability to use static methods within an array property would look like this:
+
+```php
+<?php
+
+use App\Enums\UserOption;
+use Illuminate\Database\Eloquent\Casts\AsEnumCollection;
+use Illuminate\Database\Eloquent\Model;
+
+class YourModel extends Model
+{
+    // Other model properties and methods...
+
+    /**
+     * The attributes that should be cast.
+     *
+     * @var array
+     */
+    protected $casts = [
+        'options' => AsEnumCollection::class . ':' . UserOption::class,
+    ];
+}
+
+?>
+
+```
+
+Notably, this update in [Laravel 11](https://laravel.com/docs/master/releases) is backward-compatible with Laravel 10. You can continue defining casts using both the `$casts` property and the new `casts()` method. The method keys take precedence over the `$casts` property.
+
+## Laravel 11 Model Casting New Static Method
+
+Additionally, Laravel 11 introduces new static methods for built-in casters, facilitating the definition of casts. For instance:
+
+```php
+<?php
+
+use App\Enums\UserOption;
+use Illuminate\Database\Eloquent\Casts\AsEnumCollection;
+use Illuminate\Database\Eloquent\Casts\AsCollection;
+use Illuminate\Database\Eloquent\Casts\AsEncryptedCollection;
+use Illuminate\Database\Eloquent\Casts\AsEnumArrayObject;
+use Illuminate\Database\Eloquent\Model;
+
+class YourModel extends Model
+{
+    // Other model properties and methods...
+
+    /**
+     * The attributes that should be cast.
+     *
+     * @var array
+     */
+    protected $casts = [
+        'options' => AsEnumCollection::class . ':' . UserOption::class,
+    ];
+
+    /**
+     * Get the attributes that should be cast.
+     *
+     * @return array<string, string>
+     */
+    protected function casts(): array
+    {
+        return [
+            'email_verified_at' => 'datetime',
+            'password' => 'hashed',
+        ];
+    }
+
+    // Example of using static methods for built-in casters
+    public static function setCustomCasts()
+    {
+        AsCollection::using(OptionCollection::class);
+        AsEncryptedCollection::using(OptionCollection::class);
+        AsEnumArrayObject::using(OptionEnum::class);
+        AsEnumCollection::using(OptionEnum::class);
+    }
+}
+
+?>
+
+```
+
+## Quick summary
+
+Model Casts in Laravel 11 now transition from being defined as a property to a method named casts(). This change allows the use of static methods for built-in casters and enables the definition of static methods for custom casters. The update maintains backward compatibility with Laravel 10, supporting both the new method and the traditional $casts property for cast definitions.
+
+## FAQs
+
+### 1. Why the transition from property to method for Model Casts in Laravel 11?
+
+> - The transition allows the use of static methods for both built-in and custom casters, providing more flexibility and clarity in cast definitions.
+
+### 2. How does the new casts() method enhance cast definitions?
+
+> - The casts() method allows for improved organization and readability by encapsulating cast definitions within a dedicated method.
+
+### 3. Can I still use the $casts property in Laravel 11 for cast definitions?
+
+> - Yes, Laravel 11 maintains backward compatibility, allowing developers to use both the $casts property and the new casts() method. Method keys take precedence over the $casts property.
+
+### 4. What is the significance of the new static methods introduced in Laravel 11?
+
+> - Laravel 11 introduces static methods like AsCollection::using() for built-in casters, making it easier to define casts using custom classes.
+
+### 5. How does backward compatibility work for Model Casts in Laravel 11?
+
+> - Laravel 11 ensures backward compatibility by supporting cast definitions through both the traditional $casts property and the new casts() method. Method keys take precedence in case of conflicts.
+
+## About the Author
+
+[Jigar Patel](https://expertlaravel.com) is a Laravel enthusiast and a software developer at JBCodeapp Company. Visit our [JBCodeapp](https://jbcodeapp.com) to learn more about our work in the Laravel ecosystem.
+
+## We're Hiring
+
+Are you passionate about Laravel development? We are actively scouting for exceptional developers to join our dynamic team, bringing their unique skills and expertise to contribute valuable insights and innovations. Check out our [Careers Page](https://jbcodeapp.com/career) for current job openings.
+
+## Related Blogs
+
+- [Laravel 11 Upgrades Model Casts to Methods](laravel-11-upgrade-model-casts-methods)
+
+- [Laravel 11 Introduces the 'once()' Helper](laravel-11-once-helper-guide)
+
+- [Laravel Contact Form with Email Sending](laravel-contact-form-with-email-sending)

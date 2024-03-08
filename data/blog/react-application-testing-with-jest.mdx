@@ -1,0 +1,519 @@
+---
+slug: 'react-application-testing-with-jest'
+title: 'React Application Testing With Jest'
+date: 'March 5, 2024'
+tags: ['reactjs', 'Web Development']
+draft: false
+author: 'Jigar Patel'
+summary: 'Explore the world of React testing with Jest and Enzyme. Covering unit, component, and snapshot tests, enhance code quality and reliability effortlessly.'
+---
+
+# Overview
+
+<TOCInline
+  toc={props.toc}
+  exclude="Overview"
+  toHeading={2}
+  defaultimage="react-application-testing-with-jest"
+/>
+
+## Introduction
+
+Testing [React components](https://react.dev/reference/react/Component) is crucial for maintaining code quality and ensuring the proper functionality of your application. This guide explores two main testing approaches and introduces [Jest](https://jestjs.io/) and the React Testing Library as powerful tools for testing React applications.
+
+Jest is a JavaScript testing framework that is widely used for testing React applications.Comes with built-in functionalities for test running, assertions, and mocking, making it a comprehensive testing solution.
+
+## Traditional Testing Methods
+
+1. **Rendering in a Simplified Environment:**
+
+   - Focus on rendering component trees and asserting their output.
+   - Verify individual units of code in isolation.
+
+2. **End-to-End Testing:**
+   - Run complete applications in a realistic browser environment.
+   - Test the integration and interaction of various components.
+
+## Jest: A Delightful Testing Framework
+
+[Jest](https://jestjs.io/) is a versatile JavaScript testing framework that simplifies the testing process. It supports various projects, including those using Babel, TypeScript, Node, React, Angular, and Vue.
+
+## The Role of React Testing Library
+
+The [React Testing Library](https://testing-library.com/docs/react-testing-library/intro/) by [Kent C. Dodds](https://twitter.com/kentcdodds) offers a lightweight alternative to Enzyme. It provides utility functions on top of `react-dom` and `react-dom/test-utils`, encouraging better testing practices.
+
+## The Problem
+
+When testing React components, it's essential to write maintainable tests that focus on desired behavior rather than implementation details. The challenge lies in creating a testbase that remains robust during component refactors, ensuring tests provide confidence in code changes.
+
+## The Solution: React Testing Library
+
+The React Testing Library addresses the problem by emphasizing testing practices that avoid unnecessary inclusion of component implementation details. Its lightweight nature and utility functions make it an ideal choice for maintaining a maintainable and effective testbase.
+
+## Why Test Code?
+
+### 1. Preventing Regression
+
+- Identify and fix bugs that may resurface after being fixed.
+- Ensure sustained functionality of features over time.
+
+### 2. Ensuring Functionality of Complex Components
+
+- Verify the proper operation of intricate software elements.
+- Assess the interplay between various components within a modular application.
+
+### 3. Essential for Software Application Performance
+
+- Testing as a prerequisite for effective software performance.
+- Validate that the software application meets specified requirements and standards.
+
+### 4. Enhancing Robustness and Error Prevention
+
+- Strengthen the application's resilience against potential issues.
+- Reduce the likelihood of errors and malfunctions in the software.
+
+### 5. Verification of Code Intent and User Experience
+
+- Confirm that the code aligns with its intended functionality.
+- Ensure the application functions as intended to provide a positive user experience.
+
+## Unit Test
+
+- A type of testing focused on verifying the functionality of individual units or components of a software application in isolation.
+- Ensures that each unit of code operates as expected and aids in early detection of errors.
+
+```javascript
+// File: sum.js
+function sum(a, b) {
+  return a + b;
+}
+module.exports = sum;
+```
+
+```javascript
+// File: sum.test.js
+const sum = require('./sum');
+
+test('adds 1 + 2 to equal 3', () => {
+  expect(sum(1, 2)).toBe(3);
+});
+```
+
+## Component Test
+
+- Testing the functionality and behavior of larger components or modules within a software application.
+- Purpose: Validates the interactions and interfaces between different components, ensuring they work seamlessly together.
+
+```javascript
+// File: calculator.js
+function add(a, b) {
+  return a + b;
+}
+
+function subtract(a, b) {
+  return a - b;
+}
+
+module.exports = { add, subtract };
+```
+
+```javascript
+// File: calculator.test.js
+const { add, subtract } = require('./calculator');
+
+test('adds 1 + 2 to equal 3', () => {
+  expect(add(1, 2)).toBe(3);
+});
+
+test('subtracts 4 - 2 to equal 2', () => {
+  expect(subtract(4, 2)).toBe(2);
+});
+```
+
+## Snapshot Test
+
+- A testing technique, commonly used in React applications, that captures a snapshot of the rendered output and compares it against a reference snapshot.
+- Purpose: Detects unintended changes in the UI or components, helping to prevent visual regressions.
+
+```javascript
+// File: Button.js
+import React from 'react';
+
+const Button = ({ label }) => <button>{label}</button>;
+
+export default Button;
+```
+
+```javascript
+// File: Button.test.js
+import React from 'react';
+import renderer from 'react-test-renderer';
+import Button from './Button';
+
+test('Button snapshot', () => {
+  const component = renderer.create(<Button label="Click me" />);
+  const tree = component.toJSON();
+  expect(tree).toMatchSnapshot();
+});
+```
+
+## Advantages and Disadvantages of Testing
+
+### **Advantages**
+
+- 1.  Identifies and fixes bugs early in the development process.
+- 2.  Enhances code quality and maintainability.
+- 3.  Provides confidence in code changes and updates.
+
+### **Disadvantages**
+
+- 1.  Requires time and resources.
+- 2.  May not catch all types of bugs.
+- 3.  Over-reliance on testing can lead to a false sense of security.
+
+## Process of Running a Test with Jest
+
+### Step 1: Create a React App with Jest and Enzyme
+
+Open your terminal and run the following command to create a new React app with Jest and Enzyme:
+
+```bash
+npx create-react-app my-app
+cd my-app
+```
+
+### Step 2: Install Enzyme and Enzyme Adapter
+
+Install Enzyme along with the Enzyme Adapter for React 16:
+
+```bash
+npm install --save-dev enzyme enzyme-adapter-react-16 react-test-renderer
+```
+
+### Step 3: Create the setupTest.js file
+
+In the src folder of your project, create a setupTest.js file with the following content:
+
+```javascript
+// setupTest.js
+import { configure } from 'enzyme';
+import Adapter from 'enzyme-adapter-react-16';
+
+configure({ adapter: new Adapter() });
+```
+
+This file sets up the Enzyme adapter for React.
+
+### Step 4: Write Your First Enzyme Test
+
+Create a component in the src folder. For example, let's create a simple Button component:
+
+```jsx
+// Button.js
+import React from 'react';
+
+const Button = ({ label }) => <button>{label}</button>;
+
+export default Button;
+```
+
+Now, create a test for this component:
+
+```jsx
+// Button.test.js
+import React from 'react';
+import { shallow } from 'enzyme';
+import Button from './Button';
+
+describe('Button Component', () => {
+  it('renders a button with the given label', () => {
+    const wrapper = shallow(<Button label="Click me" />);
+    expect(wrapper.find('button').text()).toEqual('Click me');
+  });
+});
+```
+
+### Step 5: Run Your Enzyme Tests
+
+Add a script to your package.json file to run the tests:
+
+```json
+// package.json
+{
+  "scripts": {
+    "test": "react-scripts test"
+  }
+}
+```
+
+Now, run your tests using:
+
+```bash
+npm test
+```
+
+Jest will execute the tests, and you'll see the results in the terminal. If all goes well, you should see a success message.
+
+That's it! You've set up Jest and Enzyme in a Create React App, written a simple test, and executed it. You can build on this foundation to test more complex React components in your project.
+
+## Creating a Test File
+
+```jsx
+import React from 'react';
+import { shallow, render } from 'enzyme';
+import App from './App';
+
+describe('App component', () => {
+  it('renders without crashing', () => {
+    console.time('renders without crashing');
+    const wrapper = shallow(<App />);
+    expect(wrapper).toBeTruthy();
+    console.timeEnd('renders without crashing');
+  });
+
+  it('renders Account header', () => {
+    console.time('renders Account header');
+    const wrapper = render(<App />);
+    const welcome = <h1>Display Active Users Account Details</h1>;
+    expect(wrapper.find('h1').text()).toEqual(welcome.props.children);
+    console.timeEnd('renders Account header');
+  });
+});
+```
+
+Now, Run this commands
+
+```bash
+npm run test
+/* OR */
+npm test
+
+```
+
+```yaml
+ PASS  src/App.test.js
+  renders without crashing: 34.123ms
+    √ renders without crashing (34ms)
+  renders Account header: 13.456ms
+    √ renders Account header (13ms)
+
+Test Suites: 1 passed, 1 total
+Tests:       2 passed, 2 total
+Snapshots:   0 total
+Time:        47.789s, estimated 16s
+Ran all test suites related to changed files.
+
+Watch Usage: Press w to show more.
+```
+
+## Skipping or Isolating a Test
+
+### Skipping:
+
+Skipping a test allows you to exclude it from the test suite temporarily. This can be useful when a particular test is causing issues, or you need to focus on other aspects of your code. You can use skip or xtest syntax to skip a test.
+
+```jsx
+// App.test.js
+import React from 'react';
+import { shallow } from 'enzyme';
+import App from './App';
+
+describe('App Component', () => {
+  // Skipped Test: This test will be skipped with minimal logic
+  it.skip('skipped test with minimal logic', () => expect(2 + 2).toEqual(4));
+
+  // Test: Check if the App component renders without crashing
+  it('renders without crashing', () => {
+    shallow(<App />);
+  });
+
+  // Test: Check if the App component renders the specified Account header
+  it('renders Account header', () => {
+    const wrapper = shallow(<App />);
+    const welcome = <h1>Display Active Users Account Details</h1>;
+    expect(wrapper.contains(welcome)).toEqual(true);
+  });
+});
+```
+
+or
+
+```jsx
+// App.test.js
+import React from 'react';
+import { shallow } from 'enzyme';
+import App from './App';
+
+describe('App Component', () => {
+  // Skipped Test: This test will be skipped using xtest
+  xtest('this test will be skipped too', () => {
+    // Test logic (won't be executed as the test is skipped)
+    console.log('This test is skipped.');
+    const result = 2 + 2;
+    expect(result).toEqual(4); // This line won't be executed
+  });
+
+  // Test: Check if the App component renders without crashing
+  it('renders without crashing', () => {
+    shallow(<App />);
+  });
+
+  // Test: Check if the App component renders the specified Account header
+  it('renders Account header', () => {
+    const wrapper = shallow(<App />);
+    const welcome = <h1>Display Active Users Account Details</h1>;
+    expect(wrapper.contains(welcome)).toEqual(true);
+  });
+});
+```
+
+### Isolating:
+
+Isolating tests ensures that each test runs independently, without being affected by the state or changes made by other tests. This helps maintain the reliability of your tests.
+
+```jsx
+describe('Isolated tests', () => {
+  beforeEach(() => {
+    // setup code that runs before each test
+  });
+
+  it('test 1', () => {
+    // test logic
+  });
+
+  it('test 2', () => {
+    // test logic
+  });
+
+  afterEach(() => {
+    // teardown code that runs after each test
+  });
+});
+```
+
+## Mocking Function
+
+Mocking involves simulating the behavior of a function or module to control its output during testing. This is particularly useful for isolating the code being tested and allowing specific scenarios to be controlled for accurate testing.
+
+using Jest's jest.fn()
+
+```jsx
+// Function to be mocked
+const fetchData = () => {
+  // some implementation
+};
+
+// Mocking the function
+jest.mock('./api', () => ({
+  fetchData: jest.fn(),
+}));
+
+// Testing code that uses the mocked function
+test('fetchData is called', () => {
+  fetchData();
+  expect(fetchData).toHaveBeenCalled();
+});
+```
+
+## Testing React Components
+
+### Approaches
+
+Testing React components can be done using various methods, including:
+
+1. Unit Tests: Test individual functions or methods in isolation.
+2. Integration Tests: Test how different components work together.
+3. Snapshot Tests: Capture and compare rendered output snapshots for visual consistency.
+
+### Tools
+
+Leverage Jest along with testing utilities like React Testing Library or [Enzyme](https://testing-library.com/docs/react-testing-library/migrate-from-enzyme/) for comprehensive testing of React components.
+
+- React Testing Library
+
+```jsx
+import { render, screen } from '@testing-library/react';
+
+test('renders component', () => {
+  render(<MyComponent />);
+  expect(screen.getByText('Hello, World!')).toBeInTheDocument();
+});
+```
+
+- Enzyme
+
+```jsx
+import { shallow } from 'enzyme';
+
+it('renders without crashing', () => {
+  const wrapper = shallow(<MyComponent />);
+  expect(wrapper.exists()).toBeTruthy();
+});
+```
+
+## Snapshot Testing
+
+### Process:
+
+Snapshot testing captures a snapshot of the rendered output of a component and compares it with a stored reference snapshot. If the new output matches the stored snapshot, the test passes.
+
+### using Jest
+
+```jsx
+import renderer from 'react-test-renderer';
+import MyComponent from './MyComponent';
+
+test('renders correctly', () => {
+  const tree = renderer.create(<MyComponent />).toJSON();
+  expect(tree).toMatchSnapshot();
+});
+```
+
+### Use Cases:
+
+Snapshot testing is particularly useful for:
+
+- **Testing UI Components**: Ensures the visual consistency of components.
+- **Detecting Unexpected Changes**: Highlights any unintended modifications to the component's appearance.
+
+## Quick summary
+
+This guide introduces React testing with a focus on Jest and the [React Testing Library](https://testing-library.com/docs/react-testing-library/intro/). Covering traditional methods, it explores the benefits and challenges of testing. The guide provides practical examples for unit, component, and snapshot tests, along with essential testing practices. It also offers a quick setup for [Jest](https://jestjs.io/) and Enzyme in a [Create React App](https://create-react-app.dev/) and touches on isolating tests, mocking functions, and snapshot testing for [React components](https://legacy.reactjs.org/docs/react-component.html).
+
+## FAQs
+
+### 1. Why is testing React components important?
+
+> - Testing ensures code quality, prevents regressions, and validates the functionality of React components, promoting a robust and error-free application.
+
+### 2. What's the role of Jest in React testing?
+
+> - Jest is a versatile JavaScript testing framework widely used for testing React applications. It simplifies the testing process and comes with built-in functionalities for test running, assertions, and mocking.
+
+### 3. How do I perform snapshot testing in React?
+
+> - Snapshot testing captures rendered component output and compares it to stored reference snapshots, helping detect unintended changes and ensuring visual consistency.
+
+### 4. What are the advantages of isolating tests?
+
+> - Isolating tests ensures independent execution, preventing interference between tests. It helps maintain test reliability by avoiding dependencies on the state or changes made by other tests.
+
+### 5. Why use mocking functions in React testing?
+
+> - Mocking simulates the behavior of functions or modules, controlling their output during testing. This is useful for isolating code, creating controlled scenarios, and ensuring accurate testing results.
+
+## About the Author
+
+[Jigar Patel](https://expertlaravel.com) is a Laravel enthusiast and a software developer at JBCodeapp Company. Visit our [JBCodeapp](https://jbcodeapp.com) to learn more about our work in the Laravel ecosystem.
+
+## We're Hiring
+
+Are you passionate about Laravel development? We are actively scouting for exceptional developers to join our dynamic team, bringing their unique skills and expertise to contribute valuable insights and innovations. Check out our [Careers Page](https://jbcodeapp.com/career) for current job openings.
+
+## Related Blogs
+
+- [React Application Testing With Cypress](react-application-testing-cypress)
+
+- [React and JavaScript Testing with Mocha](mocha-testing-react-javascript)
+
+- [Introduction to React Testing Library](react-testing-library)

@@ -1,0 +1,123 @@
+---
+slug: 'laravel-11-simplified-directory-structure'
+title: 'Laravel 11 Simplified Directory Structure Enhancements'
+date: 'March 4, 2024'
+tags: ['Laravel', 'Web Development']
+draft: false
+author: 'Jigar Patel'
+summary: 'Explore Laravel 11 is streamlined directory enhancements! App, config, and routes see significant changes for a leaner, organized development experience. Upgrade seamlessly or embrace it in new projects!'
+---
+
+# Overview
+
+<TOCInline
+  toc={props.toc}
+  exclude="Overview"
+  toHeading={2}
+  defaultimage="laravel-11-simplified-directory-structure"
+/>
+
+## Introduction
+
+## App Directory
+
+The app directory in [Laravel](https://laravel.com/) 11 has been significantly reduced by moving nine middleware to the framework.
+[Middleware](https://laravel.com/docs/10.x/middleware) changes are now managed through the `bootstrap/app.php` file, providing a leaner configuration style.
+
+```PHP
+return Application::configure(basePath: dirname(__DIR__))
+    ->withProviders()
+    ->withRouting(
+        web: __DIR__.'/../routes/web.php',
+        commands: __DIR__.'/../routes/console.php',
+        health: '/up',
+    )
+    ->withMiddleware(function (Middleware $middleware) {
+        // Add custom middleware
+    })
+    ->withExceptions(function (Exceptions $exceptions) {
+        // Handle exceptions
+    })
+    ->create();
+```
+
+## Config Directory
+
+The config directory is now empty, with configuration options moved to the `.env.example` file.
+
+Configuration files can be published and customized using the `config:publish` command.
+
+```command
+php artisan config:publish database
+php artisan config:publish logging
+# Or publish all of them
+php artisan config:publish
+```
+
+## Database Directory
+
+The database directory remains similar, but migration filenames are now ordered rather than date-based.
+
+The `create_personal_access_tokens.php` migration file is no longer included by default.
+
+## Routes Directory
+
+The routes directory includes only web.php and console.php files.
+Additional functionalities like API and broadcasting routes can be installed using artisan commands.
+
+```command
+php artisan install:api
+php artisan install:broadcasting
+```
+
+## Test Directory
+
+- The test directory no longer includes the CreatesApplication trait in Laravel 11, as it's provided in the base TestCase.
+
+## Compatibility
+
+- Existing Laravel 10 applications don't need structural changes to upgrade to Laravel 11.
+
+- The new structure is applicable only to fresh Laravel 11 installations.
+
+## Quick summary
+
+Laravel 11 introduces significant enhancements to directory structures, streamlining the app, config, database, routes, and test directories. Notable changes include middleware management in `bootstrap/app.php`, an empty config directory with options moved to .env.example, ordered migration filenames, simplified routes directory, and a refined test directory without the CreatesApplication trait.
+
+## FAQs
+
+### 1. How has the app directory changed in Laravel 11?
+
+> - Nine middleware have been moved to the framework, resulting in a leaner app directory. Middleware changes are now managed in the bootstrap/app.php file.
+
+### 2. Where are configuration options now located in Laravel 11?
+
+> - Configuration options are no longer in the config directory. They have been moved to the .env.example file, and configuration files can be published and customized using the config:publish command.
+
+### 3. What's different about the database directory in Laravel 11?
+
+> - Migration filenames in the database directory are now ordered rather than date-based. The create_personal_access_tokens.php migration file is no longer included by default.
+
+### 4. How has the routes directory changed in Laravel 11?
+
+> - The routes directory now includes only web.php and console.php files. Additional functionalities like API and broadcasting routes can be installed using artisan commands.
+
+### 5. Is upgrading from Laravel 10 to Laravel 11 straightforward?
+
+> - Yes, existing Laravel 10 applications don't require structural changes to upgrade to Laravel 11. The new directory structure is applicable only to fresh Laravel 11 installations.
+
+## About the Author
+
+[Jigar Patel](https://expertlaravel.com) is a Laravel enthusiast and a software developer at JBCodeapp Company. Visit our [JBCodeapp](https://jbcodeapp.com) to learn more about our work in the Laravel ecosystem.
+
+## We're Hiring
+
+Are you passionate about Laravel development? We are actively scouting for exceptional developers to join our dynamic team, bringing their unique skills and expertise to contribute valuable insights and innovations. Check out our [Careers Page](https://jbcodeapp.com/career) for current job openings.
+
+## Related Blogs
+
+- [Laravel 11 Upgrades Model Casts to Methods](laravel-11-upgrade-model-casts-methods)
+
+- [Laravel 11 Introduces the 'once()' Helper](laravel-11-once-helper-guide)
+
+- [How to CSV Import in Laravel with Spatie Simple Excel and Jobs](how-to-csv-import-laravel-spatie-simple-excel-jobs)
