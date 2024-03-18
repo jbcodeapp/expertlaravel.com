@@ -1,0 +1,218 @@
+---
+slug: 'testing-react-code-jasmine-testing-library'
+title: 'Testing React Code Jasmine Testing Library'
+date: 'March 5, 2024'
+tags: ['reactjs', 'Web Development']
+draft: false
+author: 'Jigar Patel'
+summary: 'Effortlessly test JavaScript apps with Jasmine. Explore React component testing, setup, and execution in this concise guide for developers.'
+---
+
+# Overview
+
+<TOCInline
+  toc={props.toc}
+  exclude="Overview"
+  toHeading={2}
+  defaultimage="testing-react-code-jasmine-testing-library"
+/>
+
+## Introduction
+
+[Jasmine](https://jasmine.github.io/index.html) Documentation provides a straightforward and efficient framework for testing JavaScript code, whether in browsers or Node.js. With minimal overhead and no external dependencies, Jasmine allows you to write tests using clean and intuitive syntax. Whether you're a beginner or an experienced developer, Jasmine's simplicity makes it easy to get started with testing your JavaScript applications.
+
+## React Component
+
+```jsx
+// src/MyComponent.js
+import React from 'react';
+
+const MyComponent = ({ message }) => (
+  <div>
+    <h1>{message}</h1>
+  </div>
+);
+
+export default MyComponent;
+```
+
+## Jasmine Spec
+
+```jsx
+// spec/MyComponentSpec.js
+import React from 'react';
+import { render } from '@testing-library/react';
+import MyComponent from '../src/MyComponent';
+
+describe('MyComponent', () => {
+  it('renders with a message', () => {
+    const { getByText } = render(<MyComponent message="Hello, Jasmine!" />);
+    const messageElement = getByText(/Hello, Jasmine!/i);
+    expect(messageElement).toBeInTheDocument();
+  });
+});
+```
+
+- **Jasmine Configuration**
+
+```json
+//spec/support/jasmine.json
+{
+  "spec_dir": "spec",
+  "spec_files": ["**/*[sS]pec.js"],
+  "helpers": ["helpers/**/*.js"],
+  "stopSpecOnExpectationFailure": false,
+  "stopOnSpecFailure": false,
+  "random": false
+}
+```
+
+## Running the Tests
+
+### 1. Install the necessary dependencies:
+
+```bash
+npm install --save-dev jasmine @testing-library/react
+```
+
+### 2. Initialize Jasmine and generate examples:
+
+```bash
+npx jasmine init
+npx jasmine examples
+```
+
+### 3. Run the tests:
+
+```bash
+npx jasmine
+```
+
+## Use Jasmine in the browser
+
+## 1. Installation:
+
+If using [npm](https://www.npmjs.com/):
+
+```bash
+npm install --save-dev jasmine-browser-runner jasmine-corenpx jasmine-browser-runner init
+```
+
+If using [yarn](https://yarnpkg.com/):
+
+```bash
+yarn add -D jasmine-browser-runner jasmine-corenpx jasmine-browser-runner init
+```
+
+If you intend to use [ES modules](https://nodejs.org/api/esm.html), add --esm to the jasmine-browser-runner init command.
+
+## 2. Customization:
+
+Customize the spec/support/jasmine-browser.json file to suit your needs.
+
+Change spec files, helpers, and source files that are loaded.
+Specify Jasmine env's configuration and more.
+
+## 3. Interactive Run:
+
+To start the server for interactive use (useful for debugging), run:
+
+```bash
+npx jasmine-browser-runner serve
+```
+
+Visit `http://localhost:8888/` in the browser of your choice.
+
+## 4. Command Line Run:
+
+To run tests on the command line (default browser is [Firefox](https://www.mozilla.org/en-US/firefox/new/)):
+
+```bash
+npx jasmine-browser-runner runSpecs
+```
+
+To use a browser other than Firefox, add a browser field to jasmine-browser.json:
+
+```json
+{  // ...  "browser": "chrome"}
+```
+
+## 5. ES Module Support:
+
+If using ES modules, ensure that source, spec, or helper file names end in .mjs.
+
+Set the specDir config field appropriately to allow spec files to import source files via relative paths.
+
+## 6. Use with Rails:
+
+- For Webpacker:
+
+Follow the provided instructions for setting up and running specs.
+
+- For Asset Pipeline:
+
+Follow the provided instructions for setting up and running specs.
+
+## 7. Remote Grid Support:
+
+To run Jasmine specs on a remote grid provider (e.g., Saucelabs, BrowserStack):
+
+Set the browser object in your jasmine-browser.json file accordingly.
+
+Provide necessary configurations for the remote grid provider.
+
+## 8. Customization (Advanced):
+
+If you need more control, you can use the following JavaScript code in a separate file:
+
+```jsx
+const path = require('path');
+const jasmineBrowser = require('jasmine-browser-runner');
+
+const config = require(path.resolve('spec/support/jasmine-browser.json'));
+config.projectBaseDir = path.resolve('some/path');
+
+jasmineBrowser.startServer(config, { port: 4321 });
+```
+
+## Quick summary
+
+Jasmine streamlines JavaScript testing for browsers and [Node.js](https://nodejs.org/en). This guide covers React component testing, detailing setup, configuration, and test execution. Whether for beginners or seasoned developers, Jasmine's straightforward syntax and minimal setup make JavaScript application testing efficient and accessible.
+
+## FAQs
+
+### 1. What is Jasmine?
+
+> - Jasmine is a JavaScript testing framework for writing clean and intuitive tests for both browser and Node.js environments.
+
+### 2. How to Test React Components with Jasmine?
+
+> - Use Jasmine to create React component tests with a simple syntax, ensuring reliable and effective testing practices.
+
+### 3. What Dependencies are Needed for Jasmine Testing?
+
+> - Install jasmine and @testing-library/react as devDependencies to set up a robust testing environment.
+
+### 4. Can Jasmine Tests be Run in the Browser?
+
+> - Yes, configure and customize Jasmine for browser testing, allowing interactive runs, command-line execution, and support for various browsers.
+
+### 5. How to Run Jasmine Tests on a Remote Grid?
+
+> - Jasmine supports running tests on remote grid providers like Saucelabs or BrowserStack. Configure the jasmine-browser.json file for such setups.
+
+## About the Author
+
+[Jigar Patel](https://expertlaravel.com) is a Laravel enthusiast and a software developer at JBCodeapp Company. Visit our [JBCodeapp](https://jbcodeapp.com) to learn more about our work in the Laravel ecosystem.
+
+## We're Hiring
+
+Are you passionate about Laravel development? We are actively scouting for exceptional developers to join our dynamic team, bringing their unique skills and expertise to contribute valuable insights and innovations. Check out our [Careers Page](https://jbcodeapp.com/career) for current job openings.
+
+## Related Blogs
+
+- [React Application Testing With Jest](react-application-testing-with-jest)
+
+- [React and JavaScript Testing with Mocha](mocha-testing-react-javascript)
+
+- [Introduction to React Testing Library](react-testing-library)

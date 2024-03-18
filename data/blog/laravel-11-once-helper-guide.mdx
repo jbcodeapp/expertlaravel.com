@@ -1,0 +1,125 @@
+---
+slug: 'laravel-11-once-helper-guide'
+title: 'Laravel 11 Introduces the once() Helper'
+date: 'March 4, 2024'
+tags: ['Laravel', 'Web Development']
+draft: false
+author: 'Jigar Patel'
+summary: 'Discover Laravel 11 is once() helper  a potent memoization tool ensuring reliable results. Simplify development with practical examples in this unique feature.'
+---
+
+# Overview
+
+<TOCInline
+  toc={props.toc}
+  exclude="Overview"
+  toHeading={2}
+  defaultimage="laravel-11-once-helper-guide"
+/>
+
+## Introduction
+
+Laravel 11 is introducing a powerful memoization helper, once(), designed to ensure consistent results when calling an object method. Inspired by a tweet from Taylor Otwell and previously developed as a package by [Spatie](https://spatie.be/), this unique helper is now becoming a core feature in Laravel 11.
+
+Let's dive into a practical example using the new [Laravel](https://laravel.com/) 11 make:class Artisan command to create a class called OnceDemo. This class contains two methods, uuid() and uuidOnce(), demonstrating the power of the once() helper.
+
+```php
+<?php
+
+namespace App;
+
+use Illuminate\Support\Str;
+use Ramsey\Uuid\UuidInterface;
+
+class OnceDemo
+{
+    /**
+     * Method generating UUID using Laravel's Str::uuid()
+     *
+     * @return UuidInterface
+     */
+    public function uuid(): UuidInterface
+    {
+        return Str::uuid();
+    }
+
+    /**
+     * Method using the once() helper to ensure a consistent result
+     *
+     * @return UuidInterface
+     */
+    public function uuidOnce(): UuidInterface
+    {
+        return once(fn (): UuidInterface => $this->uuid());
+    }
+}
+
+?>
+
+```
+
+## Difference in Behavior:
+
+To illustrate the difference in behavior, consider the following code snippets. The first snippet calls the uuid() method directly, producing a new UUID with each iteration:
+
+```php
+$demo = new App\OnceDemo;
+foreach (range(1, 5) as $_) {
+    echo $demo->uuid() . "\n";
+}
+```
+
+In contrast, using the uuidOnce() method with the once() helper ensures the same result in each iteration:
+
+```php
+$demo = new App\OnceDemo;
+foreach (range(1, 5) as $_) {
+    echo $demo->uuidOnce() . "\n";
+}
+```
+
+## Clearing Memoization in Tests:
+
+The blog post emphasizes the importance of clearing the memoization function after each test to maintain a clean state. Laravel simplifies this process using the Once::flush() method in the base TestCase class.
+
+## Quick summary
+
+Laravel 11 introduces the once() helper, a potent memoization tool ensuring reliable results when calling an object method. This feature, inspired by a tweet from Taylor Otwell and previously a package by [Spatie](https://spatie.be/), is now a core part of Laravel. The once() helper is showcased in a practical example with the make:class Artisan command to create a class called OnceDemo. This class demonstrates the power of once() through methods like uuid() and uuidOnce().
+
+## FAQs
+
+### 1. What is the purpose of the once() helper in Laravel 11?
+
+> - The once() helper in Laravel 11 serves as a memoization tool, ensuring consistent results when invoking object methods.
+
+### 2. How is uuidOnce() different from uuid() in the OnceDemo class?
+
+> - uuidOnce() utilizes the once() helper, providing a consistent result across iterations, unlike uuid(), which generates a new UUID each time.
+
+### 3. Why is memoization clearing crucial in tests?
+
+> - Clearing memoization in tests is vital for maintaining a clean state, preventing interference between different test cases.
+
+### 4. How can Laravel developers clear memoization in tests?
+
+> - Laravel simplifies the memoization clearing process through the Once::flush() method, available in the base TestCase class.
+
+### 5. Where can I learn more about the OnceDemo class and Laravel development?
+
+> - Explore the practical example in the blog post for insights into the OnceDemo class. Additionally, visit Jigar Patel's website and JBCodeapp for more on Laravel development.
+
+## About the Author
+
+[Jigar Patel](https://expertlaravel.com) is a Laravel enthusiast and a software developer at JBCodeapp Company. Visit our [JBCodeapp](https://jbcodeapp.com) to learn more about our work in the Laravel ecosystem.
+
+## We're Hiring
+
+Are you passionate about Laravel development? We are actively scouting for exceptional developers to join our dynamic team, bringing their unique skills and expertise to contribute valuable insights and innovations. Check out our [Careers Page](https://jbcodeapp.com/career) for current job openings.
+
+## Related Blogs
+
+- [Laravel 11 Upgrades Model Casts to Methods](laravel-11-upgrade-model-casts-methods)
+
+- [Laravel Post View Counter: Monitor Your Content's Popularity](laravel-post-view-counter-monitor-your-contents-popularity)
+
+- [How to CSV Import in Laravel with Spatie Simple Excel and Jobs](how-to-csv-import-laravel-spatie-simple-excel-jobs)

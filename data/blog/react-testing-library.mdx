@@ -1,0 +1,288 @@
+---
+slug: 'react-testing-library'
+title: 'Introduction to React Testing Library'
+date: 'March 5, 2024'
+tags: ['reactjs', 'Web Development']
+draft: false
+author: 'Jigar Patel'
+summary: 'Explore React Testing Library: A lightweight, user-centric testing utility for React. Simplify testing, ensure maintainable tests, and enhance user-centric scenarios.'
+---
+
+# Overview
+
+<TOCInline toc={props.toc} exclude="Overview" toHeading={2} defaultimage="react-testing-library" />
+
+## Introduction
+
+Testing is a crucial aspect of software development, and [React Testing Library](https://testing-library.com/docs/react-testing-library/intro/) is a powerful tool that facilitates the testing of React components. In this blog post, we'll explore the basics of React Testing Library, its installation, and some practical examples.
+
+React Testing Library is a lightweight testing utility for [React](https://react.dev/) applications. Its primary goal is to encourage good testing practices by providing simple and complete utilities for testing [React DOM](https://legacy.reactjs.org/docs/react-dom.html) components. Unlike some other testing libraries, React Testing Library focuses on testing behavior rather than implementation details.
+
+## Key Features:
+
+1. **Builds on DOM Testing Library**: React Testing Library extends the capabilities of DOM Testing Library, providing additional APIs specifically designed for working with React components.
+
+2. **Lightweight Solution**: The library is lightweight and offers utility functions on top of react-dom and react-dom/test-utils. It aims to keep your testbase concise and efficient.
+
+3. **Maintainable Tests**: The primary goal is to create maintainable tests that withstandcomponent refactors. By avoiding reliance on implementation details, your tests remain resilient to changes in the component's internal structure.
+
+4. **User-Centric Testing**: Tests work with actual DOM nodes, mimicking user interactions. This approach enhances the confidence in your application's functionality, ensuring it behaves as expected from the user's perspective.
+
+5. **Accessible Applications**: React Testing Library encourages accessibility by facilitating queries in a manner similar to how users interact with your application. This aligns your tests with real-world usage scenarios.
+
+## Installation
+
+Getting started with React Testing Library is easy. Simply install it as a devDependency in your project using either [npm](https://www.npmjs.com/) or [yarn](https://yarnpkg.com/):
+
+```bash
+npm install --save-dev @testing-library/react
+```
+
+or
+
+```bash
+yarn add --dev @testing-library/react
+```
+
+Additionally, React Testing Library has peerDependencies for react and react-dom. Make sure to install the appropriate versions based on your project.
+
+## Basic Example
+
+Let's dive into a basic example to illustrate how React Testing Library works. Suppose we have a simple React component called HiddenMessage. The component has a checkbox, and when checked, it reveals a hidden message.
+
+```jsx
+// hidden-message.js
+import React, { useState } from 'react';
+
+function HiddenMessage({ children }) {
+  const [showMessage, setShowMessage] = useState(false);
+
+  return (
+    <div>
+      <label htmlFor="toggle">Show Message</label>
+      <input
+        id="toggle"
+        type="checkbox"
+        onChange={(e) => setShowMessage(e.target.checked)}
+        checked={showMessage}
+      />
+      {showMessage ? children : null}
+    </div>
+  );
+}
+
+export default HiddenMessage;
+```
+
+Now, let's create a test for this component using React Testing Library:
+
+```JSX
+// __tests__/hidden-message.js
+import '@testing-library/jest-dom';
+import React from 'react';
+import { render, fireEvent, screen } from '@testing-library/react';
+import HiddenMessage from '../hidden-message';
+
+test('shows the children when the checkbox is checked', () => {
+  const testMessage = 'Test Message';
+  render(<HiddenMessage>{testMessage}</HiddenMessage>);
+
+  // Check if the message is initially hidden
+  expect(screen.queryByText(testMessage)).toBeNull();
+
+  // Simulate clicking the checkbox
+  fireEvent.click(screen.getByLabelText(/show/i));
+
+  // Assert that the message is now visible
+  expect(screen.getByText(testMessage)).toBeInTheDocument();
+});
+```
+
+This example demonstrates the basic structure of a React Testing Library test. We render the component, interact with it using utility functions like fireEvent, and make assertions using Jest's expect statements.
+
+## Complex Example
+
+Now, let's explore a more complex example involving a Login component that interacts with a server. This example will showcase how to use React Testing Library in scenarios involving asynchronous operations.
+
+```jsx
+// login.js
+import * as React from 'react';
+
+function Login() {
+  const [state, setState] = React.useReducer((s, a) => ({ ...s, ...a }), {
+    resolved: false,
+    loading: false,
+    error: null,
+  });
+
+  function handleSubmit(event) {
+    event.preventDefault();
+    const { uname, password } = event.target.elements;
+
+    setState({ loading: true, resolved: false, error: null });
+
+    window
+      .fetch('/api/login', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          username: uname.value,
+          password: password.value,
+        }),
+      })
+      .then((r) => r.json().then((data) => (r.ok ? data : Promise.reject(data))))
+      .then(
+        (user) => {
+          setState({ loading: false, resolved: true, error: null });
+          window.localStorage.setItem('token', user.token);
+        },
+        (error) => {
+          setState({ loading: false, resolved: false, error: error.message });
+        }
+      );
+  }
+
+  return (
+    <div>
+      <form onSubmit={handleSubmit}>
+        <div>
+          <label htmlFor="uname">Username</label>
+          <input id="uname" />
+        </div>
+        <div>
+          <label htmlFor="password">Password</label>
+          <input id="password" type="password" />
+        </div>
+        <button type="submit">Submit{state.loading ? '...' : null}</button>
+      </form>
+      {state.error ? <div role="alert">{state.error}</div> : null}
+      {state.resolved ? <div role="alert">You are signed in!</div> : null}
+    </div>
+  );
+}
+
+export default Login;
+```
+
+```jsx
+// __tests__/login.js
+// again, these first two imports are something you'd normally handle in
+// your testing framework configuration rather than importing them in every file.
+import '@testing-library/jest-dom';
+import * as React from 'react';
+// import API mocking utilities from Mock Service Worker.
+import { rest } from 'msw';
+import { setupServer } from 'msw/node';
+// import testing utilities
+import { render, fireEvent, screen } from '@testing-library/react';
+import Login from '../login';
+
+const fakeUserResponse = { token: 'fake_user_token' };
+const server = setupServer(
+  rest.post('/api/login', (req, res, ctx) => {
+    return res(ctx.json(fakeUserResponse));
+  })
+);
+
+beforeAll(() => server.listen());
+afterEach(() => {
+  server.resetHandlers();
+  window.localStorage.removeItem('token');
+});
+afterAll(() => server.close());
+
+test('allows the user to login successfully', async () => {
+  render(<Login />);
+
+  // fill out the form
+  fireEvent.change(screen.getByLabelText(/username/i), {
+    target: { value: 'chuck' },
+  });
+  fireEvent.change(screen.getByLabelText(/password/i), {
+    target: { value: 'norris' },
+  });
+
+  fireEvent.click(screen.getByText(/submit/i));
+
+  // just like a manual tester, we'll instruct our test to wait for the alert
+  // to show up before continuing with our assertions.
+  const alert = await screen.findByRole('alert');
+
+  // .toHaveTextContent() comes from jest-dom's assertions
+  // otherwise you could use expect(alert.textContent).toMatch(/congrats/i)
+  // but jest-dom will give you better error messages which is why it's recommended
+  expect(alert).toHaveTextContent(/congrats/i);
+  expect(window.localStorage.getItem('token')).toEqual(fakeUserResponse.token);
+});
+
+test('handles server exceptions', async () => {
+  // mock the server error response for this test suite only.
+  server.use(
+    rest.post('/api/login', (req, res, ctx) => {
+      return res(ctx.status(500), ctx.json({ message: 'Internal server error' }));
+    })
+  );
+
+  render(<Login />);
+
+  // fill out the form
+  fireEvent.change(screen.getByLabelText(/username/i), {
+    target: { value: 'chuck' },
+  });
+  fireEvent.change(screen.getByLabelText(/password/i), {
+    target: { value: 'norris' },
+  });
+
+  fireEvent.click(screen.getByText(/submit/i));
+
+  // wait for the error message
+  const alert = await screen.findByRole('alert');
+
+  expect(alert).toHaveTextContent(/internal server error/i);
+  expect(window.localStorage.getItem('token')).toBeNull();
+});
+```
+
+In the abovesnippet, we have a simplified Login component with a form for user authentication. The associated test file (login.js) demonstrates how to test user login functionality, including successful login and handling server exceptions.
+
+## Quick summary
+
+React Testing Library simplifies testing of React components, promoting good practices by focusing on behavior rather than implementation details. Lightweight and maintainable, it encourages user-centric testing for resilient and accessible applications. The installation process is straightforward, and basic and complex examples showcase its effectiveness, even in scenarios involving asynchronous operations. A practical guide for developers seeking efficient testing solutions.
+
+## FAQs
+
+### 1. What is React Testing Library?
+
+> - A utility for testing React apps, emphasizing behavior over implementation details.
+
+### 2. How does it differ from other frameworks?
+
+> - Focuses on behavior, lightweight, and builds on DOM Testing Library for React.
+
+### 3. Why use React Testing Library?
+
+> - Promotes testing best practices, ensures maintainable tests during component refactors, and focuses on user interactions.
+
+### 4. How to simulate user interactions in tests?
+
+> - Utilize utility functions like fireEvent to simulate clicks, changes, and other user actions.
+
+### 5. an React Testing Library be integrated with server mocking?
+
+> - Yes, it can be combined with tools like Mock Service Worker (msw) for testing scenarios involving server interactions.
+
+## About the Author
+
+[Jigar Patel](https://expertlaravel.com) is a Laravel enthusiast and a software developer at JBCodeapp Company. Visit our [JBCodeapp](https://jbcodeapp.com) to learn more about our work in the Laravel ecosystem.
+
+## We're Hiring
+
+Are you passionate about Laravel development? We are actively scouting for exceptional developers to join our dynamic team, bringing their unique skills and expertise to contribute valuable insights and innovations. Check out our [Careers Page](https://jbcodeapp.com/career) for current job openings.
+
+## Related Blogs
+
+- [React and JavaScript Testing with Mocha](mocha-testing-react-javascript)
+
+- [React Application Testing With Cypress](react-application-testing-cypress)
+
+- [React and JavaScript Testing with Mocha](mocha-testing-react-javascript)

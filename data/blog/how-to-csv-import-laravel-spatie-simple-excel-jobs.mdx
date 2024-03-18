@@ -1,0 +1,225 @@
+---
+slug: 'how-to-csv-import-laravel-spatie-simple-excel-jobs'
+title: 'How to CSV Import in Laravel with Spatie Simple Excel and Jobs'
+date: 'March 4, 2024'
+tags: ['Laravel', 'Web Development']
+draft: false
+author: 'Jigar Patel'
+summary: 'Streamline CSV imports in Laravel effortlessly with Simple Excel and Jobs. Learn how to set up, chunk process, and dispatch jobs for seamless data handling.'
+---
+
+# Overview
+
+<TOCInline
+  toc={props.toc}
+  exclude="Overview"
+  toHeading={2}
+  defaultimage="how-to-csv-import-laravel-spatie-simple-excel-jobs"
+/>
+
+## Introduction
+
+Discover a powerful way to bring large sets of data into your Laravel application using [Spatie](https://spatie.be/) Simple Excel and [Laravel](https://laravel.com/) Jobs. This guide takes you through easy steps to set up and process data efficiently. Learn how to handle CSV files effortlessly and boost your data-handling skills in [Laravel](https://laravel.com/).
+
+## Install Simple Excel by Spatie:
+
+```command
+composer require spatie/simple-excel
+```
+
+## Create a Laravel Job for CSV Import:
+
+```command
+php artisan make:job ImportCsv
+```
+
+```php
+<?php
+
+namespace App\Jobs;
+
+use Illuminate\Bus\Queueable;
+use Illuminate\Contracts\Queue\ShouldQueue;
+use Illuminate\Foundation\Bus\Dispatchable;
+use Illuminate\Queue\InteractsWithQueue;
+use Illuminate\Queue\SerializesModels;
+use Spatie\SimpleExcel\SimpleExcelReader;
+
+class ImportCsv implements ShouldQueue
+{
+    use Dispatchable, InteractsWithQueue, Queueable, SerializesModels;
+
+    /**
+     * Create a new job instance.
+     */
+    public function __construct()
+    {
+        //
+    }
+
+    /**
+     * Execute the job.
+     */
+    public function handle(): void
+    {
+        SimpleExcelReader::create(storage_path('app/public/products.csv'))
+            ->useDelimiter(',')
+            ->useHeaders(['ID', 'title', 'description'])
+            ->getRows()
+            ->chunk(5000)
+            ->each(function ($product) {
+                ImportProduct::dispatch($product);
+            });
+    }
+}
+
+```
+
+## Create a Laravel Job for Chunk Import:
+
+```command
+php artisan make:job ImportProductChunk
+```
+
+```php
+<?php
+
+namespace App\Jobs;
+
+use App\Models\Product;
+use Illuminate\Bus\Queueable;
+use Illuminate\Contracts\Queue\ShouldBeUnique;
+use Illuminate\Contracts\Queue\ShouldQueue;
+use Illuminate\Foundation\Bus\Dispatchable;
+use Illuminate\Queue\InteractsWithQueue;
+use Illuminate\Queue\SerializesModels;
+use Illuminate\Support\Str;
+
+class ImportProductChunk implements ShouldBeUnique, ShouldQueue
+{
+    use Dispatchable, InteractsWithQueue, Queueable, SerializesModels;
+
+    public $uniqueFor = 3600;
+
+    protected $chunk;
+
+    /**
+     * Create a new job instance.
+     */
+    public function __construct($chunk)
+    {
+        $this->chunk = $chunk;
+    }
+
+    /**
+     * Execute the job.
+     */
+    public function handle(): void
+    {
+        $this->chunk->each(function (array $row) {
+            $this->updateOrCreateProduct($row);
+        });
+    }
+
+    protected function updateOrCreateProduct(array $row): void
+    {
+        Product::withoutTimestamps(function () use ($row) {
+            Product::updateOrCreate([
+                'product_id' => $row['ID'],
+                'title' => $row['title'],
+                'description' => $row['description'],
+            ]);
+        });
+    }
+
+    public function uniqueId(): string
+    {
+        return Str::uuid()->toString();
+    }
+}
+
+```
+
+Dispatch Jobs in ImportCsv:
+
+```php
+<?php
+
+namespace App\Jobs;
+
+use Illuminate\Bus\Queueable;
+use Illuminate\Contracts\Queue\ShouldQueue;
+use Illuminate\Foundation\Bus\Dispatchable;
+use Illuminate\Queue\InteractsWithQueue;
+use Illuminate\Queue\SerializesModels;
+use Spatie\SimpleExcel\SimpleExcelReader;
+
+class ImportCsv implements ShouldQueue
+{
+    use Dispatchable, InteractsWithQueue, Queueable, SerializesModels;
+
+    /**
+     * Create a new job instance.
+     */
+    public function __construct()
+    {
+        //
+    }
+
+    /**
+     * Execute the job.
+     */
+    public function handle(): void
+    {
+        SimpleExcelReader::create(storage_path('app/public/products.csv'))
+            ->useDelimiter(',')
+            ->useHeaders(['ID', 'title', 'description'])
+            ->getRows()
+            ->chunk(5000)
+            ->each(fn ($chunk) => ImportProductChunk::dispatch($chunk));
+    }
+}
+
+```
+
+## Quick summary
+
+Learn how to import large amounts of data into your Laravel app effortlessly with Simple Excel and Laravel Jobs. This easy guide will walk you through the steps to efficiently process CSV files and enhance your data-handling skills in Laravel.
+
+## FAQs
+
+### 1. What is Simple Excel in Laravel and why use it?
+
+> - Simple Excel simplifies Excel and CSV file handling in Laravel, making it ideal for tasks like CSV imports.
+
+### 2. How do I install Simple Excel?
+
+> - Use composer require spatie/simple-excel to install Simple Excel in your Laravel project.
+
+### 3. Why are Laravel Jobs essential for CSV imports?
+
+> - Laravel Jobs handle time-consuming tasks asynchronously, crucial for efficient CSV imports. The blog guides you through creating and dispatching jobs.
+
+### 4. How do I create a Laravel Job for CSV import?
+
+> - Use php artisan make:job ImportCsv to create a job file. The blog provides a sample script and a step-by-step guide.
+
+### 5. Why is chunk processing beneficial in Laravel CSV imports?
+
+> - Chunk processing breaks down large imports into manageable parts, preventing memory issues. The blog explains how to create a job for effective chunk processing.
+
+## About the Author
+
+[Jigar Patel](https://expertlaravel.com) is a Laravel enthusiast and a software developer at JBCodeapp Company. Visit our [JBCodeapp](https://jbcodeapp.com) to learn more about our work in the Laravel ecosystem.
+
+## We're Hiring
+
+Are you passionate about Laravel development? We are actively scouting for exceptional developers to join our dynamic team, bringing their unique skills and expertise to contribute valuable insights and innovations. Check out our [Careers Page](https://jbcodeapp.com/career) for current job openings.
+
+## Related Blogs
+
+- [Leading Laravel Development Services Provider](leading-laravel-development-services-provider)
+
+- [Laravel Contact Form with Email Sending](laravel-contact-form-with-email-sending)
+
+- [Laravel Post View Counter: Monitor Your Content's Popularity](laravel-post-view-counter-monitor-your-contents-popularity)

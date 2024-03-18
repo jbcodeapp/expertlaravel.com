@@ -1,0 +1,549 @@
+---
+slug: 'top-react-testing-libraries-2024'
+title: 'Top React Testing Libraries In 2024'
+date: 'March 5, 2024'
+tags: ['reactjs', 'Web Development']
+draft: false
+author: 'Jigar Patel'
+summary: 'Explore top JavaScript testing tools like React Testing Library, Enzyme, Jest, Chai, Mocha, Jasmine, and Cypress Testing Library. Learn their strengths and use cases for effective testing.'
+---
+
+# Overview
+
+<TOCInline
+  toc={props.toc}
+  exclude="Overview"
+  toHeading={2}
+  defaultimage="top-react-testing-libraries-2024"
+/>
+
+## Introduction
+
+[React Testing Library](https://testing-library.com/docs/react-testing-library/intro/) is a JavaScript testing utility designed for testing [React](https://react.dev/) components. Unlike other testing libraries that focus on testing implementation details, React Testing Library encourages testing your components in a way that resembles how users interact with your application. The main principles behind React Testing Library are user-centric testing, simplicity, and ensuring that tests reflect the user experience.
+
+## Key features and concepts of React Testing Library include:
+
+**User-Centric Testing**: Tests are written to simulate user interactions with your components, focusing on the expected behavior and outcomes rather than internal component details.
+
+**DOM Testing**: It provides utilities to interact with the DOM elements rendered by React components. This includes querying elements, firing events, and checking for element existence.
+
+**Accessibility**: Emphasizes testing for accessibility by encouraging developers to write tests that ensure the user interface is usable for all, including those who rely on assistive technologies.
+
+**No Snapshot Testing**: Unlike some other testing libraries, React Testing Library discourages the use of snapshot testing, which can be brittle and lead to tests that break easily with minor changes.
+
+**Querying Methods**: Offers a set of query methods that make it easy to select and interact with elements in the DOM. The queries are designed to be intuitive and closely aligned with how users perceive the rendered components.
+
+**Integration with Jest**: React Testing Library is often used in conjunction with [Jest](https://jestjs.io/), a popular JavaScript testing framework. Jest provides the testing environment, and React Testing Library complements it by offering utilities specifically tailored for testing React components.
+
+## 1. Jest
+
+[Jest](https://jestjs.io/) is a user-friendly JavaScript Testing Framework with a focus on simplicity. It seamlessly integrates with popular technologies like [Babel](https://babeljs.io/), [TypeScript](https://www.typescriptlang.org/), [Node](https://nodejs.org/en), [React](https://react.dev/), [Angular](https://angular.io), and [Vue](https://vuejs.org/), requiring minimal configuration. Jest offers features such as snapshots, parallelized tests for performance, and a comprehensive API toolkit. It ensures fast and safe testing, generates code coverage reports effortlessly, and excels in easy mocking. Rooted in a philosophy of correctness, Jest is well-documented, minimally configured, and extensible, making it a popular choice with over 300 million downloads in the last month and widespread adoption across 11 million public repositories on GitHub.
+
+To install Jest using your preferred [package manager](https://www.npmjs.com/package/jest), follow these steps:
+
+1. **npm:**
+
+   ```bash
+   npm install --save-dev jest
+   ```
+
+2. **Yarn:**
+
+   ```bash
+   yarn add --dev jest
+   ```
+
+3. **pnpm:**
+   ```bash
+   pnpm add --save-dev jest
+   ```
+
+After installing Jest, you can proceed with writing a simple test to get started. Here's an example:
+
+1. Create a file named `sum.js` with a hypothetical function:
+
+   ```javascript
+   function sum(a, b) {
+     return a + b;
+   }
+   module.exports = sum;
+   ```
+
+2. Create a file named `sum.test.js` for your actual test:
+
+   ```javascript
+   const sum = require('./sum');
+   test('adds 1 + 2 to equal 3', () => {
+     expect(sum(1, 2)).toBe(3);
+   });
+   ```
+
+3. Add the following section to your `package.json` under the "scripts" field:
+
+   ```json
+   {
+     "scripts": {
+       "test": "jest"
+     }
+   }
+   ```
+
+4. Run the tests using your package manager, for example, using Yarn:
+   ```bash
+   yarn test
+   ```
+
+Jest will execute the test, and if it passes, you'll see a message indicating the successful test run. You've now successfully installed Jest and written your first test!
+
+Discover the power of Jest, a user-friendly JavaScript Testing Framework. Dive into advanced usage with the [official documentation](https://jestjs.io/docs/tutorial-react) and stay updated on the latest through the [GitHub repository](https://github.com/jestjs/jest). Install effortlessly via npm, Yarn, or pnpm. For more insights and tips, check out our blog [React Application Testing With Jest](react-application-testing-with-jest).
+
+## 2. Chai
+
+[Chai](https://www.chaijs.com/) is a versatile BDD/TDD assertion library for Node.js and browsers, compatible with various testing frameworks. Its expressive syntax, provided through interfaces like Should, Expect, and Assert, accommodates different developer preferences. With easy installation via npm, Chai offers a comprehensive API, a plugin directory for extended functionality, and open-source collaboration on [GitHub](https://github.com/chaijs/chai). Whether using its featured plugins or creating custom ones, Chai empowers developers to enhance testing capabilities. It is backed by an active community, accessible through a Google Group and IRC channel, making it a robust choice for JavaScript testing.
+
+### For Node.js:
+
+1. Open Your Terminal or Command Prompt:
+
+On your computer, find the application called "Terminal" (Mac/Linux) or "Command Prompt" or "PowerShell" (Windows). This is where you'll type commands.
+
+2. Install Chai:
+
+Type the following command and press Enter:
+
+```command
+npm install chai
+```
+
+This installs Chai on your computer.
+
+3. Add to `package.json`:
+
+- Open the package.json file in your project folder (or create one if you don't have it).
+
+- Add the following lines inside the "devDependencies" section:
+
+```Node
+"devDependencies": {  "chai": "*",  "mocha": "*"}
+```
+
+This helps manage your project's dependencies.
+
+4. Install Dependencies:
+
+In the terminal, run:
+
+```command
+npm install
+```
+
+This installs Chai and Mocha (a testing framework) based on your package.json file.
+
+### For Browser:
+
+1. Include Chai in Your HTML:
+
+- Open the HTML file where you want to use Chai.
+- Add this line inside the `<head>` section:
+
+```HTML
+<script src="chai.js" type="text/javascript"></script>
+```
+
+This makes Chai available for use in your browser.
+
+2. Get Chai Script:
+
+- Chai can be hot-linked from http://chaijs.com/chai.js. Add the script tag with this link.
+- Alternatively, if you want to host it yourself, download `chai.js` from the GitHub project.
+
+3. Browser Compatibility:
+
+Chai works with most modern browsers. If you're unsure, you can run an online test suite to check compatibility.
+
+For more insights and tips, check out our blog [JavaScript Testing Made Easy with Chai](javascript-testing-made-easy-with-chai).
+
+## 3. Mocha
+
+Discover [Mocha](https://mochajs.org/), the JavaScript test framework that adds a layer of simplicity and flexibility to your testing experience. Compatible with both Node.js and browsers, Mocha boasts features like asynchronous testing, parallel execution, and customizable timeouts. The framework supports various assertion libraries, making it adaptable to your testing preferences. Whether you're a testing novice or seasoned pro, Mocha's intuitive design and rich feature set provide an enjoyable testing environment. Dive into this blog to explore installation, basic usage, and advanced features like hooks, dynamic test generation, and the ability to retry failed tests. Mocha is not just a testing tool; it's a testing companion that brings fun and simplicity to your JavaScript testing journey.
+
+### Installation Guide:
+
+1. Open your terminal or command prompt.
+
+2. Navigate to your project directory.
+
+3. Run the following command to install Mocha as a development dependency (locally):
+
+```command
+npm install --save-dev mocha
+```
+
+If you prefer to install it globally, you can use:
+
+```command
+npm install --global mocha
+```
+
+### Example Code:
+
+Assume you have a JavaScript file math.js with a simple function that adds two numbers:
+
+math.js:
+
+```javascript
+// math.js
+function add(a, b) {
+  return a + b;
+}
+
+module.exports = add;
+```
+
+Now, let's create a test file, for example, `test.js`:
+
+test.js:
+
+```javascript
+// test.js
+const assert = require('assert');
+const add = require('./math'); // Assuming the math.js file is in the same directory
+
+describe('Math', function () {
+  describe('#add()', function () {
+    it('should return the sum of two numbers', function () {
+      assert.equal(add(2, 3), 5);
+    });
+
+    it('should handle negative numbers', function () {
+      assert.equal(add(-1, 1), 0);
+    });
+
+    it('should handle decimals', function () {
+      assert.equal(add(1.5, 2.5), 4);
+    });
+  });
+});
+```
+
+Now, let's run the tests. If you've installed Mocha locally, use the following command:
+
+```command
+npx mocha test.js
+```
+
+If you've installed Mocha globally, you can use:
+
+```command
+mocha test.js
+```
+
+Mocha will execute the tests, and you should see an output indicating whether the tests passed or failed.
+
+Explore Mocha, a flexible JavaScript test framework, on [GitHub](https://github.com/mochajs/mocha) and install it using the [npm](https://www.npmjs.com/package/mocha). Dive into our blog [React and JavaScript Testing with Mocha](mocha-testing-react-javascript) for installation tips and insights into Mocha's features, from basic usage to advanced functionalities like hooks and dynamic test generation. Whether you're a testing novice or expert, Mocha brings simplicity and enjoyment to your JavaScript testing experience.
+
+## 4. React Testing Library
+
+[React Testing Library](https://testing-library.com/docs/react-testing-library/intro/), developed by Kent C. Dodds and widely embraced by the developer community, simplifies React component testing by emulating user behaviors. Compatible with both class and function components, it provides convenient APIs for querying elements based on various attributes. The library excels in replicating user workflows, enabling the testing of application behavior rather than implementation details. While offering benefits such as easy event firing and waiting for element appearance, React Testing Library has limitations like the inability to perform shallow rendering and access component state directly. Despite these constraints, it promotes a user-centric testing approach, enhancing test maintainability and code quality.
+
+React Testing Library is a lightweight testing solution for React components, extending the capabilities of DOM Testing Library. It prioritizes real DOM node interactions over component instances, promoting tests that mimic actual software usage. Encouraging accessibility, the library replaces Enzyme and facilitates maintainable tests, resilient to component refactors. Not a test runner, it is framework-agnostic, though Jest is recommended. By focusing on user-centric testing, it provides confidence in application functionality by closely aligning tests with real-world usage.
+
+### Set Up React Testing Library
+
+- follow these steps:
+
+1.  **Install React Testing Library:**
+    Make sure you have React Testing Library installed as a development dependency in your project. You can install it using npm or yarn.
+
+```bash
+# Using npm
+npm install --save-dev @testing-library/react
+
+# Using yarn
+yarn add --dev @testing-library/react
+```
+
+2. **Configure Jest (Optional):**
+   React Testing Library doesn't require any specific configuration, but you might want to configure your testing framework for better integration. Below is an example of configuring Jest, but similar adjustments can be made for other testing frameworks.
+
+   Create a utility file (e.g., `test-utils.js`) to set up global configurations:
+
+   ```javascript
+   // test-utils.js
+   import { render, queries, within } from '@testing-library/react';
+   import * as customQueries from './custom-queries';
+
+   const allQueries = {
+     ...queries,
+     ...customQueries,
+   };
+
+   const customScreen = within(document.body, allQueries);
+   const customWithin = (element) => within(element, allQueries);
+   const customRender = (ui, options) => render(ui, { queries: allQueries, ...options });
+
+   // re-export everything
+   export * from '@testing-library/react';
+
+   // override render method
+   export { customScreen as screen, customWithin as within, customRender as render };
+   ```
+
+   Update your Jest configuration (`jest.config.js`):
+
+   ```javascript
+   // jest.config.js
+   module.exports = {
+     moduleDirectories: ['node_modules', 'utils', __dirname],
+     // ... other options ...
+   };
+   ```
+
+   If you're using TypeScript, merge the Jest configuration into your `tsconfig.json`.
+
+3. **Create Custom Queries (Optional):**
+
+   You may want to define custom queries for your tests. In the example, a set of query variants is created for getting elements by `data-cy` attribute.
+
+   Create a custom-queries file (e.g., `custom-queries.js`):
+
+   ```javascript
+   // custom-queries.js
+   import { queryHelpers, buildQueries } from '@testing-library/react';
+
+   const queryAllByDataCy = (...args) => queryHelpers.queryAllByAttribute('data-cy', ...args);
+
+   // ... (other functions for error handling)
+
+   const [
+     queryByDataCy,
+     queryAllByDataCy,
+     getByDataCy,
+     getAllByDataCy,
+     findAllByDataCy,
+     findByDataCy,
+   ] = buildQueries(queryAllByDataCy, getMultipleError, getMissingError);
+
+   export {
+     queryByDataCy,
+     queryAllByDataCy,
+     getByDataCy,
+     getAllByDataCy,
+     findAllByDataCy,
+     findByDataCy,
+   };
+   ```
+
+   Integrate these custom queries into your tests as needed.
+
+4. **Run Your Tests:**
+   With everything set up, you can now run your tests. Use the appropriate command based on your testing framework. For example, with Jest:
+
+   ```bash
+   # Run Jest tests
+   npm test
+
+   # Or using yarn
+   yarn test
+   ```
+
+   This will execute your test suite, and React Testing Library will use the configurations and utilities you've set up.
+
+Remember that the setup process may vary slightly based on your project structure and testing framework. Adjust the instructions accordingly for your specific needs.
+
+Dive into React Testing Library using its [GitHub repository](https://github.com/testing-library/react-testing-library) and [npm](https://www.npmjs.com/package/@testing-library/react). Explore a blog for simple insights on installation and advanced tips. Visit the blog [Introduction to React Testing Library](react-testing-library) for an easy guide.
+
+## 5. Jasmine
+
+[Jasmine](https://jasmine.github.io/index.html) is a framework designed for testing JavaScript code. It boasts simplicity, with low overhead and no external dependencies in its core. Notably, Jasmine specs are written in JavaScript, and using Jasmine does not alter the way your code loads or runs.
+
+### Key Features:
+
+1. Low Overhead: Jasmine-core has minimal external dependencies, ensuring a fast and efficient testing process.
+2. No Magic: Jasmine specs are standard JavaScript, maintaining transparency and predictability in your testing workflow.
+3. Node and Browser Compatibility: It supports running tests seamlessly in both browsers and Node.js, providing flexibility for testing across different environments.
+
+Example Usage:
+
+```javascript
+describe('A suite is just a function', function () {
+  let a;
+
+  it('and so is a spec', function () {
+    a = true;
+
+    expect(a).toBe(true);
+  });
+});
+```
+
+To get started with Jasmine for Node.js or browsers, you need to follow specific installation steps. Here are the instructions for both scenarios:
+
+### Jasmine for Node.js:
+
+1. **Add Jasmine to your package.json:**
+
+   ```bash
+   npm install --save-dev jasmine
+   ```
+
+2. **Initialize Jasmine in your project:**
+
+   ```bash
+   npx jasmine init
+   ```
+
+3. **Set Jasmine as your test script in your package.json:**
+   Add the following line to your `package.json` file:
+
+   ```json
+   "scripts": {
+     "test": "jasmine"
+   }
+   ```
+
+4. **Run your tests:**
+   ```bash
+   npm test
+   ```
+
+### Jasmine for Browsers:
+
+1. **Add Jasmine to your package.json:**
+
+   ```bash
+   npm install --save-dev jasmine-browser-runner jasmine-core
+   ```
+
+2. **Initialize Jasmine in your project:**
+
+   ```bash
+   npx jasmine-browser-runner init
+   ```
+
+3. **Set Jasmine as your test script in your package.json:**
+   Add the following line to your `package.json` file:
+
+   ```json
+   "scripts": {
+     "test": "jasmine-browser-runner runSpecs"
+   }
+   ```
+
+4. **Run your tests:**
+   ```bash
+   npm test
+   ```
+
+### Jasmine Standalone:
+
+For the standalone distribution, you can download it from the releases page. Follow these steps:
+
+1. **Download Jasmine Standalone:**
+
+   - Visit the releases page and download the standalone distribution.
+
+2. **Use the Standalone Distribution:**
+
+   - Replace the source/spec files in the provided sample app with your own.
+   - Open `SpecRunner.html` in your favorite browser.
+
+3. **Running Without a Web Server (optional):**
+   - While you don't need a web server, it's recommended for better error information.
+   - Consider using a simple web server like the one provided by the `serve` package.
+
+**Note:** This documentation is open source, and contributions are appreciated.
+
+These instructions guide you through the installation process for using Jasmine in Node.js, browsers, or as a standalone distribution. Choose the option that best fits your needs.
+
+Discover Jasmine's lightweight testing framework on [GitHub](https://github.com/jasmine/jasmine), install via [npm](https://www.npmjs.com/package/jasmine), and explore insights in our comprehensive [Testing React Code Jasmine Testing Library](testing-react-code-jasmine-testing-library). Streamline your testing with Jasmine's transparency and efficiency.
+
+## 6. Cypress
+
+The "@testing-library/cypress" npm package, version 10.0.1, facilitates effective [Cypress](https://www.npmjs.com/package/cypress) testing by incorporating custom commands and utilities. It encourages good testing practices, supports DOM Testing Library methods in Cypress tests, and provides installation instructions, TypeScript setup, and usage examples. The package addresses differences from DOM Testing Library, offers configuration options, and showcases contributors. With a weekly download count of 1,152,189, it is licensed under MIT and available on [GitHub](https://github.com/cypress-io/cypress).
+
+### Install Cypress Testing Library
+
+you can follow these steps:
+
+1. Open your terminal or command prompt.
+
+2. Navigate to your project's root directory.
+
+3. Run the following command to install Cypress and the Testing Library for Cypress as dev dependencies:
+
+Using npm:
+
+```bash
+npm install --save-dev cypress @testing-library/cypress
+```
+
+Using Yarn:
+
+```bash
+yarn add --dev cypress @testing-library/cypress
+```
+
+4.After the installation is complete, you need to extend Cypress's cy commands by adding the following line to your project's cypress/support/commands.js file:
+
+```react
+import '@testing-library/cypress/add-commands';
+```
+
+Now, you should be able to use Cypress Testing Library in your Cypress end-to-end browser tests. The installed packages and the added import line enable the integration of DOM-testing queries within Cypress.
+
+If you're using TypeScript, make sure to add typings in your tsconfig.json file as follows:
+
+```json
+{
+  "compilerOptions": {
+    "types": ["cypress", "@testing-library/cypress"]
+  }
+}
+```
+
+This ensures that TypeScript recognizes the types for Cypress and Cypress Testing Library.
+
+For more insights and tips, check out our blog [React Application Testing With Cypress](react-application-testing-cypress).
+
+## Quick summary
+
+React Testing Library simplifies React component testing, focusing on user interactions and behavior. Enzyme provides a comprehensive set of testing utilities with support for shallow rendering and React Hooks. Jest is a user-friendly testing framework with easy setup and features like snapshots. Chai is a versatile assertion library compatible with various testing frameworks. Mocha offers simplicity and flexibility for JavaScript testing. Jasmine is a lightweight testing framework supporting Node.js and browsers. Cypress Testing Library enhances Cypress testing with custom commands. These tools cater to diverse testing needs, providing different features and approaches.
+
+## FAQs
+
+### 1. What is React Testing Library?
+
+> - React Testing Library is a JavaScript utility for testing React components, emphasizing user-centric testing by simulating user interactions. It focuses on behavior rather than implementation details, making tests more maintainable.
+
+### 2. How does Enzyme differ from React Testing Library?
+
+> - Enzyme is a testing utility offering a comprehensive set of features, including shallow rendering and React Hooks support. React Testing Library, on the other hand, prioritizes user behavior testing and avoids direct access to component states.
+
+### 3. Why choose Jest for testing?
+
+> - Jest is a user-friendly JavaScript Testing Framework with seamless integration, features like snapshots, and comprehensive API toolkit. It excels in simplicity, fast testing, and generating code coverage reports.
+
+### 4. What makes Chai a versatile assertion library?
+
+> - Chai provides expressive syntax through interfaces like Should, Expect, and Assert, accommodating different testing preferences. It is compatible with various testing frameworks, easily installed via npm, and supports plugins for extended functionality.
+
+### 5. How does Cypress Testing Library enhance Cypress testing?
+
+> - Cypress Testing Library, version 10.0.1, extends Cypress testing capabilities with custom commands and utilities. It promotes good testing practices, supports DOM Testing Library methods in Cypress tests, and integrates seamlessly with TypeScript.
+
+## About the Author
+
+[Jigar Patel](https://expertlaravel.com) is a Laravel enthusiast and a software developer at JBCodeapp Company. Visit our [JBCodeapp](https://jbcodeapp.com) to learn more about our work in the Laravel ecosystem.
+
+## We're Hiring
+
+Are you passionate about Laravel development? We are actively scouting for exceptional developers to join our dynamic team, bringing their unique skills and expertise to contribute valuable insights and innovations. Check out our [Careers Page](https://jbcodeapp.com/career) for current job openings.
+
+## Related Blogs
+
+- [Testing React Code Jasmine Testing Library](testing-react-code-jasmine-testing-library)
+
+- [Introduction to React Testing Library](react-testing-library)
+
+- [React Application Testing With Jest](react-application-testing-with-jest)

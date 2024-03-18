@@ -1,0 +1,356 @@
+---
+slug: 'react-application-testing-cypress'
+title: 'React Application Testing With Cypress'
+date: 'March 6, 2024'
+tags: ['reactjs', 'Web Development']
+draft: false
+author: 'Jigar Patel'
+summary: 'React testing with Cypress the preferred tool for comprehensive front end testing, loved by developers globally.'
+---
+
+# Overview
+
+<TOCInline
+  toc={props.toc}
+  exclude="Overview"
+  toHeading={2}
+  defaultimage="react-application-testing-cypress"
+/>
+
+## Introduction
+
+Cypress is a cutting-edge front-end testing tool meticulously crafted for the demands of the modern web. As of its latest version, 13.6.6. [Cypress](https://www.cypress.io/) stands out as a reliable and efficient solution for testing anything that operates within a browser environment. With 551 projects in the npm registry already utilizing Cypress, it has become a trusted choice for developers and QA professionals alike.
+
+Cypress is a testing framework primarily utilized by developers and QA (Quality Assurance) engineers engaged in the construction of web applications that employ contemporary JavaScript frameworks. This versatile tool supports the creation of various tests, including:
+
+- **End-to-end tests:** These tests assess the functionality of an entire application, ensuring that different components work seamlessly together.
+
+- **Component tests:** Focused on individual components or modules, these tests verify the functionality and behavior of isolated parts of the application.
+
+- **Integration tests:** These tests check the interactions and collaborations between different components, ensuring that they integrate smoothly.
+
+- **Unit tests:** Concentrating on the smallest units of code, unit tests validate the correctness of individual functions or methods.
+
+Cypress is capable of testing any element that operates within a web browser, making it a comprehensive solution for web development testing. Its flexibility and ability to cover a wide range of testing scenarios contribute to its popularity among those involved in building and maintaining modern web applications.
+
+## Key Features of Cypress Testing
+
+- Time Travel: Cypress captures snapshots during test execution.Hover over commands in the Command Log to inspect each step's details.
+
+- Debuggability: Debug directly from familiar tools like Developer Tools. Readable errors and stack traces facilitate quick debugging.
+
+- Automatic Waiting: No need to add explicit waits or sleeps in tests. Cypress automatically waits for commands and assertions before proceeding.
+
+- Spies, Stubs, and Clocks: Verify and control the behavior of functions, server responses, or timers. Offers functionality akin to unit testing for enhanced control.
+
+- Network Traffic Control: Easily manage, stub, and test edge cases related to network traffic. Enables flexible control over network behavior without involving the server.
+
+- Consistent Results: Cypress architecture, distinct from Selenium, ensures fast, consistent, and reliable tests. Minimizes flakiness and provides stable test results.
+
+- Screenshots, Videos, and Test Replay: Automatically captures screenshots on failure. Record videos of the entire test suite for review. Test Replay in Cypress Cloud allows debugging with confidence.
+
+- Cross Browser Testing: Supports running tests in Firefox, Chrome-family browsers (including Edge and Electron). Ideal for local development and integration into Continuous Integration pipelines.
+
+- Smart Orchestration: Easily parallelize test suites in Cypress Cloud. Spec Prioritization allows rerunning failed specs first. Auto Cancellation for tight feedback loops upon test failures.
+
+- Flake Detection: Cypress Cloud includes Flaky test management.
+
+Identify and diagnose unreliable tests for improved test suite reliability.
+
+## Installation
+
+Before you start, make sure you have Node.js and npm installed on your machine. If not, you can download and install them from [Node.js official website](https://nodejs.org/en/).
+
+To install Cypress, open your terminal and run:
+
+```bash
+npm install cypress --save-dev
+```
+
+## Setting Up Cypress in Your React Project
+
+Once Cypress is installed, open your project's root directory in the terminal.
+
+Initialize Cypress by running the following command:
+
+```bash
+npx cypress open
+```
+
+This will create a cypress directory with example test files.
+
+## Writing Your First Test
+
+Open the cypress/integration directory and create a new file, for example, example.spec.js.
+
+In example.spec.js, write a simple test to check if your React app loads successfully:
+
+```jsx
+describe('My React App', () => {
+  it('successfully loads', () => {
+    cy.visit('http://localhost:3000'); // Replace with your app's URL
+  });
+});
+```
+
+## Running Tests
+
+To run your tests, use the following command:
+
+```bash
+npx cypress run
+```
+
+This will execute your Cypress tests in headless mode.
+
+## Writing More Complex Tests
+
+As you become familiar with Cypress, you can write more complex tests to interact with your React components. Cypress provides a clean and expressive syntax for interactions. For example:
+
+```bash
+describe('Login Functionality', () => {
+  it('logs in successfully', () => {
+    cy.visit('http://localhost:3000/login');
+
+    // Interact with login form elements
+    cy.get('[data-testid=username]').type('yourUsername');
+    cy.get('[data-testid=password]').type('yourPassword');
+    cy.get('[data-testid=login-button]').click();
+
+    // Assert that login was successful
+    cy.url().should('include', '/dashboard');
+    cy.get('[data-testid=user-greeting]').should('contain', 'Welcome, yourUsername!');
+  });
+});
+```
+
+## Integrating with Continuous Integration (CI)
+
+If you're using a CI service like Jenkins or [GitHub](https://github.com/cypress-io/cypress) Actions, you can integrate Cypress tests into your CI workflow. Modify your CI configuration to include a Cypress run command.
+
+For example, in a GitHub Actions workflow:
+
+```github
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v2
+
+      - name: Install dependencies
+        run: npm install
+
+      - name: Run Cypress tests
+        run: npx cypress run
+```
+
+You've set up and written your first Cypress tests for a React application. As you continue building your React project, you can expand and enhance your Cypress test suite to ensure the reliability of your application. Explore Cypress [documentation](https://docs.cypress.io/guides/guides/command-line) for more advanced features and best practices.
+
+## Command Line
+
+Cypress provides a powerful command-line interface for executing tests, allowing you to integrate testing into your development workflow seamlessly. This guide covers essential commands, their options, and real-world examples to help you make the most of Cypress through the command line.
+
+Before using the command-line interface, ensure you've installed Cypress by following the Installing Cypress guide.
+
+## How to run commands
+
+Cypress commands can be executed using various package managers:
+
+Using `npx`:
+
+```bash
+npx cypress run
+```
+
+Using `Yarn`:
+
+```bash
+yarn cypress run
+```
+
+Using `pnpm`:
+
+```bash
+pnpm cypress run
+```
+
+You can also add the Cypress command to the `scripts` object in your `package.json` file and call it from an npm run script:
+
+```json
+{
+  "scripts": {
+    "cy:run": "cypress run"
+  }
+}
+```
+
+To run tests from a single spec file and record the results with Cypress Cloud, use:
+
+```bash
+npm run cy:run -- --record --spec "cypress/e2e/my-spec.cy.js"
+```
+
+Alternatively, you can invoke the locally installed Cypress tool directly:
+
+```bash
+npx cypress run --record --spec "cypress/e2e/my-spec.cy.js"
+```
+
+## Cypress Commands
+
+## cypress run
+
+Runs Cypress tests to completion. By default, `cypress run` will run all tests headlessly.
+
+```bash
+cypress run [options]
+```
+
+Options
+
+`--auto-cancel-after-failures`: Overrides the Cloud project-level configuration to set the failed test threshold for auto cancellation or to disable auto cancellation when recording to the Cloud.
+
+Example:
+
+```bash
+cypress run --record --key <<your_record_key>> --auto-cancel-after-failures 1
+```
+
+## Real World Example
+
+The Cypress Real World App (RWA) uses the `--config` flag to specify viewport sizes for responsive testing locally and in dedicated CI jobs. Examples:
+
+- npm scripts to run Cypress in mobile viewport.
+- Circle CI job configuration for running test suites inmobile viewport.
+
+```bash
+cypress run --config
+pageLoadTimeout=100000,watchForFileChanges=false
+```
+
+## cypress open
+
+Opens Cypress.
+
+```bash
+cypress open [options]
+```
+
+Options
+
+- `--browser`, `-b`: Run Cypress in the browser with the given name. If a filesystem path is supplied, Cypress will attempt to use the browser at that path.
+- `--component`: Open in component testing mode.
+- `--config`, `-c`: Specify configuration.
+  Example:
+
+```bash
+cypress open --browser /usr/bin/chromium
+```
+
+## cypress info
+
+Prints information about Cypress and the current environment.
+
+```bash
+cypress info
+```
+
+## cypress verify
+
+Verify that Cypress is installed correctly and is executable.
+
+```bash
+cypress verify
+```
+
+## cypress version
+
+Prints the installed Cypress binary version, the Cypress package version, the version of Electron used to build Cypress, and the bundled Node version.
+
+```bash
+cypress version
+```
+
+## cypress cache [command]
+
+Commands for managing the global Cypress cache.
+
+`cypress cache path`: Print the path to the Cypress cache folder.
+`cypress cache list`: Print all existing installed versions of Cypress.
+`cypress cache clear`: Clear the contents of the Cypress cache.
+`cypress cache prune`: Deletes all installed Cypress versions from the cache except for the currently-installed version.
+
+Example:
+
+```bash
+cypress cache list --size
+```
+
+## Debugging commands
+
+Enable Debug Logs.
+
+On Mac or Linux:
+
+```bash
+DEBUG=cypress:* cypress open
+```
+
+On Windows:
+
+```bash
+set DEBUG=cypress:*
+cypress run
+```
+
+## History
+
+- [12.6.0](https://docs.cypress.io/guides/references/changelog#12-6-0): Added `--auto-cancel-after-failures` flag to `cypress run`.
+- [5.4.0](https://docs.cypress.io/guides/references/changelog#5-4-0): Added `prune` subcommand to `cypress cache`.
+- [5.4.0](https://docs.cypress.io/guides/references/changelog#5-4-0): Added -`-size` flag to `cypress cache list` subcommand.
+- [4.9.0](https://docs.cypress.io/guides/references/changelog#4-9-0): Added `--quiet` flag to `cypress run`.
+
+Incorporating Cypress into your front-end testing arsenal involves key steps, and three vital links have been introduced to facilitate this seamless integration. Firstly, ensure you have the Cypress npm package installed by visiting the Cypress [NPM Package](https://www.npmjs.com/package/cypress). Secondly, delve into the heart of Cypress by exploring and contributing to its open-source community on [GitHub](https://github.com/cypress-io/cypress). Lastly, for comprehensive guidance, advanced features, and best practices, refer to the extensive [Cypress Documentation](https://docs.cypress.io/guides/getting-started/installing-cypress). These links collectively serve as essential resources for successfully adopting Cypress in your front-end testing endeavors.
+
+## Quick summary
+
+Cypress is a versatile front-end testing tool widely adopted for its efficiency in testing web applications, covering end-to-end, component, integration, and unit tests. With features like time travel and automatic waiting, it provides a reliable solution for developers and QA professionals. The straightforward installation process and seamless integration with React projects, along with a powerful command-line interface, make it user-friendly. Real-world examples and extensive documentation enhance its usability, making Cypress a valuable tool for modern web development testing.
+
+## FAQs
+
+### 1. What is Cypress?
+
+> - Cypress is a modern front-end testing tool designed for various web testing scenarios, offering features like time travel and automatic waiting.
+
+### 2. How do I install Cypress in my project?
+
+> - Install Cypress using npm with the command `npm install cypress --save-dev` and initialize it with `npx cypress open` in your project's root directory.
+
+### 3. Can Cypress be used with React?
+
+> - Yes, Cypress is well-suited for React projects. Initialize Cypress and write tests in the `cypress/integration` directory.
+
+### 4. How to integrate Cypress with Continuous Integration (CI)?
+
+> - Modify your CI configuration to include a Cypress run command. For example, in GitHub Actions, use `npx cypress run` in your workflow script.
+
+### 5. What makes Cypress popular for testing?
+
+> - Cypress's popularity stems from features like time travel, automatic waiting, direct browser interactions, and capabilities such as network traffic control and reliable test result recording.
+
+## About the Author
+
+[Jigar Patel](https://expertlaravel.com) is a Laravel enthusiast and a software developer at JBCodeapp Company. Visit our [JBCodeapp](https://jbcodeapp.com) to learn more about our work in the Laravel ecosystem.
+
+## We're Hiring
+
+Are you passionate about Laravel development? We are actively scouting for exceptional developers to join our dynamic team, bringing their unique skills and expertise to contribute valuable insights and innovations. Check out our [Careers Page](https://jbcodeapp.com/career) for current job openings.
+
+## Related Blogs
+
+- [Building a Blog Post Editor with React and CKEditor](react-ckeditor-blog-editor)
+
+- [Mastering React Debugging: Tips and Techniques for Effective Debugging](react-debugging-tips-and-techniques)
+
+- [React Application Testing With Jest](react-application-testing-with-jest)

@@ -1,0 +1,240 @@
+---
+slug: 'whats-new-in-laravel-11-features-and-updates'
+title: 'Whats New In Laravel 11 Features And Updates'
+date: 'February 7, 2024'
+tags: ['laravel', 'Web Development']
+draft: false
+author: 'Jigar Patel'
+summary: 'Laravel 11 revolutionizes development with streamlined structures model cast evolution Dumpable trait config changes and more Explore the future of Laravel'
+---
+
+# Overview
+
+<TOCInline
+  toc={props.toc}
+  exclude="Overview"
+  toHeading={2}
+  defaultimage="whats-new-in-laravel-11-features-and-updates"
+/>
+
+## Introduction
+
+[Laravel](https://laravel.com/) 11: Revolutionizing Development with Simplicity, Flexibility, and Efficiency. Explore [directory structure](laravel-11-simplified-directory-structure), [model casts](laravel-11-upgrade-model-casts-methods), [Dumpable trait](https://laravel.com/api/master/Illuminate/Support/Traits/Dumpable.html), config changes, and more in this game-changing update.
+
+## Streamlined Directory Structure
+
+One of the most notable changes in Laravel 11 is the introduction of a more concise directory structure. Fresh installations now boast a significantly reduced file count, with controllers no longer extending anything by default. Config files are eliminated, and the middleware directory is no more, providing a cleaner and more intuitive development environment.
+
+## Model Casts Evolution
+
+Model casts take on a new form in Laravel 11, transitioning from a property to a method. This shift enhances flexibility, empowering developers to invoke other methods directly from the casts. The article showcases the updated syntax, demonstrating how this change opens up new possibilities for handling attributes within models.
+
+```php
+<?php
+
+protected function casts(): array {
+    return [
+        'email_verified_at' => 'datetime',
+        'password' => 'hashed',
+        'options' => AsEnumCollection::of(UserOption::class),
+    ];
+}
+
+?>
+```
+
+## Introducing the Dumpable Trait
+
+### Laravel 11 Unveils Dumpable Trait
+
+- Simplifying Debugging for Enhanced Developer Experience. Learn how this valuable addition streamlines core framework classes, offering seamless integration and improved debugging capabilities.
+
+```php
+<?php
+
+class Stringable implements JsonSerializable, ArrayAccess {
+    use Dumpable;
+
+    str('foo')->dd();
+    str('foo')->dump();
+}
+
+?>
+```
+
+## Config Changes and Cascading Options
+
+- Say goodbye to numerous config files in Laravel 11 as it adopts a cascading approach, where all config options cascade down. Explore how the .env file expands to encompass all necessary options, and the new `config:publish` command facilitates the retrieval of specific configurations.
+
+## The Once Method for Consistent Values
+
+- Laravel 11 introduces the `once` helper method, ensuring that calling an object method multiple times consistently returns the same value. Learn how this feature proves invaluable when code execution needs to be limited to a single occurrence, contributing to more predictable and reliable application behavior.
+
+## Slimmed Default Migrations
+
+- Default migrations undergo a significant revamp in Laravel 11, with dates removed and migrations consolidated into just two files. Simplify the setup process, providing a cleaner and more efficient migration experience for developers.
+
+## Revamped Routes Structure
+
+- Laravel 11 simplifies route management by defaulting to only two route files - `console.php` and `web.php`. Explore how API routes and websocket broadcasting become opt-in through specific artisan commands, allowing developers to tailor their routes more precisely.
+
+## New /up Health Route
+
+- In a bid to enhance uptime monitoring, Laravel 11 introduces a new `/up` health route, triggering a `DiagnosingHealthEvent` for better integration. Understand the significance of this addition and its implications for improving overall application health monitoring.
+
+## Graceful APP_KEY Rotation
+
+- Addressing potential issues with APP_KEY changes, Laravel 11 introduces a graceful rotation mechanism. Delve into how old encrypted data is protected using the `APP_PREVIOUS_KEYS` .env variable, ensuring a seamless transition to a new key without compromising data integrity.
+
+## Console Kernel Removal and Named Arguments
+
+- The Console Kernel is phased out in Laravel 11, and console commands are now defined in `routes/console.php`. Additionally, the version introduces named arguments, urging caution due to potential future changes in parameter names. Explore these changes and gain insights into their implications for command-line development.
+
+## Eager Load Limit Integration
+
+- Laravel 11 integrates the code behind the "eager load limit" package, offering developers more control over eager loading. Examine how this integration enhances performance and provides greater flexibility in managing relationships within Laravel applications.
+
+## Laravel Reverb: Real-time Communication and Scalability.
+
+### Real-time Communication:
+
+Laravel Reverb facilitates real-time communication between the client and server, enhancing the user experience.
+
+### Blazing Fast:
+
+The WebSocket server is optimized for speed, capable of supporting thousands of connections without the delays associated with HTTP polling.
+
+### Seamless Integration:
+
+Reverb seamlessly integrates with Laravel's broadcasting capabilities, and it offers a first-party Laravel Forge integration for deployment. Monitoring is supported through Pulse.
+
+### Built for Scale:
+
+The server is designed for scalability, with built-in support for horizontal scaling using Redis. This enables the management of connections and channels across multiple servers, providing increased capacity.
+
+### Pusher Protocol:
+
+Reverb utilizes the Pusher protocol for WebSockets, ensuring compatibility with Laravel broadcasting and Laravel Echo.
+
+## Exploring the `once()` Memoization Helper in Laravel 11
+
+In Laravel 11, a game-changing feature called once() memoization helper has been introduced to enhance consistency in object method calls. This innovation is showcased through the OnceDemo class, demonstrating a notable difference between the conventional approach and the improved once()-enhanced method. The magic lies in achieving consistent results across iterations, ensuring reliability in your code. Additionally, the Once::flush() method is highlighted for maintaining a clean test state. This revolutionary tool promises to streamline your coding experience and elevate the efficiency of your Laravel projects. For a detailed exploration of this groundbreaking feature, you can read the full blog post [here](laravel-11-once-helper-guide).
+
+## Transitioning Model Casts to Methods
+
+Laravel 11 brings a big change to how model casts work, moving from the old static properties to the dynamic casts() method. This shift lets you use static methods for default casters and opens the door to exciting possibilities for custom casters. The blog emphasizes that this update is smoothly compatible with Laravel 10, giving developers the choice between the familiar $casts property and the new, more dynamic casts() method. Learn how this change makes working with model casts in Laravel more efficient and flexible. Get all the details in the full blog post [here](laravel-11-upgrade-model-casts-methods).
+
+## Simplifying Debugging with Dumpable Trait
+
+### Dumpable Trait Introduction:
+
+Laravel 11 introduces the Dumpable trait to clean up code related to dump() and dd() methods.
+The trait consolidates the implementation of these debugging methods, promoting code reusability.
+
+### Chaining in Laravel 10 vs. Dumpable Trait in Laravel 11:
+
+In Laravel 10, chaining ->dd() or ->dump() was possible in various framework classes, such as Carbon, Stringable, Query Builder, and TestResponse.
+However, in Laravel 10, the methods were implemented ad-hoc in each class separately.
+
+### Dumpable Trait Implementation:
+
+In Laravel 11, the Dumpable trait can be easily added to any class to enable the use of dump() and dd() methods.
+
+Example implementation in the Illuminate Carbon class:
+
+```php
+use Illuminate\Support\Traits\Dumpable;class Carbon extends BaseCarbon {    use Conditionable, Dumpable;    // ...}
+```
+
+### Dump() Method Implementation:
+
+The dump() method within the Dumpable trait is implemented as follows:
+
+```php
+public function dump(...$args) {    dump($this, ...$args);    return $this;}
+```
+
+The dd() method is similar, but it stops execution and exits.
+
+## Directory Structure Enhancements
+
+Laravel 11 introduces impactful enhancements to the directory structure, streamlining the app, config, and routes directories. Notably, middleware changes are managed in `bootstrap/app.php`, making the app directory leaner. Configuration options now reside in .env.example, publishable and customizable with config:publish. Migration filenames are ordered in the database directory, and routes are simplified. The test directory no longer includes the CreatesApplication trait. Existing Laravel 10 apps smoothly upgrade to Laravel 11 without structural changes. For detailed insights, explore the full blog post [here](laravel-11-simplified-directory-structure).
+
+## Effortless String Cleanup with Laravel's Squish Method
+
+### Example String:
+
+An example string $paragraph is given, which contains extra spaces, a newline character, and a tab character.
+
+### Solution with Laravel Squish Method:
+
+The Laravel solution involves using the "squish" method on the String helpers. The code snippet is:
+
+```php
+$result = str($paragraph)->squish();
+```
+
+This effectively removes all extra spaces and formats the string correctly.
+
+### Explanation of Squish Method:
+
+The underlying code of the "squish" method is explained. It uses two preg_replace calls:
+
+The first one removesleading and trailing white spaces or BOM characters.
+The second one replaces one or more consecutive white spaces or special fillers with a single space.
+
+### Code Snippet:
+
+Here is the actual code for the "squish" method:
+
+```php
+public static function squish($value) {
+    return preg_replace('~(\s|\x{3164}|\x{1160})+~u', ' ', preg_replace('~^[\s\x{FEFF}]+|[\s\x{FEFF}]+$~u', '', $value));
+}
+```
+
+This code ensures that the resulting string has no extra white spaces.
+
+## Quick summary
+
+Laravel 11 introduces significant enhancements, including a streamlined directory structure, a transition in model casts, the Dumpable trait for debugging, and various other improvements. From effortless string cleanup to efficient CSV imports and real-time communication with Laravel Reverb, this update focuses on simplicity, flexibility, and efficiency.
+
+## Frequently Asked Questions (FAQs)
+
+### 1. Is upgrading to Laravel 11 mandatory for existing projects?
+
+> - Upgrading is recommended for accessing new features, but it's not mandatory. Existing projects remain compatible, and the new structure is applicable mainly to fresh installations.
+
+### 2. How does the wordWrap method enhance string handling in Laravel 11?
+
+> - The wordWrap method provides increased flexibility for managing strings by acting as a wrapper for PHP's native wordwrap function, offering efficient string handling.
+
+### 3. What is the significance of the Dumpable trait in Laravel 11?
+
+> - The Dumpable trait streamlines debugging in Laravel by consolidating the implementation of dump() and dd() methods, promoting code reusability and improving the developer experience.
+
+### 4. How does Laravel 11 simplify CSV imports with Simple Excel and Jobs?
+
+> - Laravel 11 simplifies CSV imports by leveraging the Simple Excel package from Spatie and utilizing Laravel Jobs, offering an organized and efficient approach to handle large datasets.
+
+### 5. What are the key changes in the directory structure of Laravel 11?
+
+> - Laravel 11 adopts a more concise directory structure, reducing file count, eliminating unnecessary config files, and providing a cleaner and more intuitive development environment for developers.
+
+## About the Author
+
+[Jigar Patel](https://expertlaravel.com) is a Laravel enthusiast and a software developer at JBCodeapp Company. Visit our [JBCodeapp](https://jbcodeapp.com) to learn more about our work in the Laravel ecosystem.
+
+## We're Hiring
+
+Are you passionate about Laravel development? We are actively scouting for exceptional developers to join our dynamic team, bringing their unique skills and expertise to contribute valuable insights and innovations. Check out our [Careers Page](https://jbcodeapp.com/career) for current job openings.
+
+## Related Blogs
+
+- [3 Crucial Laravel Architecture Best Practices for 2023](laravel-architecture-2023)
+
+- [Laravel Contact Form with Email Sending](laravel-contact-form-with-email-sending)
+
+- [Laravel Post View Counter: Monitor Your Content's Popularity](laravel-post-view-counter-monitor-your-contents-popularity)
+
+- [Leading Laravel Development Services Provider](leading-laravel-development-services-provider)
